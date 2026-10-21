@@ -47,36 +47,105 @@ h1 {
     width: fit-content;
     margin: 0 0 12px -8px;
     font-family: "Bowlby One SC", Impact, sans-serif;
-    font-size: clamp(4.5rem, 13vw, 9rem);
+    font-size: clamp(3.7rem, 10vw, 7rem);
     font-weight: 400;
     letter-spacing: -0.04em;
     line-height: 0.92;
-    filter: drop-shadow(0 3px 0 #00f522);
+}
+
+h1::after {
+    content: "";
+    position: absolute;
+    right: 8%;
+    bottom: -18px;
+    left: 60%;
+    height: 24px;
+    width: 40%;
+    top: 200%;
+    background: url("imagenes/subrayadoverde.png") center / contain no-repeat;
+    filter: none;
 }
 
 .title-back,
 .title-front {
-    display: block;
-}
-
-.title-back {
-    position: absolute;
-    inset: 0;
-    color: #090909;
-    -webkit-text-fill-color: #090909;
-    -webkit-text-stroke: 9px #090909;
-    transform: translate(5px, 5px);
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
     white-space: nowrap;
 }
 
+.word-cumb,
+.word-ia {
+    display: inline-block;
+}
+
+.word-cumb {
+    transform: translateY(0.05em);
+}
+
+.word-ia {
+    font-size: 1.32em;
+    line-height: 0.8;
+    transform: translateY(-0.02em);
+}
+
+.title-back,
+.title-front {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    white-space: nowrap;
+}
+
+.word-cumb,
+.word-ia {
+    display: inline-block;
+}
+
+.word-cumb {
+    transform: translateY(0.05em);
+}
+
+.word-ia {
+    font-size: 1.32em;
+    line-height: 0.8;
+    transform: translateY(-0.02em);
+}
+
+/* Capa de atrás: borde negro grueso + línea fina verde (arriba) y roja (abajo) */
+.title-back {
+    position: absolute;
+    inset: 0;
+    color: #000;
+    -webkit-text-fill-color: #000;
+    -webkit-text-stroke: 18px #000;
+    stroke-linejoin: round;
+    transform: translate(0, 3px);
+    filter:
+        drop-shadow(0 -2px 0 #3dff00)
+        drop-shadow(0 2px 0 #ff2a55);
+}
+
+/* Capa de adelante: solo relleno con degradado, SIN stroke */
 .title-front {
     position: relative;
     z-index: 1;
-    color: #ffe600;
-    background: linear-gradient(180deg, #b6ff00 10%, #fff000 47%, #ff8a00 72%, #ff0050 94%);
-    background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-text-stroke: 2px #090909;
+    -webkit-text-stroke: 0;
+}
+
+/* CUMB: amarillo -> naranja -> rojo */
+.title-front .word-cumb {
+    background: linear-gradient(180deg, #f4ff00 0%, #ffe600 30%, #ff9a00 65%, #ff2d55 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+/* IA: verde -> amarillo -> naranja -> rojo */
+.title-front .word-ia {
+    background: linear-gradient(180deg, #3dff00 0%, #e8ff00 35%, #ff9a00 70%, #ff2d55 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
 h2 {
@@ -112,6 +181,10 @@ h2 {
     color: #f1ff00;
 }
 
+.question-mark {
+    color: #fff;
+}
+
 .visual {
     position: absolute;
     z-index: 0;
@@ -124,7 +197,8 @@ h2 {
     position: absolute;
     top: 16%;
     right: -7%;
-    width: min(47vw, 500px);
+    left: 25%;
+    width: min(300vw, 600px);
     height: auto;
 }
 
@@ -146,30 +220,41 @@ h2 {
 }
 
 .sparkle-one {
-    top: 27%;
-    left: 4%;
+    top: 32%;
+    left: 30%;
 }
 
 .sparkle-two {
     top: 12%;
-    left: 19%;
+    left: 95%;
 }
 
 .sparkle-three {
-    top: 16%;
-    right: 17%;
+    top: 5%;
+    right: 25%;
 }
 
 .sparkle-four {
-    top: 47%;
-    left: -1%;
+    top: 55%;
+    left: 25%;
 }
 
 .sparkle-five {
     top: 33%;
     right: 3%;
 }
-
+.sparkle-six {
+    top: 20%;
+    left: 30%;
+}
+.sparkle-seven {
+    top: 10%;
+    right: 45%;
+}
+.sparkle-eight {
+    top: 15%;
+    left: 75%;
+}
 .start-hint {
     position: absolute;
     z-index: 3;
@@ -183,13 +268,13 @@ h2 {
     padding: 0 16px;
     font-size: 1rem;
     text-align: center;
-    animation: hint-pulse 1.6s ease-in-out infinite;
+    animation: hint-pulse 2.4s ease-in-out infinite;
 }
 
 @keyframes hint-pulse {
     0%,
     100% {
-        opacity: 0.55;
+        opacity: 0.3;
     }
 
     50% {
@@ -277,6 +362,11 @@ h2 {
         left: 2%;
     }
 
+    .sparkle-eight {
+        top: 57%;
+        left: 46%;
+    }
+
     .sparkle-two {
         top: 19%;
         left: 30%;
@@ -287,7 +377,13 @@ h2 {
         right: 10%;
     }
 
+    .sparkle-seven {
+        top: 39%;
+        right: 12%;
+    }
+
     .sparkle-four,
+    .sparkle-six,
     .sparkle-five {
         display: none;
     }
