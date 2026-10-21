@@ -1,0 +1,179 @@
+:root {
+    color-scheme: dark;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background: #222;
+    color: #f5f5f5;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0;
+    background:
+        linear-gradient(rgb(32 32 32 / 88%), rgb(32 32 32 / 88%)),
+        url("imagenes/fondo.png") center / cover fixed;
+}
+
+.tutorial {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    width: min(100%, 1200px);
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0 auto;
+    padding: clamp(36px, 6.5vh, 64px) clamp(24px, 7.5vw, 80px) 30px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.tutorial__title {
+    position: relative;
+    margin: 0 auto;
+    isolation: isolate;
+    font-family: "Bowlby One SC", Impact, sans-serif;
+    font-size: clamp(2.25rem, 6.6vw, 4.35rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 0.98;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.tutorial__title-back,
+.tutorial__title-front {
+    display: block;
+    font: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-align: inherit;
+    text-transform: inherit;
+}
+
+.tutorial__title-back {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    color: #090909;
+    -webkit-text-fill-color: #090909;
+    -webkit-text-stroke: 20px #090909;
+    transform: translate(7px, 7px);
+}
+
+.tutorial__title-front {
+    position: relative;
+    z-index: 1;
+    color: #ffed00;
+    background: linear-gradient(180deg, #b6ff00 10%, #fff000 47%, #ff8a00 72%, #ff0050 94%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0;
+}
+
+.tutorial__title-front span,
+.tutorial__title-back span {
+    display: block;
+}
+
+.tutorial__content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+    align-items: center;
+    gap: clamp(24px, 5vw, 58px);
+    width: min(100%, 790px);
+    margin: 20px auto 24px;
+}
+
+.tutorial__photo-slot {
+    display: block;
+    width: 100%;
+    aspect-ratio: 420 / 340;
+    object-fit: contain;
+}
+
+.tutorial__description {
+    margin: 0;
+    font-size: clamp(1.05rem, 2.35vw, 1.5rem);
+    line-height: 1.34;
+}
+
+.tutorial__description strong {
+    color: #f4ed00;
+    font-weight: 800;
+}
+
+.tutorial__hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.tutorial__hint kbd {
+    display: inline-grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border: 3px solid #ff0054;
+    background: #ff0054;
+    box-shadow: inset 0 0 0 2px rgb(255 255 255 / 22%);
+    color: #fff;
+    font: 900 0.78rem "Trebuchet MS", Arial, sans-serif;
+}
+
+@media (min-width: 701px) {
+    .tutorial__title {
+        font-size: clamp(3.2rem, 7.6vw, 4.5rem);
+        transform: scaleX(1.3);
+    }
+}
+
+@media (max-width: 600px) {
+    .tutorial {
+        min-height: 100vh;
+        min-height: 100svh;
+        padding: 42px 22px 22px;
+    }
+
+    .tutorial__title {
+        font-size: clamp(2.2rem, 10vw, 3.8rem);
+        transform: none;
+    }
+
+    .tutorial__content {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        width: min(100%, 440px);
+        margin: 20px auto;
+    }
+
+    .tutorial__photo-slot {
+        width: min(100%, 300px);
+        margin: 0 auto;
+    }
+
+    .tutorial__description {
+        font-size: clamp(1.05rem, 4.6vw, 1.28rem);
+    }
+
+    .tutorial__hint {
+        flex-wrap: wrap;
+        gap: 7px;
+        font-size: 0.83rem;
+    }
+
+    .tutorial__hint kbd {
+        width: 32px;
+        height: 32px;
+    }
+}

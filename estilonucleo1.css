@@ -1,0 +1,459 @@
+:root {
+    color-scheme: dark;
+    font-family: "Poppins", Arial, sans-serif;
+    background: #222;
+    color: #f5f5f5;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0;
+    background:
+        linear-gradient(rgb(32 32 32 / 88%), rgb(32 32 32 / 88%)),
+        url("imagenes/fondo.png") center / cover fixed;
+}
+
+.process {
+    width: min(100%, 1320px);
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0 auto;
+    padding: clamp(24px, 4.2vh, 42px) clamp(20px, 5.5vw, 72px) 24px;
+}
+
+.process__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.18fr) minmax(250px, 1fr);
+    align-items: start;
+    gap: 18px;
+    width: min(100%, 1120px);
+    margin: 0 auto clamp(20px, 3.2vh, 38px);
+}
+
+.process__title {
+    position: relative;
+    width: fit-content;
+    margin: 0;
+    isolation: isolate;
+    font-family: "Bowlby One SC", Impact, sans-serif;
+    font-size: clamp(2rem, 3.75vw, 3.4rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 0.96;
+    text-transform: uppercase;
+}
+
+.process__title-back,
+.process__title-front {
+    display: block;
+    font: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-transform: inherit;
+}
+
+.process__title-back {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    color: #090909;
+    -webkit-text-fill-color: #090909;
+    -webkit-text-stroke: 8px #090909;
+    transform: translate(4px, 4px);
+}
+
+.process__title-front {
+    position: relative;
+    z-index: 1;
+    color: #ffed00;
+    background: linear-gradient(180deg, #b6ff00 10%, #fff000 47%, #ff8a00 72%, #ff0050 94%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.process__title-front span,
+.process__title-back span {
+    display: block;
+}
+
+.process__subtitle {
+    max-width: 390px;
+    margin: 0;
+    padding-top: 3px;
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    line-height: 1.35;
+}
+
+.process__card {
+    position: relative;
+    width: min(78%, 820px);
+    min-height: clamp(245px, 29vw, 310px);
+    margin: 0 auto;
+    border: 6px solid #a90042;
+    border-radius: 3.5% 4.5% 3% 4%;
+}
+
+.process__content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(150px, 0.78fr);
+    align-items: center;
+    gap: clamp(20px, 4vw, 48px);
+    width: min(100%, 670px);
+    min-height: inherit;
+    margin: 0 auto;
+    padding: clamp(24px, 5vw, 48px);
+}
+
+.process__copy h2 {
+    margin: 0 0 8px;
+    color: #f1ff00;
+    font-family: "Bowlby One SC", Impact, sans-serif;
+    font-size: clamp(1.65rem, 3.6vw, 2.35rem);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+}
+
+.process__copy p {
+    margin: 0;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: clamp(0.95rem, 1.8vw, 1.12rem);
+    line-height: 1.43;
+    text-transform: none;
+}
+
+.process__copy strong {
+    font-weight: 400;
+}
+
+.process__copy .process__term--yellow {
+    color: #f1ff00;
+}
+
+.process__copy .process__term--pink {
+    color: #ff0054;
+}
+
+.process__copy .process__term--medium {
+    font-weight: 500;
+}
+
+.process__next {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    min-height: 36px;
+    margin: 10px 0 0 16px;
+    padding: 5px 27px 6px;
+    border: none;
+    border-radius: 999px;
+    background-color: transparent;
+    background-image: url("imagenes/boton cancion.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    box-shadow: none;
+    color: #080808;
+    font-family: "Bowlby One SC", Impact, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 150ms ease, filter 150ms ease;
+}
+
+.process__next:hover,
+.process__next:focus-visible {
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+    box-shadow: none;
+}
+
+.process__next:focus-visible {
+    outline: 3px solid #f1ff00;
+    outline-offset: 4px;
+}
+
+.process__next[hidden] {
+    display: none;
+}
+
+.tutorial-overlay {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgb(0 0 0 / 78%);
+    opacity: 1;
+    transition: opacity 450ms ease;
+}
+
+.tutorial-overlay.is-dismissed {
+    pointer-events: none;
+    opacity: 0;
+}
+
+.tutorial-overlay__content {
+    position: relative;
+    width: min(90vw, 460px);
+    height: min(70svh, 340px);
+    min-height: 210px;
+}
+
+.tutorial-overlay__character {
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    bottom: 0;
+    width: 49%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom right;
+}
+
+.tutorial-overlay__message {
+    position: absolute;
+    z-index: 2;
+    top: 11%;
+    left: 0;
+    width: 62%;
+    margin: 0;
+    padding: 14px 15px;
+    border: 3px solid #f1ff00;
+    border-radius: 23px;
+    background: #f8f8f3;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 45%);
+    color: #171717;
+    font-size: clamp(0.76rem, 2.2vw, 0.95rem);
+    line-height: 1.35;
+}
+
+.tutorial-overlay__message::before,
+.tutorial-overlay__message::after {
+    position: absolute;
+    content: "";
+    border: 3px solid #f1ff00;
+    border-radius: 50%;
+    background: #f8f8f3;
+}
+
+.tutorial-overlay__message::before {
+    right: -17px;
+    bottom: -16px;
+    width: 17px;
+    height: 15px;
+}
+
+.tutorial-overlay__message::after {
+    right: -31px;
+    bottom: -32px;
+    width: 10px;
+    height: 9px;
+}
+
+.tutorial-overlay__message strong {
+    color: #ff0054;
+    font-weight: 600;
+}
+
+.process__image {
+    display: block;
+    width: 100%;
+    max-height: 220px;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+
+.process__piano {
+    position: relative;
+    z-index: 1;
+    width: min(80%, 940px);
+    margin: -3px auto 0;
+    padding: 9px 0 0;
+    overflow: hidden;
+    border: 10px solid #ff0054;
+    border-bottom: 0;
+    background: #080808;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 10%);
+}
+
+.piano {
+    position: relative;
+    width: 100%;
+    line-height: 0;
+}
+
+.piano__image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.piano__keys {
+    position: absolute;
+    top: 6%;
+    bottom: 17%;
+    left: 22.7%;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    width: 54.3%;
+}
+
+.piano__key {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 0;
+    padding: 12% 0 0;
+    border: 0;
+    border-radius: 7px 7px 2px 2px;
+    background: transparent;
+    color: #050505;
+    font: 400 clamp(2rem, 6.3vw, 4.5rem) / 1 "Bowlby One SC", Impact, sans-serif;
+    cursor: pointer;
+    transition: background-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+}
+
+.piano__key:hover:not(.is-active) {
+    background: rgb(105 236 111 / 38%);
+}
+
+.piano__key:focus-visible {
+    position: relative;
+    z-index: 1;
+    outline: 4px solid #ff0054;
+    outline-offset: -4px;
+}
+
+.piano__key.is-active {
+    background: #63e76e;
+    box-shadow: 0 0 22px rgb(99 231 110 / 65%);
+    animation: key-glow 1.8s ease-in-out infinite;
+}
+
+.process__hint {
+    margin: 13px 0 0;
+    color: #d0d0d0;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+@keyframes key-glow {
+    0%,
+    100% {
+        box-shadow: 0 0 12px rgb(99 231 110 / 45%);
+    }
+
+    50% {
+        box-shadow: 0 0 25px rgb(99 231 110 / 80%);
+    }
+}
+
+@media (max-width: 650px) {
+    .process {
+        padding: 30px 18px 20px;
+    }
+
+    .process__header {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 26px;
+    }
+
+    .process__title {
+        font-size: clamp(1.9rem, 8vw, 3.25rem);
+    }
+
+    .process__subtitle {
+        max-width: 460px;
+        padding-left: 2px;
+    }
+
+    .process__card {
+        width: 100%;
+        min-height: 0;
+        border-width: 5px;
+    }
+
+    .process__content {
+        grid-template-columns: minmax(0, 1fr) minmax(90px, 0.55fr);
+        gap: 12px;
+        min-height: 225px;
+        padding: 22px 20px;
+    }
+
+    .process__copy h2 {
+        font-size: clamp(1.45rem, 6vw, 2rem);
+    }
+
+    .process__copy p {
+        font-size: clamp(0.85rem, 3.5vw, 1rem);
+    }
+
+    .process__piano {
+        width: 100%;
+        margin-top: 8px;
+        padding-top: 6px;
+        border-width: 7px;
+        border-bottom: 0;
+    }
+
+    .piano__key {
+        border-radius: 4px 4px 1px 1px;
+        font-size: clamp(1.4rem, 8vw, 2.8rem);
+    }
+}
+
+@media (max-width: 390px) {
+    .tutorial-overlay__content {
+        width: 92vw;
+        height: min(62svh, 300px);
+        min-height: 190px;
+    }
+
+    .tutorial-overlay__message {
+        width: 64%;
+        padding: 11px 12px;
+        font-size: 0.76rem;
+    }
+
+    .process__content {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        padding: 18px 18px 12px;
+    }
+
+    .process__image {
+        width: min(100%, 150px);
+        max-height: 140px;
+        margin: 0 auto;
+    }
+
+    .piano__key {
+        font-size: 1.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

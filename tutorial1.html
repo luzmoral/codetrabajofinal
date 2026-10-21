@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#222222">
+    <title>¿Cómo es el proceso de creación? | Cumbia e IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="tutorial1.css">
+</head>
+<body>
+    <main class="tutorial">
+        <h1 class="tutorial__title">
+            <span class="tutorial__title-back" aria-hidden="true">
+                ¿Cómo es el proceso
+                <span>de creación?</span>
+            </span>
+            <span class="tutorial__title-front">
+                ¿Cómo es el proceso
+                <span>de creación?</span>
+            </span>
+        </h1>
+
+        <section class="tutorial__content" aria-label="Introducción al proceso de creación musical">
+            <img class="tutorial__photo-slot" src="imagenes/cerebro.png" alt="Ilustración de un cerebro">
+
+            <p class="tutorial__description">
+                Para comprender cómo se genera una canción con inteligencia artificial, retomamos
+                <strong>investigaciones académicas</strong> que estudian los modelos generativos de audio
+                y su capacidad para producir música <strong>a partir de instrucciones humanas.</strong>
+            </p>
+        </section>
+
+        <p class="tutorial__hint">
+            <span>¡Presiona el botón</span>
+            <kbd>OK</kbd>
+            <span>en tu teclado para continuar!</span>
+        </p>
+    </main>
+     <script>
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" && !event.repeat) {
+                window.location.href = "tutorial2.html";
+            }
+        });
+    </script>
+</body>
+</html>

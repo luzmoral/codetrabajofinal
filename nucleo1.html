@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#222222">
+    <title>¿Cómo es el proceso de creación? | Cumbia e IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilonucleo1.css">
+</head>
+<body>
+    <main class="process">
+        <header class="process__header">
+            <h1 class="process__title">
+                <span class="process__title-back" aria-hidden="true">
+                    ¿Cómo es el proceso
+                    <span>de creación?</span>
+                </span>
+                <span class="process__title-front">
+                    ¿Cómo es el proceso
+                    <span>de creación?</span>
+                </span>
+            </h1>
+            <p class="process__subtitle">
+                Investigadores de la UBA señalan que no ocurre de manera completamente autónoma.
+            </p>
+        </header>
+
+        <section class="process__card" aria-label="Pasos del proceso de creación musical">
+            <div class="process__content" aria-live="polite" aria-atomic="true">
+                <div class="process__copy">
+                    <h2 id="process-step-title">1. Idea</h2>
+                    <p id="process-step-description">
+                        Todo comienza con una <strong class="process__term">intención</strong>, se selecciona género +
+                        emoción + instrumentos + estilo + tema. Ahí, la persona define
+                        <strong>qué quiere transmitir con la canción.</strong>
+                    </p>
+                    <a class="process__next" id="process-next" href="nucleo2.html" hidden>¡ES TU TURNO!</a>
+                </div>
+                <img
+                    class="process__image"
+                    id="process-step-image"
+                    src="imagenes/idea.png"
+                    alt="Ilustración de una idea musical"
+                >
+            </div>
+        </section>
+
+        <section class="process__piano" aria-label="Elegí un paso tocando una tecla del piano">
+            <div class="piano">
+                <img class="piano__image" src="imagenes/piano.png" alt="">
+                <div class="piano__keys">
+                    <button class="piano__key is-active" type="button" data-step="0" aria-label="Paso 1: Idea" aria-pressed="true">1</button>
+                    <button class="piano__key" type="button" data-step="1" aria-label="Paso 2: Prompt" aria-pressed="false">2</button>
+                    <button class="piano__key" type="button" data-step="2" aria-label="Paso 3: La generación" aria-pressed="false">3</button>
+                    <button class="piano__key" type="button" data-step="3" aria-label="Paso 4: Selección" aria-pressed="false">4</button>
+                    <button class="piano__key" type="button" data-step="4" aria-label="Paso 5: Modificación" aria-pressed="false">5</button>
+                    <button class="piano__key" type="button" data-step="5" aria-label="Paso 6: Canción" aria-pressed="false">6</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <aside class="tutorial-overlay" id="process-tutorial" role="status" aria-live="polite">
+        <div class="tutorial-overlay__content">
+            <img
+                class="tutorial-overlay__character"
+                src="imagenes/muneco%20tutorial%20nucleo1.png"
+                alt=""
+            >
+            <p class="tutorial-overlay__message">
+                ¡Desplázate entre los pasos presionando alguna de las teclas del 1 al 6 en tu
+                <strong>teclado físico!</strong>
+            </p>
+        </div>
+    </aside>
+
+    <script>
+        const steps = [
+            {
+                title: "1. Idea",
+                description: [
+                    { text: "Todo comienza con una " },
+                    { text: "intención", tone: "yellow" },
+                    { text: ": se selecciona género + emoción + instrumentos + estilo + tema. Ahí, la persona define " },
+                    { text: "qué quiere transmitir con la canción.", tone: "pink" }
+                ],
+                image: "imagenes/idea.png",
+                alt: "Ilustración de una idea musical"
+            },
+            {
+                title: "2. Prompt",
+                description: [
+                    { text: "La idea se transforma en una " },
+                    { text: "indicación", tone: "yellow" },
+                    { text: " escrita para la IA. Por ej: " },
+                    { text: "“Una canción pop melancólica, con piano, voz femenina y un tempo lento.”", tone: "pink", weight: "medium" }
+                ],
+                image: "imagenes/",
+                alt: "Ilustración de un cerebro"
+            },
+            {
+                title: "3. Generación",
+                description: [
+                    { text: "La IA " },
+                    { text: "procesa", tone: "yellow" },
+                    { text: " la indicación y genera música con " },
+                    { text: "ritmos, instrumentos, voces y estructuras.", tone: "pink" }
+                ],
+                image: "imagenes/",
+                alt: "Ilustración de una máquina que crea música"
+            },
+            {
+                title: "4. Selección",
+                description: [
+                    { text: "La IA puede generar una propuesta, pero " },
+                    { text: "no necesariamente una canción definitiva.", tone: "yellow" },
+                    { text: " La persona puede escuchar distintas opciones, " },
+                    { text: "elegir una y descartar otras.", tone: "pink" }
+                ],
+                image: "imagenes/",
+                alt: "Ilustración de auriculares y ondas sonoras"
+            },
+            {
+                title: "5. Modificación",
+                description: [
+                    { text: "La persona puede cambiar, combinar, editar, " },
+                    { text: "volver a generar.", tone: "pink" },
+                    { text: " La IA puede formar parte de un proceso creativo en el que se " },
+                    { text: "combinan", tone: "yellow" },
+                    { text: " materiales humanos y algorítmicos." }
+                ],
+                image: "imagenes/",
+                alt: "Instrumento musical electrónico"
+            },
+            {
+                title: "6. Canción",
+                description: [
+                    { text: "Finalmente " },
+                    { text: "se organizan", tone: "yellow" },
+                    { text: " las diferentes partes: letra, melodía, voz, instrumentos." }
+                ],
+                image: "imagenes/",
+                alt: "Portada de una canción de KODE GONZALEZ"
+            }
+        ];
+
+        const title = document.querySelector("#process-step-title");
+        const description = document.querySelector("#process-step-description");
+        const image = document.querySelector("#process-step-image");
+        const nextButton = document.querySelector("#process-next");
+        const keys = document.querySelectorAll(".piano__key");
+
+        function selectStep(index) {
+            const step = steps[index];
+            title.textContent = step.title;
+            description.replaceChildren();
+            step.description.forEach((part) => {
+                if (!part.tone) {
+                    description.append(document.createTextNode(part.text));
+                    return;
+                }
+
+                const highlight = document.createElement("strong");
+                highlight.className = `process__term process__term--${part.tone}`;
+                if (part.weight === "medium") {
+                    highlight.classList.add("process__term--medium");
+                }
+                highlight.textContent = part.text;
+                description.append(highlight);
+            });
+            image.src = step.image;
+            image.alt = step.alt;
+            nextButton.hidden = index !== steps.length - 1;
+
+            keys.forEach((key, keyIndex) => {
+                const isActive = keyIndex === index;
+                key.classList.toggle("is-active", isActive);
+                key.setAttribute("aria-pressed", String(isActive));
+            });
+        }
+
+        keys.forEach((key) => {
+            key.addEventListener("click", () => selectStep(Number(key.dataset.step)));
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (!event.repeat && /^[1-6]$/.test(event.key)) {
+                selectStep(Number(event.key) - 1);
+            }
+        });
+
+        selectStep(0);
+
+        const tutorial = document.querySelector("#process-tutorial");
+        window.setTimeout(() => {
+            tutorial.classList.add("is-dismissed");
+            tutorial.setAttribute("aria-hidden", "true");
+        }, 6000);
+    </script>
+</body>
+</html>

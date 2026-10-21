@@ -1,0 +1,8 @@
+body {
+    min-height: 100vh;
+    margin: 0;
+    background:
+        linear-gradient(rgb(32 32 32 / 88%), rgb(32 32 32 / 88%)),
+        url("imagenes/fondo.png") center / cover fixed;
+    color: #f4f4f4;
+}

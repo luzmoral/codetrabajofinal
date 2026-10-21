@@ -1,0 +1,318 @@
+:root {
+    color-scheme: dark;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #222;
+    color: #f4f4f4;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0;
+    background:
+        linear-gradient(rgb(32 32 32 / 88%), rgb(32 32 32 / 88%)),
+        url("imagenes/fondo.png") center / cover fixed;
+}
+
+.landing {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    width: min(100%, 1440px);
+    min-height: 100vh;
+    min-height: 100svh;
+    margin: 0 auto;
+    padding: 48px 5.3% 92px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.copy {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 560px);
+    padding-bottom: 14px;
+}
+
+h1 {
+    position: relative;
+    width: fit-content;
+    margin: 0 0 12px -8px;
+    font-family: "Bowlby One SC", Impact, sans-serif;
+    font-size: clamp(4.5rem, 13vw, 9rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    filter: drop-shadow(0 3px 0 #00f522);
+}
+
+.title-back,
+.title-front {
+    display: block;
+}
+
+.title-back {
+    position: absolute;
+    inset: 0;
+    color: #090909;
+    -webkit-text-fill-color: #090909;
+    -webkit-text-stroke: 9px #090909;
+    transform: translate(5px, 5px);
+    white-space: nowrap;
+}
+
+.title-front {
+    position: relative;
+    z-index: 1;
+    color: #ffe600;
+    background: linear-gradient(180deg, #b6ff00 10%, #fff000 47%, #ff8a00 72%, #ff0050 94%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px #090909;
+}
+
+h2 {
+    max-width: 560px;
+    margin: 20px 0 54px;
+    color: #f1ff00;
+    font-size: clamp(1.65rem, 3.25vw, 2.65rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.32;
+}
+
+.artist-label {
+    display: inline-block;
+    margin: 0 0 13px;
+    padding: 3px 11px 5px;
+    background: #ff0050;
+    color: #00fa26;
+    font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 1.12;
+}
+
+.description {
+    max-width: 465px;
+    margin: 0;
+    font-size: clamp(1.15rem, 2.15vw, 1.55rem);
+    line-height: 1.3;
+}
+
+.highlight {
+    color: #f1ff00;
+}
+
+.visual {
+    position: absolute;
+    z-index: 0;
+    inset: 0 0 0 auto;
+    width: 54%;
+    pointer-events: none;
+}
+
+.burst {
+    position: absolute;
+    top: 16%;
+    right: -7%;
+    width: min(47vw, 500px);
+    height: auto;
+}
+
+.singer {
+    position: absolute;
+    right: -1%;
+    bottom: 0;
+    width: min(53vw, 570px);
+    max-height: 91%;
+    object-fit: contain;
+    object-position: bottom right;
+}
+
+.sparkle {
+    position: absolute;
+    z-index: 1;
+    width: clamp(26px, 4vw, 42px);
+    height: auto;
+}
+
+.sparkle-one {
+    top: 27%;
+    left: 4%;
+}
+
+.sparkle-two {
+    top: 12%;
+    left: 19%;
+}
+
+.sparkle-three {
+    top: 16%;
+    right: 17%;
+}
+
+.sparkle-four {
+    top: 47%;
+    left: -1%;
+}
+
+.sparkle-five {
+    top: 33%;
+    right: 3%;
+}
+
+.start-hint {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    bottom: 31px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 0 16px;
+    font-size: 1rem;
+    text-align: center;
+    animation: hint-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes hint-pulse {
+    0%,
+    100% {
+        opacity: 0.55;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.key {
+    display: inline-grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border: 3px solid #ff0050;
+    background: #ff0050;
+    box-shadow: inset 0 0 0 2px rgb(255 255 255 / 24%);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 900;
+}
+
+@media (min-width: 1441px) {
+    .landing {
+        min-height: min(100vh, 930px);
+    }
+}
+
+@media (max-width: 700px) {
+    .landing {
+        display: block;
+        min-height: 100vh;
+        min-height: 100svh;
+        padding: 42px 24px 92px;
+    }
+
+    .copy {
+        width: min(100%, 520px);
+    }
+
+    h1 {
+        margin-left: -4px;
+        font-size: clamp(4rem, 18vw, 7rem);
+    }
+
+    h2 {
+        max-width: 480px;
+        margin: 17px 0 34px;
+        font-size: clamp(1.55rem, 7vw, 2.25rem);
+    }
+
+    .artist-label {
+        font-size: clamp(1.35rem, 6.5vw, 2rem);
+    }
+
+    .description {
+        max-width: 390px;
+        font-size: clamp(1.08rem, 4.6vw, 1.35rem);
+    }
+
+    .visual {
+        top: auto;
+        bottom: 0;
+        width: 75%;
+        height: 48%;
+        opacity: 0.55;
+    }
+
+    .burst {
+        top: 2%;
+        right: -12%;
+        width: min(68vw, 380px);
+    }
+
+    .singer {
+        right: -4%;
+        width: min(68vw, 390px);
+        max-height: 100%;
+    }
+
+    .sparkle {
+        width: 29px;
+    }
+
+    .sparkle-one {
+        top: 28%;
+        left: 2%;
+    }
+
+    .sparkle-two {
+        top: 19%;
+        left: 30%;
+    }
+
+    .sparkle-three {
+        top: 11%;
+        right: 10%;
+    }
+
+    .sparkle-four,
+    .sparkle-five {
+        display: none;
+    }
+
+    .start-hint {
+        bottom: 20px;
+        gap: 8px;
+        font-size: 0.88rem;
+    }
+}
+
+@media (max-width: 390px) {
+    .landing {
+        padding-right: 18px;
+        padding-left: 18px;
+    }
+
+    .artist-label {
+        padding-right: 7px;
+        padding-left: 7px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .start-hint {
+        animation: none;
+    }
+}

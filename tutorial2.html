@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#222222">
+    <title>¿En qué investigaciones nos basamos? | Cumbia e IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="tutorial2.css">
+</head>
+<body>
+    <main class="research">
+        <h1 class="research__title">
+            <span class="research__title-back" aria-hidden="true">
+                ¿En qué investigaciones
+                <span>nos basamos?</span>
+            </span>
+            <span class="research__title-front">
+                ¿En qué investigaciones
+                <span>nos basamos?</span>
+            </span>
+        </h1>
+
+        <section class="research__studies" aria-label="Investigaciones académicas consultadas">
+            <article class="study study--uba">
+                <h2>UBA — Santiago Fiorino<br>y Pablo Riera (2025)</h2>
+                <p>
+                    Investigaron el ajuste de modelos de difusión para generar audio a partir
+                    de instrucciones en lenguaje natural, trabajando con modelos capaces de
+                    producir canciones completas.
+                </p>
+                <img class="study__illustration study__illustration--tape" src="imagenes/cd.png" alt="Disco compacto">
+            </article>
+
+            <article class="study study--unlp">
+                <img class="study__illustration study__illustration--headphones" src="imagenes/auris.png" alt="Auriculares">
+                <h2>UNLP / UBA — Gabriel<br>Barreiro (2025)</h2>
+                <p>
+                    Analizó la creación musical mediante inteligencia artificial generativa y
+                    sus implicancias en las prácticas creativas contemporáneas.
+                </p>
+            </article>
+        </section>
+
+        <p class="research__hint">
+            <span>¡Presiona el botón</span>
+            <kbd>OK</kbd>
+            <span>en tu teclado para continuar!</span>
+        </p>
+    </main>
+     <script>
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" && !event.repeat) {
+                window.location.href = "nucleo1.html";
+            }
+        });
+    </script>
+</body>
+</html>

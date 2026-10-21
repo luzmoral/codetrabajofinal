@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#222222">
+    <title>Cumbia: IA y música en Argentina</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <main class="landing">
+        <section class="copy" aria-labelledby="page-title">
+            <h1 id="page-title"><span class="title-back" aria-hidden="true">CUMBIA</span><span class="title-front">CUMBIA</span></h1>
+            <h2>¿Cómo transforma la IA a la cumbia en Argentina?</h2>
+            <p class="artist-label">El caso KODE GONZALEZ</p>
+            <p class="description">
+                Ahora que la IA generativa llegó a nuestro país: ¿Puede crear una cumbia que suene real,
+                engañe a tu oído y <span class="highlight">te haga sentir lo mismo?</span>
+            </p>
+        </section>
+
+        <div class="visual" aria-hidden="true">
+            <img class="burst" src="imagenes/estrellarara.png" alt="">
+            <img class="singer" src="imagenes/kode.png" alt="">
+            <img class="sparkle sparkle-one" src="imagenes/estrellaverde.png" alt="">
+            <img class="sparkle sparkle-two" src="imagenes/estrellaamarilla.png" alt="">
+            <img class="sparkle sparkle-three" src="imagenes/estrellarosa.png" alt="">
+            <img class="sparkle sparkle-four" src="imagenes/estrellaamarilla.png" alt="">
+            <img class="sparkle sparkle-five" src="imagenes/estrellarosa.png" alt="">
+        </div>
+
+        <div class="start-hint">
+            <span>¡Presiona el botón</span>
+            <span class="key" aria-label="Enter">OK</span>
+            <span>en tu teclado para comenzar!</span>
+        </div>
+    </main>
+    <script>
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" && !event.repeat) {
+                window.location.href = "tutorial1.html";
+            }
+        });
+    </script>
+</body>
+</html>

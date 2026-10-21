@@ -1,0 +1,146 @@
+:root {
+    color-scheme: dark;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    background: #222;
+    color: #f5f5f5;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    background:
+        linear-gradient(rgb(32 32 32 / 88%), rgb(32 32 32 / 88%)),
+        url("imagenes/fondo.png") center / cover fixed;
+}
+
+.research {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    width: min(100%, 1000px);
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 38px 6.5% 23px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.research__title {
+    position: relative;
+    margin: 0 auto;
+    isolation: isolate;
+    font-family: "Bowlby One SC", Impact, sans-serif;
+    font-size: clamp(2.5rem, 6.2vw, 3.7rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 0.98;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.research__title-back,
+.research__title-front {
+    display: block;
+    font: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-align: inherit;
+    text-transform: inherit;
+}
+
+.research__title-back {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    color: #090909;
+    -webkit-text-fill-color: #090909;
+    -webkit-text-stroke: 20px #090909;
+    transform: translate(7px, 7px);
+}
+
+.research__title-front {
+    position: relative;
+    z-index: 1;
+    color: #ffed00;
+    background: linear-gradient(180deg, #b6ff00 10%, #fff000 47%, #ff8a00 72%, #ff0050 94%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0;
+    filter: saturate(0.7);
+}
+
+.research__title-front span,
+.research__title-back span {
+    display: block;
+}
+
+.research__studies {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 10%;
+    width: min(100%, 750px);
+    margin: 17px auto 13px;
+}
+
+.study {
+    width: 100%;
+}
+
+.study h2 {
+    margin: 0;
+    color: #f4ed00;
+    font-size: clamp(1rem, 2.9vw, 1.38rem);
+    font-weight: 800;
+    line-height: 1.35;
+}
+
+.study p {
+    margin: 0;
+    font-size: clamp(0.82rem, 1.9vw, 0.96rem);
+    line-height: 1.31;
+}
+
+.study__illustration {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.study__illustration--tape {
+    margin-top: 8px;
+}
+
+.study__illustration--headphones {
+    margin-bottom: -2px;
+}
+
+.research__hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.research__hint kbd {
+    display: inline-grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    border: 3px solid #ff0054;
+    background: #ff0054;
+    box-shadow: inset 0 0 0 2px rgb(255 255 255 / 22%);
+    color: #fff;
+    font: 900 0.7rem "Trebuchet MS", Arial, sans-serif;
+}
