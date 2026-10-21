@@ -1,43 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Web Page</title>
+    <meta name="theme-color" content="#222222">
+    <title>Creá tu propia cumbia | Cumbia e IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilonucleo2.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Web Page</h1>
-    </header>
+    <main class="creator">
+        <h1 class="creator__title">
+            <span class="creator__title-back" aria-hidden="true">¡CREÁ TU PROPIA CUMBIA!</span>
+            <span class="creator__title-front">¡CREÁ TU PROPIA CUMBIA!</span>
+        </h1>
+        <h2 class="creator__step" id="step-title">PASO 1: Elegí el instrumento predominante</h2>
 
-    <nav>
-        <ul>
-            <li><a href="#section1">Section 1</a></li>
-            <li><a href="#section2">Section 2</a></li>
-            <li><a href="#section3">Section 3</a></li>
-        </ul>
-    </nav>
-
-    <main>
-        <section id="section1">
-            <h2>Section 1</h2>
-            <p>This is the content for section 1.</p>
-        </section>
-
-        <section id="section2">
-            <h2>Section 2</h2>
-            <p>This is the content for section 2.</p>
-        </section>
-
-        <section id="section3">
-            <h2>Section 3</h2>
-            <p>This is the content for section 3.</p>
+        <section class="creator__screen" aria-labelledby="step-title">
+            <img class="creator__image" id="step-image" src="imagenes/keytar.png" alt="Keytar">
+            <div class="creator__options" id="options" aria-label="Elegí una opción"></div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 My Web Page. All rights reserved.</p>
-    </footer>
+    <script>
+        const steps = [
+            {
+                title: "PASO 1: Elegí el instrumento predominante",
+                image: "imagenes/keytar.png",
+                alt: "Keytar",
+                options: [
+                    { name: "KEYTAR", image: "imagenes/keytar.png", alt: "Keytar" },
+                    { name: "GÜIRO", image: "imagenes/guiro.png", alt: "Güiro" },
+                    { name: "TIMBAL", image: "imagenes/timbal.png", alt: "Timbal" }
+                ]
+            },
+            {
+                title: "PASO 2: Elegí la temática a cantar",
+                image: "imagenes/corazonroto.png",
+                alt: "Corazón roto",
+                options: [
+                    { name: "DESAMOR", image: "imagenes/corazonroto.png", alt: "Corazón roto" },
+                    { name: "AMISTAD", image: "imagenes/caritafeliz.png", alt: "Carita sonriente" },
+                    { name: "FIESTA", image: "imagenes/fiesta.png", alt: "Fiesta" }
+                ]
+            },
+            {
+                title: "PASO 3: Elegí la voz",
+                image: "imagenes/microfono.png",
+                alt: "Micrófono",
+                options: [
+                    { name: "VOZ 1", image: "imagenes/ondamusical.png", alt: "Micrófono, voz 1" },
+                    { name: "VOZ 2", image: "imagenes/ondamusical.png", alt: "Micrófono, voz 2" },
+                    { name: "VOZ 3", image: "imagenes/ondamusical.png", alt: "Micrófono, voz 3" }
+                ]
+            }
+        ];
+
+        const selections = [null, null, null];
+        const title = document.querySelector("#step-title");
+        const image = document.querySelector("#step-image");
+        const options = document.querySelector("#options");
+        let currentStep = 0;
+
+        function previewOption(option) {
+            image.src = option.image;
+            image.alt = option.alt;
+        }
+
+        function showStep() {
+            const step = steps[currentStep];
+            title.textContent = step.title;
+            previewOption(selections[currentStep] || step.options[0]);
+            options.replaceChildren();
+
+            step.options.forEach((option) => {
+                const button = document.createElement("button");
+                button.className = "creator__option";
+                button.type = "button";
+                button.textContent = option.name;
+                button.setAttribute("aria-pressed", String(selections[currentStep]?.name === option.name));
+                button.addEventListener("pointerenter", () => previewOption(option));
+                button.addEventListener("pointerleave", () => {
+                    previewOption(selections[currentStep] || step.options[0]);
+                });
+                button.addEventListener("focus", () => previewOption(option));
+                button.addEventListener("blur", () => {
+                    previewOption(selections[currentStep] || step.options[0]);
+                });
+                button.addEventListener("click", () => {
+                    selections[currentStep] = option;
+                    if (currentStep < steps.length - 1) {
+                        currentStep += 1;
+                        showStep();
+                        return;
+                    }
+
+                    options.querySelectorAll(".creator__option").forEach((choice) => {
+                        const isSelected = choice === button;
+                        choice.classList.toggle("is-selected", isSelected);
+                        choice.setAttribute("aria-pressed", String(isSelected));
+                    });
+                });
+                options.append(button);
+            });
+        }
+
+        showStep();
+    </script>
 </body>
 </html>
