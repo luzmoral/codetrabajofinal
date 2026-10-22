@@ -34,6 +34,7 @@ body {
 
 .research__title {
     position: relative;
+    left: -50px;
     width: 100%;
     margin: 0 auto;
     isolation: isolate;
