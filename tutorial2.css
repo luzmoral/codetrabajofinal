@@ -1,6 +1,6 @@
 :root {
     color-scheme: dark;
-    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-family: "Poppins", Arial, sans-serif;
     background: #222;
     color: #f5f5f5;
     font-synthesis: none;
@@ -24,25 +24,27 @@ body {
     position: relative;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    width: min(100%, 1000px);
+    width: min(100%, 1200px);
     min-height: 100vh;
     margin: 0 auto;
-    padding: 38px 6.5% 23px;
+    padding: 38px 5% 23px;
     overflow: hidden;
     isolation: isolate;
 }
 
 .research__title {
     position: relative;
+    width: 100%;
     margin: 0 auto;
     isolation: isolate;
     font-family: "Bowlby One SC", Impact, sans-serif;
-    font-size: clamp(2.5rem, 6.2vw, 3.7rem);
+    font-size: clamp(1.25rem, 4.7vw, 3.15rem);
     font-weight: 400;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.05em;
     line-height: 0.98;
     text-align: center;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 
 .research__title-back,
@@ -78,15 +80,15 @@ body {
 
 .research__title-front span,
 .research__title-back span {
-    display: block;
+    display: inline;
 }
 
 .research__studies {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: center;
-    gap: 10%;
-    width: min(100%, 750px);
+    gap: clamp(64px, 7vw, 88px);
+    width: min(100%, 900px);
     margin: 17px auto 13px;
 }
 
@@ -97,14 +99,17 @@ body {
 .study h2 {
     margin: 0;
     color: #f4ed00;
-    font-size: clamp(1rem, 2.9vw, 1.38rem);
-    font-weight: 800;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: clamp(1.05rem, 2.9vw, 1.5rem);
+    font-weight: 600;
     line-height: 1.35;
 }
 
 .study p {
     margin: 0;
-    font-size: clamp(0.82rem, 1.9vw, 0.96rem);
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: clamp(0.9rem, 1.9vw, 1.05rem);
+    font-weight: 400;
     line-height: 1.31;
 }
 
@@ -129,7 +134,9 @@ body {
     justify-content: center;
     gap: 10px;
     margin: 0;
+    font-family: "Poppins", Arial, sans-serif;
     font-size: 0.8rem;
+    font-weight: 400;
     text-align: center;
 }
 
@@ -142,5 +149,17 @@ body {
     background: #ff0054;
     box-shadow: inset 0 0 0 2px rgb(255 255 255 / 22%);
     color: #fff;
-    font: 900 0.7rem "Trebuchet MS", Arial, sans-serif;
+    font: 600 0.7rem "Poppins", Arial, sans-serif;
+}
+
+@media (max-width: 600px) {
+    .research__title {
+        font-size: clamp(1.7rem, 8vw, 2.5rem);
+        white-space: normal;
+    }
+
+    .research__title-front span,
+    .research__title-back span {
+        display: block;
+    }
 }
