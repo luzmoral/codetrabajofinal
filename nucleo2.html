@@ -12,6 +12,8 @@
 </head>
 <body>
     <main class="creator">
+        <img class="creator__star creator__star--yellow" src="imagenes/estrellararaama.png" alt="" aria-hidden="true">
+        <img class="creator__star creator__star--green" src="imagenes/estrellararaver.png" alt="" aria-hidden="true">
         <h1 class="creator__title">
             <span class="creator__title-back" aria-hidden="true">¡CREÁ TU PROPIA CUMBIA!</span>
             <span class="creator__title-front">¡CREÁ TU PROPIA CUMBIA!</span>
@@ -67,6 +69,7 @@
         function previewOption(option) {
             image.src = option.image;
             image.alt = option.alt;
+            image.classList.toggle("is-wave", option.image === "imagenes/ondamusical.png");
         }
 
         function showStep() {
