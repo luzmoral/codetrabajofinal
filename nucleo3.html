@@ -1,43 +1,291 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Web Page</title>
+    <meta name="theme-color" content="#222222">
+    <title>¿Todavía podemos distinguir a la IA? | Cumbia e IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilonucleo3.css">
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Web Page</h1>
-    </header>
+    <main class="story">
+        <h1 class="story__title">
+            <span class="story__title-back" aria-hidden="true">¿Todavía podemos distinguir a la IA?</span>
+            <span class="story__title-front">¿Todavía podemos distinguir a la IA?</span>
+        </h1>
 
-    <nav>
-        <ul>
-            <li><a href="#section1">Section 1</a></li>
-            <li><a href="#section2">Section 2</a></li>
-            <li><a href="#section3">Section 3</a></li>
-        </ul>
-    </nav>
+        <div class="timeline" id="timeline" aria-label="Seis estados sobre música sintética">
+            <img class="timeline__bar" src="imagenes/barra%20con%20lineas.png" alt="">
+            <div class="timeline__stops" id="timeline-stops"></div>
+            <button
+                class="timeline__thumb"
+                id="timeline-thumb"
+                type="button"
+                role="slider"
+                aria-label="Estado seleccionado"
+                aria-valuemin="1"
+                aria-valuemax="6"
+                aria-valuenow="1"
+                aria-valuetext="Estado 1 de 6"
+                tabindex="0"
+            >
+                <img src="imagenes/botoncito%20que%20se%20desliza.png" alt="">
+            </button>
+        </div>
 
-    <main>
-        <section id="section1">
-            <h2>Section 1</h2>
-            <p>This is the content for section 1.</p>
-        </section>
-
-        <section id="section2">
-            <h2>Section 2</h2>
-            <p>This is the content for section 2.</p>
-        </section>
-
-        <section id="section3">
-            <h2>Section 3</h2>
-            <p>This is the content for section 3.</p>
+        <section class="story__card" aria-label="Información del estado seleccionado">
+            <article class="story__state is-active" data-state="0" aria-label="Estado 1">
+                <img
+                    class="story__image"
+                    src="imagenes/microfono.png"
+                    alt="Ilustración rosa de un micrófono y ondas musicales"
+                >
+                <p class="story__copy">
+                    Las primeras generaciones de música sintética presentaban
+                    <span>voces poco naturales</span> y
+                    <span>entonaciones extrañas.</span> Estas limitaciones hacían que
+                    algunas canciones fueran más fáciles de identificar como artificiales.
+                </p>
+            </article>
+            <article class="story__state" data-state="1" aria-label="Estado 2" hidden>
+                <img
+                    class="story__image"
+                    src="imagenes/aurisrosa.png"
+                    alt="Ilustración rosa de auriculares, inteligencia artificial y ondas musicales"
+                >
+                <p class="story__copy">
+                    Los modelos actuales pueden generar
+                    <span>canciones completas y reproducir con mayor complejidad voces</span>,
+                    melodías, instrumentos, géneros y tempos. La diferencia entre una
+                    producción humana y una generada por IA ya no siempre resulta evidente
+                    al escucharla.
+                </p>
+            </article>
+            <article class="story__state" data-state="2" aria-label="Estado 3: El caso argentino" hidden>
+                <img
+                    class="story__image"
+                    src="imagenes/foto%20y%20sombra%20kode.png"
+                    alt="Retrato de Kode González con una silueta amarilla"
+                >
+                <div class="story__details">
+                    <h2 class="story__state-title">El caso argentino</h2>
+                    <p class="story__copy">
+                        En 2026, el productor argentino Rastry presentó a Kode González,
+                        un <span>artista de cumbia creado mediante inteligencia artificial.</span>
+                        Su caso permite explorar estos avances dentro de un género musical
+                        reconocible para el público argentino.
+                    </p>
+                </div>
+            </article>
+            <article class="story__state" data-state="3" aria-label="Estado 4: El caso argentino" hidden>
+                <img
+                    class="story__image story__image--framed"
+                    src="imagenes/boca%20code.png"
+                    alt="Primer plano de la boca de Kode González"
+                >
+                <div class="story__details">
+                    <h2 class="story__state-title">El caso argentino</h2>
+                    <p class="story__copy">
+                        Según contó Rastry a TN, trabajó durante aproximadamente dos años
+                        en el desarrollo de la voz de Kode para conseguir
+                        <span>que transmitiera emoción y no sonara vacía o automática.</span>
+                    </p>
+                    <blockquote class="story__quote">
+                        “Quiero que la gente sienta que le cantó de verdad”.
+                    </blockquote>
+                    <p class="story__copy">
+                        El desafío consiste en lograr una interpretación que genere una
+                        respuesta emocional.
+                    </p>
+                </div>
+            </article>
+            <article class="story__state story__state--player" data-state="4" aria-label="Estado 5: Escuchar la canción" hidden>
+                <h2 class="player__heading">¡Poné play y escuchalo!</h2>
+                <div class="player__cover-column">
+                    <img
+                        class="player__cover"
+                        src="imagenes/cancionkode.png"
+                        alt="Portada de Desalójame el alma de Rastry y Kode Gonzalez"
+                    >
+                    <div class="player__controls" aria-label="Controles de reproducción no disponibles">
+                        <button class="player__skip" type="button" aria-label="Pista anterior" disabled>
+                            <img src="imagenes/flecha%20iz%20paso%205.png" alt="">
+                        </button>
+                        <button class="player__play" type="button" aria-label="Reproducir canción" disabled>
+                            <img src="imagenes/play%20paso%205.png" alt="">
+                        </button>
+                        <button class="player__skip player__skip--next" type="button" aria-label="Pista siguiente" disabled>
+                            <img src="imagenes/flecha%20paso%205.png" alt="">
+                        </button>
+                    </div>
+                </div>
+                <div class="player__track">
+                    <h3 class="player__song-title">Desalójame el alma</h3>
+                    <p class="player__artist">Rastry x Kode Gonzalez</p>
+                    <div class="player__waveform" aria-hidden="true">
+                        <span style="--bar-height: 13px"></span>
+                        <span style="--bar-height: 20px"></span>
+                        <span style="--bar-height: 15px"></span>
+                        <span style="--bar-height: 25px"></span>
+                        <span style="--bar-height: 31px"></span>
+                        <span style="--bar-height: 20px"></span>
+                        <span style="--bar-height: 27px"></span>
+                        <span style="--bar-height: 34px"></span>
+                        <span style="--bar-height: 25px"></span>
+                        <span style="--bar-height: 38px"></span>
+                        <span style="--bar-height: 30px"></span>
+                        <span style="--bar-height: 24px"></span>
+                        <span style="--bar-height: 33px"></span>
+                        <span style="--bar-height: 23px"></span>
+                        <span style="--bar-height: 29px"></span>
+                        <span style="--bar-height: 36px"></span>
+                        <span style="--bar-height: 25px"></span>
+                        <span style="--bar-height: 19px"></span>
+                        <span style="--bar-height: 26px"></span>
+                        <span style="--bar-height: 15px"></span>
+                        <span style="--bar-height: 29px"></span>
+                        <span style="--bar-height: 19px"></span>
+                        <span style="--bar-height: 34px"></span>
+                        <span style="--bar-height: 25px"></span>
+                        <span style="--bar-height: 18px"></span>
+                        <span style="--bar-height: 30px"></span>
+                        <span style="--bar-height: 23px"></span>
+                        <span style="--bar-height: 17px"></span>
+                        <span style="--bar-height: 27px"></span>
+                        <span style="--bar-height: 21px"></span>
+                        <span style="--bar-height: 31px"></span>
+                        <span style="--bar-height: 19px"></span>
+                        <span style="--bar-height: 24px"></span>
+                        <span style="--bar-height: 14px"></span>
+                        <span style="--bar-height: 22px"></span>
+                        <span style="--bar-height: 17px"></span>
+                        <span style="--bar-height: 28px"></span>
+                    </div>
+                    <div class="player__progress" role="img" aria-label="Progreso de la canción: sin reproducir">
+                        <span></span>
+                    </div>
+                </div>
+            </article>
+            <article class="story__state story__state--conclusion" data-state="5" aria-label="Estado 6: Conclusión" hidden>
+                <img
+                    class="story__image"
+                    src="imagenes/maquinamusica.png"
+                    alt="Ilustración rosa de una máquina generadora de música e inteligencia artificial"
+                >
+                <div class="story__details">
+                    <p class="story__copy">
+                        La mejora de las herramientas generativas y la producción masiva
+                        de contenido pueden <span>dificultar la diferenciación.</span>
+                        Manuel Cullen relaciona este problema con el dumping cognitivo:
+                        la naturalización de la IA puede contribuir a que se debilite
+                        nuestra capacidad de valorar sus particularidades.
+                    </p>
+                </div>
+                <p class="story__hint">
+                    <span>¡Presioná el botón</span>
+                    <kbd class="story__key" aria-label="Enter">OK</kbd>
+                    <span>en tu teclado para continuar!</span>
+                </p>
+            </article>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 My Web Page. All rights reserved.</p>
-    </footer>
+    <script>
+        const statePositions = [5.11, 22.93, 40.65, 58.38, 76.10, 93.83];
+        const timeline = document.querySelector("#timeline");
+        const stopsContainer = document.querySelector("#timeline-stops");
+        const thumb = document.querySelector("#timeline-thumb");
+        const states = document.querySelectorAll(".story__state");
+        let currentState = 0;
+
+        statePositions.forEach((position, index) => {
+            const stop = document.createElement("button");
+            stop.className = "timeline__stop";
+            stop.type = "button";
+            stop.style.setProperty("--position", `${position}%`);
+            stop.setAttribute("aria-label", `Mostrar estado ${index + 1}`);
+            stop.setAttribute("aria-pressed", String(index === 0));
+            stop.addEventListener("click", () => selectState(index));
+            stopsContainer.append(stop);
+        });
+
+        function selectState(index) {
+            currentState = Math.max(0, Math.min(statePositions.length - 1, index));
+            thumb.style.setProperty("--position", `${statePositions[currentState]}%`);
+            thumb.setAttribute("aria-valuenow", String(currentState + 1));
+            thumb.setAttribute("aria-valuetext", `Estado ${currentState + 1} de 6`);
+
+            states.forEach((state, stateIndex) => {
+                const isActive = stateIndex === currentState;
+                state.hidden = !isActive;
+                state.classList.toggle("is-active", isActive);
+            });
+
+            stopsContainer.querySelectorAll(".timeline__stop").forEach((stop, stopIndex) => {
+                stop.setAttribute("aria-pressed", String(stopIndex === currentState));
+            });
+        }
+
+        function selectNearestState(clientX) {
+            const bounds = timeline.getBoundingClientRect();
+            const percentage = ((clientX - bounds.left) / bounds.width) * 100;
+            const nearest = statePositions.reduce((closest, position, index) => {
+                return Math.abs(position - percentage) < Math.abs(statePositions[closest] - percentage)
+                    ? index
+                    : closest;
+            }, 0);
+            selectState(nearest);
+        }
+
+        timeline.addEventListener("pointerdown", (event) => {
+            if (event.target.closest(".timeline__thumb, .timeline__stop")) {
+                return;
+            }
+            selectNearestState(event.clientX);
+        });
+
+        thumb.addEventListener("pointerdown", (event) => {
+            event.preventDefault();
+            thumb.setPointerCapture(event.pointerId);
+            selectNearestState(event.clientX);
+        });
+
+        thumb.addEventListener("pointermove", (event) => {
+            if (thumb.hasPointerCapture(event.pointerId)) {
+                selectNearestState(event.clientX);
+            }
+        });
+
+        thumb.addEventListener("keydown", (event) => {
+            let nextState = currentState;
+            if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+                nextState += 1;
+            } else if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+                nextState -= 1;
+            } else if (event.key === "Home") {
+                nextState = 0;
+            } else if (event.key === "End") {
+                nextState = statePositions.length - 1;
+            } else {
+                return;
+            }
+            event.preventDefault();
+            selectState(nextState);
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (
+                currentState === 5 &&
+                event.key === "Enter" &&
+                !event.repeat &&
+                !event.target.closest("button, a, input, select, textarea")
+            ) {
+                window.location.href = "entrevistas.html";
+            }
+        });
+    </script>
 </body>
 </html>
