@@ -36,15 +36,18 @@ body {
 
 .tutorial__title {
     position: relative;
+    width: 100%;
     margin: 0 auto;
     isolation: isolate;
     font-family: "Bowlby One SC", Impact, sans-serif;
-    font-size: clamp(2.25rem, 6.6vw, 4.35rem);
+    font-size: clamp(1.25rem, 4.7vw, 3.15rem);
     font-weight: 400;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.05em;
     line-height: 0.98;
     text-align: center;
     text-transform: uppercase;
+    white-space: nowrap;
+    transform: scaleX(1.15);
 }
 
 .tutorial__title-back,
@@ -79,7 +82,7 @@ body {
 
 .tutorial__title-front span,
 .tutorial__title-back span {
-    display: block;
+    display: inline;
 }
 
 .tutorial__content {
@@ -120,28 +123,21 @@ body {
     gap: 10px;
     margin: 0;
     font-family: "Poppins", Arial, sans-serif;
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     font-weight: 400;
     text-align: center;
 }
 
 .tutorial__hint kbd {
     display: inline-grid;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     place-items: center;
     border: 3px solid #ff0054;
     background: #ff0054;
     box-shadow: inset 0 0 0 2px rgb(255 255 255 / 22%);
     color: #fff;
-    font: 800 0.78rem "Poppins", Arial, sans-serif;
-}
-
-@media (min-width: 701px) {
-    .tutorial__title {
-        font-size: clamp(3.2rem, 7.2vw, 4.25rem);
-        transform: scaleX(1.3);
-    }
+    font: 800 0.86rem "Poppins", Arial, sans-serif;
 }
 
 @media (max-width: 600px) {
@@ -152,8 +148,14 @@ body {
     }
 
     .tutorial__title {
-        font-size: clamp(2.2rem, 10vw, 3.8rem);
+        font-size: clamp(1.7rem, 8vw, 2.5rem);
+        white-space: normal;
         transform: none;
+    }
+
+    .tutorial__title-front span,
+    .tutorial__title-back span {
+        display: block;
     }
 
     .tutorial__content {
@@ -175,11 +177,11 @@ body {
     .tutorial__hint {
         flex-wrap: wrap;
         gap: 7px;
-        font-size: 0.83rem;
+        font-size: 0.97rem;
     }
 
     .tutorial__hint kbd {
-        width: 32px;
-        height: 32px;
+        width: 36px;
+        height: 36px;
     }
 }
