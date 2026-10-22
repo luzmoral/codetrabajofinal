@@ -256,11 +256,18 @@ body {
     width: 38px;
     height: 38px;
     place-items: center;
+    padding: 0;
     border: 3px solid #ff0054;
     background: #ff0054;
     box-shadow: inset 0 0 0 2px rgb(255 255 255 / 24%);
     color: #fff;
     font: 900 0.8rem Arial, sans-serif;
+    cursor: pointer;
+}
+
+.story__key:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
 }
 
 @keyframes hint-pulse {
