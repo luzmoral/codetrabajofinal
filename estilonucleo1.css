@@ -93,7 +93,8 @@ body {
 }
 
 .process__subtitle {
-    max-width: 390px;
+    width: min(500px, calc(100% + 80px));
+    max-width: 500px;
     margin: 10px 0 0 80px;
     padding-top: 3px;
     font-size: clamp(0.9rem, 1.6vw, 1.05rem);
@@ -350,6 +351,10 @@ body {
     outline-offset: -4px;
 }
 
+.piano__key[data-step="1"]:focus-visible {
+    outline-color: #63e76e;
+}
+
 .piano__key.is-active {
     background: #63e76e;
     box-shadow: 0 0 22px rgb(99 231 110 / 65%);
@@ -390,7 +395,9 @@ body {
     }
 
     .process__subtitle {
+        width: 100%;
         max-width: 460px;
+        margin-left: 0;
         padding-left: 2px;
     }
 
