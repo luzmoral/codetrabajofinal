@@ -186,7 +186,7 @@
                 </div>
                 <p class="story__hint">
                     <span>¡Presioná el botón</span>
-                    <kbd class="story__key" aria-label="Enter">OK</kbd>
+                    <button class="story__key" type="button" aria-label="Ir a las entrevistas">OK</button>
                     <span>en tu teclado para continuar!</span>
                 </p>
             </article>
@@ -199,6 +199,7 @@
         const stopsContainer = document.querySelector("#timeline-stops");
         const thumb = document.querySelector("#timeline-thumb");
         const states = document.querySelectorAll(".story__state");
+        const conclusionButton = document.querySelector(".story__key");
         let currentState = 0;
 
         statePositions.forEach((position, index) => {
@@ -228,6 +229,12 @@
                 stop.setAttribute("aria-pressed", String(stopIndex === currentState));
             });
         }
+
+        conclusionButton.addEventListener("click", () => {
+            if (currentState === 5) {
+                window.location.href = "entrevistas.html";
+            }
+        });
 
         function selectNearestState(clientX) {
             const bounds = timeline.getBoundingClientRect();
