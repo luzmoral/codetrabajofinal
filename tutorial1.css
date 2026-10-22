@@ -36,7 +36,7 @@ body {
 
 .tutorial__title {
     position: relative;
-    width: 100%;
+    left: -10px;
     margin: 0 auto;
     isolation: isolate;
     font-family: "Bowlby One SC", Impact, sans-serif;
