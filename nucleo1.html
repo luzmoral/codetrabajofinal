@@ -88,7 +88,7 @@
             </p>
         </div>
     </aside>
-
+    <script src="serial.js"></script>
     <script>
         const steps = [
             {
@@ -205,7 +205,7 @@
             });
         }
 
-        keys.forEach((key) => {
+                keys.forEach((key) => {
             key.addEventListener("click", () => selectStep(Number(key.dataset.step)));
         });
 
@@ -215,8 +215,14 @@
             }
         });
 
-        selectStep(0);
+        // Botón físico del Arduino: en el paso 6 pasa a nucleo2.html
+        document.addEventListener("boton-arduino", () => {
+            if (!nextButton.hidden) {
+                window.location.href = nextButton.getAttribute("href");
+            }
+        });
 
+        selectStep(0);
         const tutorial = document.querySelector("#process-tutorial");
         window.setTimeout(() => {
             tutorial.classList.add("is-dismissed");
