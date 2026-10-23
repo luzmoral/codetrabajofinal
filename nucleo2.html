@@ -25,7 +25,7 @@
             <div class="creator__options" id="options" aria-label="Elegí una opción"></div>
         </section>
     </main>
-
+    <script src="serial.js"></script>
     <script>
         const steps = [
             {
@@ -110,6 +110,31 @@
                 options.append(button);
             });
         }
+           // ----- Potenciómetro y botón del Arduino -----
+        let potIndex = 0;
+
+       function resaltarOpcion(index) {
+    const botones = options.querySelectorAll(".creator__option");
+    botones.forEach((boton, i) => {
+        boton.classList.toggle("is-pot", i === index);
+    });
+    const opcion = steps[currentStep].options[index];
+    if (opcion) previewOption(opcion);   // cambia la foto, sin focus()
+}
+        document.addEventListener("potenciometro", (e) => {
+            const cantidad = steps[currentStep].options.length;
+            const index = Math.min(cantidad - 1, Math.floor((e.detail / 1024) * cantidad));
+            if (index !== potIndex) {
+                potIndex = index;
+                resaltarOpcion(potIndex);
+            }
+        });
+
+        // Botón físico: confirma la opción elegida con el potenciómetro
+        document.addEventListener("boton-arduino", () => {
+            const botones = options.querySelectorAll(".creator__option");
+            if (botones[potIndex]) botones[potIndex].click();
+        });
 
         showStep();
     </script>
