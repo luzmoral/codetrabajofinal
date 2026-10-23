@@ -298,6 +298,10 @@ body {
     object-fit: contain;
 }
 
+.process__image[hidden] {
+    display: none;
+}
+
 .process__piano {
     position: relative;
     z-index: 1;
