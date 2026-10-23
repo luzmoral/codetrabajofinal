@@ -45,6 +45,17 @@
                     src="imagenes/idea.png"
                     alt="Ilustración de una idea musical"
                 >
+                <video
+                    class="process__image process__video"
+                    id="process-step-video"
+                    src="imagenes/paso1.mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    aria-label="Animación del paso 1: Idea"
+                    hidden
+                ></video>
             </div>
         </section>
 
@@ -151,6 +162,7 @@
         const title = document.querySelector("#process-step-title");
         const description = document.querySelector("#process-step-description");
         const image = document.querySelector("#process-step-image");
+        const video = document.querySelector("#process-step-video");
         const nextButton = document.querySelector("#process-next");
         const keys = document.querySelectorAll(".piano__key");
 
@@ -172,6 +184,16 @@
                 highlight.textContent = part.text;
                 description.append(highlight);
             });
+            const showVideo = index === 0;
+            video.hidden = !showVideo;
+            image.hidden = showVideo;
+            if (showVideo) {
+                video.play().catch((error) => {
+                    console.error("No se pudo reproducir el video del paso 1.", error);
+                });
+            } else {
+                video.pause();
+            }
             image.src = step.image;
             image.alt = step.alt;
             nextButton.hidden = index !== steps.length - 1;
