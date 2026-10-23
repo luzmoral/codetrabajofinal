@@ -163,6 +163,16 @@ body {
 }
 
 .creator__option:hover,
+.creator__option:focus-visible,
+.creator__option.is-pot {
+    filter: brightness(1.08) drop-shadow(0 0 8px rgb(255 0 84 / 65%));
+    color: #f1ff00;
+    transform: translateY(-1px);
+}
+
+.creator__option:focus-visible {
+    outline: none;
+}
 .creator__option:focus-visible {
     filter: brightness(1.08) drop-shadow(0 0 8px rgb(255 0 84 / 65%));
     color: #f1ff00;
