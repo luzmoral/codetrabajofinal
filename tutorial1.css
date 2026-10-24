@@ -1,3 +1,4 @@
+/* Estilos globales y fondo de la página */
 :root {
     color-scheme: dark;
     font-family: "Poppins", Arial, sans-serif;
@@ -21,6 +22,7 @@ body {
         url("imagenes/fondo.png") center / cover fixed;
 }
 
+/* Estructura general de la pantalla tutorial */
 .tutorial {
     position: relative;
     display: grid;
@@ -34,6 +36,7 @@ body {
     isolation: isolate;
 }
 
+/* Título con efecto de capas */
 .tutorial__title {
     position: relative;
     left: -10px;
@@ -85,6 +88,7 @@ body {
     display: inline;
 }
 
+/* Imagen y texto explicativo */
 .tutorial__content {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -113,6 +117,7 @@ body {
     animation: paragraph-entrance 2s ease-out both;
 }
 
+/* Animaciones de entrada del contenido */
 @keyframes image-appear {
     0% {
         opacity: 0;
@@ -143,6 +148,7 @@ body {
     }
 }
 
+/* Indicador de tecla para continuar */
 .tutorial__hint {
     display: flex;
     align-items: center;
@@ -175,6 +181,7 @@ body {
     object-fit: contain;
 }
 
+/* Parpadeo del indicador */
 @keyframes hint-pulse {
     0%,
     100% {
@@ -186,6 +193,7 @@ body {
     }
 }
 
+/* Adaptación a pantallas pequeñas */
 @media (max-width: 600px) {
     .tutorial {
         min-height: 100vh;
