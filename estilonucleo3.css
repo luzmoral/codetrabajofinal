@@ -1,3 +1,4 @@
+/* Estilos globales y fondo de la página */
 :root {
     color-scheme: dark;
     font-family: "Poppins", Arial, sans-serif;
@@ -21,6 +22,7 @@ body {
         url("imagenes/fondo.png") center / cover fixed;
 }
 
+/* Estructura general y título de la historia */
 .story {
     width: min(100%, 1100px);
     min-height: 100vh;
@@ -77,6 +79,7 @@ body {
     -webkit-text-fill-color: transparent;
 }
 
+/* Línea de tiempo y controles para cambiar de paso */
 .timeline {
     position: relative;
     width: min(100%, 930px);
@@ -147,6 +150,7 @@ body {
     user-select: none;
 }
 
+/* Tarjeta principal e información de cada paso */
 .story__card {
     display: grid;
     width: min(100%, 1050px);
@@ -237,6 +241,7 @@ body {
     color: #ff0054;
 }
 
+/* Indicador para avanzar desde el teclado */
 .story__hint {
     grid-column: 2;
     display: flex;
@@ -278,6 +283,7 @@ body {
     outline-offset: 3px;
 }
 
+/* Parpadeo del indicador */
 @keyframes hint-pulse {
     0%,
     100% {
@@ -289,6 +295,7 @@ body {
     }
 }
 
+/* Reproductor y controles de la canción */
 .story__state--player {
     grid-template-columns: 150px minmax(0, 1fr);
     grid-template-rows: auto minmax(0, 1fr);
@@ -412,6 +419,7 @@ body {
     background: #ff0054;
 }
 
+/* Transición del control deslizante cuando se permiten animaciones */
 @media (prefers-reduced-motion: no-preference) {
     .timeline__thumb {
         transition: left 140ms ease-out;
