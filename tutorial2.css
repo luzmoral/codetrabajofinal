@@ -1,3 +1,4 @@
+/* Estilos globales y fondo de la página */
 :root {
     color-scheme: dark;
     font-family: "Poppins", Arial, sans-serif;
@@ -20,6 +21,7 @@ body {
         url("imagenes/fondo.png") center / cover fixed;
 }
 
+/* Estructura de la pantalla de investigaciones */
 .research {
     position: relative;
     display: grid;
@@ -32,6 +34,7 @@ body {
     isolation: isolate;
 }
 
+/* Título con relleno degradado y contorno */
 .research__title {
     position: relative;
     left: -50px;
@@ -84,6 +87,7 @@ body {
     display: inline;
 }
 
+/* Bloques de investigación e ilustraciones */
 .research__studies {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -143,6 +147,7 @@ body {
     animation: headphones-appear 1.8s ease-out 2.2s forwards;
 }
 
+/* Animaciones de entrada de los bloques e ilustraciones */
 @keyframes uba-entry {
     0% {
         opacity: 0;
@@ -191,6 +196,7 @@ body {
     }
 }
 
+/* Indicador de tecla para continuar */
 .research__hint {
     display: flex;
     align-items: center;
@@ -206,8 +212,8 @@ body {
 
 .research__hint kbd {
     display: inline-grid;
-    width: 34px;
-    height: 34px;
+    width: 35px;
+    height: 35px;
     place-items: center;
     border: 3px solid transparent;
     background: transparent;
@@ -223,6 +229,7 @@ body {
     object-fit: contain;
 }
 
+/* Parpadeo del indicador */
 @keyframes hint-pulse {
     0%,
     100% {
@@ -234,6 +241,7 @@ body {
     }
 }
 
+/* Adaptación a pantallas pequeñas */
 @media (max-width: 600px) {
     .research__title {
         font-size: clamp(1.7rem, 8vw, 2.5rem);
