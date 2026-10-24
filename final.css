@@ -1,0 +1,194 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    linear-gradient(rgb(32 32 32 / 88%), rgb(32 32 32 / 88%)),
+    url("imagenes/fondo.png") center / cover fixed;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ---------- Celular: una columna, en el orden del HTML ----------
+   título > robot > texto > título rosa > texto amarillo > botón */
+.final {
+  width: 100%;
+  max-width: 1000px;
+  padding: 40px 24px 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: left;
+}
+.robot {
+  width: min(70%, 300px);
+  height: auto;
+  opacity: 0;
+  animation: image-appear 1.2s ease-out 0.2s forwards;
+}
+.texto {
+  width: 100%;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  text-align: justify;
+}
+.texto--amarillo { color: #f5ff1f; font-weight: 500; }
+.final .titulo--gradiente { text-align: center; }
+
+/* El robot aparece primero; después entran los textos en secuencia */
+.titulo--gradiente {
+  opacity: 0;
+  animation: text-appear 0.8s ease-out 1.4s forwards;
+}
+
+.texto--blanco span {
+  display: block;
+  opacity: 0;
+  animation: text-appear 0.8s ease-out forwards;
+}
+
+.texto--blanco span:first-child { animation-delay: 1.8s; }
+.texto--blanco span:last-child { animation-delay: 2.2s; }
+
+.titulo--rosa {
+  opacity: 0;
+  animation: text-appear 0.8s ease-out 2.6s forwards;
+}
+
+.texto--amarillo {
+  opacity: 0;
+  animation: text-appear 0.8s ease-out 3s forwards;
+}
+
+.boton {
+  opacity: 0;
+  animation: text-fade 0.8s ease-out 3.4s forwards;
+}
+
+@keyframes image-appear {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes text-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes text-appear {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Escritorio: igual a la imagen ---------- */
+@media (min-width: 800px) {
+  .final {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    grid-template-rows: auto repeat(4, auto);
+    column-gap: 48px;
+    row-gap: 18px;
+    align-items: start;
+    padding: 60px 40px;
+  }
+  .titulo--gradiente { grid-column: 1 / -1; justify-self: center; margin-bottom: 30px; }
+  .robot {
+    grid-column: 1;
+    grid-row: 2 / span 4;
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+    max-width: 380px;
+  }
+  .texto, .titulo--rosa, .boton { grid-column: 2; }
+  .texto { font-size: 1.45rem; line-height: 1.25; }
+  .texto--amarillo { font-size: 1.35rem; font-weight: 700; }
+  .boton { justify-self: start; }
+}
+
+/* ---------- Títulos: contorno negro + relleno ---------- */
+.titulo {
+  position: relative;
+  display: inline-block;
+  font-family: "Rubik", "Poppins", sans-serif;
+  font-weight: 900;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: transparent;            /* el texto real se dibuja con ::before y ::after */
+}
+.titulo::before,
+.titulo::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  white-space: nowrap;
+}
+.titulo::before {                /* capa de atrás: contorno negro grueso */
+  color: #000;
+  -webkit-text-stroke: 14px #000;
+  text-shadow: 4px 5px 0 #000;
+}
+.titulo::after { z-index: 1; }   /* capa de adelante: relleno */
+
+.titulo--gradiente { font-size: clamp(2.2rem, 10vw, 4.2rem); white-space: nowrap; }
+.titulo--gradiente::before { text-shadow: 0 0 0 #000; }
+.titulo--gradiente::after {
+  background: linear-gradient(180deg, #6bff1f 0%, #f5ff1f 55%, #ff8a1f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.titulo--rosa { font-size: clamp(1.7rem, 7vw, 2.9rem); white-space: nowrap; }
+.titulo--rosa::after { color: #ff1f5a; }
+
+/* ---------- Botón ---------- */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 240px;
+  min-height: 48px;
+  padding: 5px 27px 6px;
+  border: none;
+  border-radius: 999px;
+  background-color: transparent;
+  background-image: url("imagenes/boton cancion.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  box-shadow: none;
+  color: #080808;
+  font-family: "Bowlby One SC", Impact, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 150ms ease, filter 150ms ease;
+}
+.boton:hover,
+.boton:focus-visible {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+.boton:focus-visible {
+  outline: 3px solid #f1ff00;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .robot,
+  .titulo--gradiente,
+  .texto--blanco span,
+  .titulo--rosa,
+  .texto--amarillo,
+  .boton {
+    opacity: 1;
+    animation: none;
+  }
+}
