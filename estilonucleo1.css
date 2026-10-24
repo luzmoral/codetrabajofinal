@@ -178,9 +178,9 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-width: 200px;
-    min-height: 36px;
-    margin: 10px 0 0 16px;
+    min-width: 240px;
+    min-height: 48px;
+    margin: 18px 0 0 16px;
     padding: 5px 27px 6px;
     border: none;
     border-radius: 999px;
@@ -192,7 +192,7 @@ body {
     box-shadow: none;
     color: #080808;
     font-family: "Bowlby One SC", Impact, sans-serif;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 400;
     letter-spacing: 0;
     line-height: 1;
