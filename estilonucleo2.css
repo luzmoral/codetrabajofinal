@@ -1,3 +1,4 @@
+/* Estilos globales y fondo de la página */
 :root {
     color-scheme: dark;
     font-family: "Poppins", Arial, sans-serif;
@@ -21,6 +22,7 @@ body {
         url("imagenes/fondo.png") center / cover fixed;
 }
 
+/* Distribución general de la pantalla de creación */
 .creator {
     position: relative;
     isolation: isolate;
@@ -31,6 +33,7 @@ body {
     padding: clamp(25px, 5vh, 48px) clamp(20px, 5vw, 60px);
 }
 
+/* Estrellas decorativas de la pantalla */
 .creator__star {
     position: absolute;
     z-index: -1;
@@ -49,6 +52,7 @@ body {
     right: 2%;
 }
 
+/* Título y texto del paso actual */
 .creator__title {
     position: relative;
     isolation: isolate;
@@ -101,6 +105,7 @@ body {
     text-align: center;
 }
 
+/* Zona de imagen y opciones para elegir */
 .creator__screen {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(280px, 0.95fr);
@@ -123,6 +128,7 @@ body {
     animation: voice-wave 1.2s ease-in-out infinite;
 }
 
+/* Movimiento de la ilustración de voz */
 @keyframes voice-wave {
     0%,
     100% {
@@ -138,6 +144,7 @@ body {
     }
 }
 
+/* Botones de selección y sus estados */
 .creator__options {
     display: grid;
     gap: 24px;
@@ -188,6 +195,7 @@ body {
     color: #f1ff00;
 }
 
+/* Adaptación para pantallas pequeñas */
 @media (max-width: 620px) {
     .creator {
         padding: 30px 20px;
@@ -225,6 +233,7 @@ body {
     }
 }
 
+/* Reduce el movimiento según la preferencia del usuario */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
