@@ -1,3 +1,4 @@
+/* Estilos globales y fondo de la página */
 :root {
     color-scheme: dark;
     font-family: "Poppins", Arial, sans-serif;
@@ -22,6 +23,7 @@ body {
         url("imagenes/fondo.png") center / cover fixed;
 }
 
+/* Estructura principal y encabezado */
 .process {
     width: min(100%, 1320px);
     min-height: 100vh;
@@ -113,13 +115,17 @@ body {
     }
 }
 
+/* Recuadro del paso y contenido de texto e imagen */
 .process__card {
     position: relative;
-    width: min(78%, 820px);
-    min-height: clamp(245px, 29vw, 310px);
+    width: min(96%, 1120px);
+    min-height: clamp(300px, 35vw, 390px);
     margin: 0 auto;
-    border: 6px solid #a90042;
-    border-radius: 3.5% 4.5% 3% 4%;
+    border: 12px solid transparent;
+    border-image-source: url("imagenes/recuadro%20de%20caja.png");
+    border-image-slice: 18 fill;
+    border-image-width: 12px;
+    border-image-repeat: stretch;
 }
 
 .process__content {
@@ -127,17 +133,17 @@ body {
     grid-template-columns: minmax(0, 1fr) minmax(150px, 0.78fr);
     align-items: center;
     gap: clamp(20px, 4vw, 48px);
-    width: min(100%, 670px);
+    width: min(100%, 980px);
     min-height: inherit;
     margin: 0 auto;
-    padding: clamp(24px, 5vw, 48px);
+    padding: clamp(30px, 5vw, 60px);
 }
 
 .process__copy h2 {
     margin: 0 0 8px;
     color: #f1ff00;
     font-family: "Bowlby One SC", Impact, sans-serif;
-    font-size: clamp(1.65rem, 3.6vw, 2.35rem);
+    font-size: clamp(1.9rem, 4vw, 2.7rem);
     font-weight: 400;
     letter-spacing: -0.035em;
     line-height: 1.1;
@@ -146,7 +152,7 @@ body {
 .process__copy p {
     margin: 0;
     font-family: "Poppins", Arial, sans-serif;
-    font-size: clamp(0.95rem, 1.8vw, 1.12rem);
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
     line-height: 1.43;
     text-transform: none;
 }
@@ -167,6 +173,7 @@ body {
     font-weight: 500;
 }
 
+/* Botón para avanzar al siguiente contenido */
 .process__next {
     display: inline-flex;
     align-items: center;
@@ -211,6 +218,7 @@ body {
     display: none;
 }
 
+/* Tutorial inicial superpuesto a la página */
 .tutorial-overlay {
     position: fixed;
     z-index: 10;
@@ -290,6 +298,7 @@ body {
     font-weight: 600;
 }
 
+/* Imagen o video del paso seleccionado */
 .process__image {
     display: block;
     width: 100%;
@@ -302,11 +311,12 @@ body {
     display: none;
 }
 
+/* Teclado interactivo y resaltado de la tecla activa */
 .process__piano {
     position: relative;
     z-index: 1;
-    width: min(80%, 940px);
-    margin: -3px auto 0;
+    width: min(90%, 1060px);
+    margin: 6px auto 0;
     padding: 9px 0 0;
     overflow: hidden;
     border: 10px solid #ff0054;
@@ -329,8 +339,8 @@ body {
 
 .piano__keys {
     position: absolute;
-    top: 6%;
-    bottom: 17%;
+    top: 17%;
+    bottom: 7%;
     left: 22.7%;
     display: grid;
     grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -338,6 +348,7 @@ body {
 }
 
 .piano__key {
+    position: relative;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -368,9 +379,25 @@ body {
 }
 
 .piano__key.is-active {
+    background: transparent;
+}
+
+.piano__key.is-active::before {
+    position: absolute;
+    z-index: 0;
+    inset: -22% -2px 0;
+    border-radius: 7px 7px 3px 3px;
     background-color: #63e76e;
     box-shadow: 0 0 22px rgb(99 231 110 / 65%);
+    content: "";
+    mix-blend-mode: multiply;
+    pointer-events: none;
     animation: key-glow 1.8s ease-in-out infinite;
+}
+
+.piano__key span {
+    position: relative;
+    z-index: 1;
 }
 
 .process__hint {
@@ -391,6 +418,7 @@ body {
     }
 }
 
+/* Ajustes de distribución para pantallas pequeñas */
 @media (max-width: 650px) {
     .process {
         padding: 30px 18px 20px;
@@ -417,13 +445,14 @@ body {
     .process__card {
         width: 100%;
         min-height: 0;
-        border-width: 5px;
+        border-width: 7px;
+        border-image-width: 7px;
     }
 
     .process__content {
         grid-template-columns: minmax(0, 1fr) minmax(90px, 0.55fr);
         gap: 12px;
-        min-height: 225px;
+        min-height: 245px;
         padding: 22px 20px;
     }
 
@@ -432,12 +461,12 @@ body {
     }
 
     .process__copy p {
-        font-size: clamp(0.85rem, 3.5vw, 1rem);
+        font-size: clamp(0.9rem, 3.6vw, 1.05rem);
     }
 
     .process__piano {
         width: 100%;
-        margin-top: 8px;
+        margin-top: 2px;
         padding-top: 6px;
         border-width: 7px;
         border-bottom: 0;
@@ -449,6 +478,7 @@ body {
     }
 }
 
+/* Ajustes adicionales para teléfonos angostos */
 @media (max-width: 390px) {
     .tutorial-overlay__content {
         width: 92vw;
@@ -479,6 +509,7 @@ body {
     }
 }
 
+/* Ajustes para teléfonos angostos y de poca altura */
 @media (max-width: 390px) and (max-height: 650px) {
     .process {
         padding-top: 14px;
@@ -521,10 +552,11 @@ body {
     }
 
     .process__piano {
-        margin-top: 6px;
+        margin-top: 0;
     }
 }
 
+/* Respeta la preferencia del usuario por menos animaciones */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
