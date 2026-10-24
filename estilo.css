@@ -1,3 +1,4 @@
+/* Estilos globales y fondo de la página */
 :root {
     color-scheme: dark;
     font-family: "Poppins", Arial, sans-serif;
@@ -21,6 +22,7 @@ body {
         url("imagenes/fondo.png") center / cover fixed;
 }
 
+/* Distribución general de la portada */
 .landing {
     position: relative;
     display: grid;
@@ -42,6 +44,7 @@ body {
     padding-bottom: 14px;
 }
 
+/* Título principal y sus capas decorativas */
 h1 {
     position: relative;
     width: fit-content;
@@ -148,6 +151,7 @@ h1::after {
     background-clip: text;
 }
 
+/* Subtítulo, etiqueta del artista y descripción */
 h2 {
     max-width: 560px;
     margin: 20px 0 54px;
@@ -193,6 +197,7 @@ h2 {
     color: #fff;
 }
 
+/* Ilustraciones, destellos y elementos decorativos */
 .visual {
     position: absolute;
     z-index: 0;
@@ -276,6 +281,7 @@ h2 {
     top: 15%;
     left: 75%;
 }
+/* Indicador de tecla para iniciar */
 .start-hint {
     position: absolute;
     z-index: 3;
@@ -323,12 +329,14 @@ h2 {
     object-fit: contain;
 }
 
+/* Ajuste para pantallas grandes */
 @media (min-width: 1441px) {
     .landing {
         min-height: min(100vh, 930px);
     }
 }
 
+/* Adaptación de la portada a móviles y tabletas */
 @media (max-width: 700px) {
     .landing {
         display: block;
@@ -431,6 +439,7 @@ h2 {
     }
 }
 
+/* Ajustes para teléfonos angostos */
 @media (max-width: 390px) {
     .landing {
         padding-right: 18px;
@@ -443,6 +452,7 @@ h2 {
     }
 }
 
+/* Respeta la preferencia del usuario por menos animaciones */
 @media (prefers-reduced-motion: reduce) {
     .start-hint {
         animation: none;
