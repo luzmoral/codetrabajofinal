@@ -2,6 +2,8 @@ function enviarTecla(key) {
   document.dispatchEvent(new KeyboardEvent("keydown", { key }));
 }
 
+let conectado = false;
+
 function procesar(mensaje) {
   if (mensaje === "ENTER") {
     enviarTecla("Enter");
@@ -23,6 +25,7 @@ async function abrirPuerto(port) {
     console.error("No se pudo abrir el puerto (¿Monitor Serie abierto?)", e);
     return;
   }
+  conectado = true;
   const decoder = new TextDecoderStream();
   port.readable.pipeTo(decoder.writable);
   const reader = decoder.readable.getReader();
@@ -38,26 +41,10 @@ async function abrirPuerto(port) {
   }
 }
 
-if ("serial" in navigator) {
-  navigator.serial.getPorts().then((ports) => {
-    if (ports.length) abrirPuerto(ports[0]);
-  });
-
-  document.addEventListener("click", async () => {
-    const ports = await navigator.serial.getPorts();
-    if (!ports.length) {
-      try {
-        const port = await navigator.serial.requestPort();
-        abrirPuerto(port);
-      } catch (e) {
-        console.error("No se eligió ningún puerto", e);
-      }
-    }
-  }, { once: true });
-} else {
+if (!("serial" in navigator)) {
   console.warn("Web Serial no está disponible: usá Chrome o Edge con Live Server.");
 }
-// Botón manual para conectar el Arduino (también con la tecla C)
+
 async function conectarManual() {
   if (!("serial" in navigator)) {
     alert("Usá Chrome o Edge, abierto con Live Server.");
@@ -71,16 +58,13 @@ async function conectarManual() {
   }
 }
 
-const botonConectar = document.createElement("button");
-botonConectar.textContent = "Conectar Arduino (C)";
-botonConectar.style.cssText =
-  "position:fixed;bottom:8px;right:8px;z-index:9999;padding:6px 10px;opacity:.6;font-size:12px;cursor:pointer;";
-botonConectar.addEventListener("click", (e) => {
-  e.stopPropagation();
-  conectarManual();
-});
-document.addEventListener("DOMContentLoaded", () => document.body.append(botonConectar));
-
 document.addEventListener("keydown", (e) => {
-  if (e.key.toLowerCase() === "c" && !conectado) conectarManual();
+  if (
+    e.key.toLowerCase() === "c" &&
+    !e.repeat &&
+    !conectado &&
+    !(e.target instanceof Element && e.target.closest("input, textarea, select, [contenteditable='true']"))
+  ) {
+    conectarManual();
+  }
 });
