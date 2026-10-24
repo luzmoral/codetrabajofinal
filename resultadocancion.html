@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#222222">
+    <title>Tu cumbia con IA | Cumbia e IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="resultado.css">
+</head>
+<body>
+    <main class="result">
+        <header class="result__header">
+            <h1 class="result__title">Tu cumbia con IA</h1>
+            <p class="result__subtitle">¡Escuchá tu resultado!</p>
+        </header>
+
+        <section class="result-player" aria-label="Reproductor de la canción">
+            <img
+                class="result-player__cover"
+                src="imagenes/cancionkode.png"
+                alt="Portada de la canción"
+            >
+            <div class="result-player__details">
+                <h2 class="result-player__song">Tu canción</h2>
+                <p class="result-player__artist">feat. IA</p>
+                <!-- Cuando tengas la canción, agregá src="imagenes/nombre-de-tu-cancion.mp3" al audio. -->
+                <audio
+                    class="result-player__audio"
+                    controls
+                    preload="none"
+                    aria-label="Escuchar tu canción"
+                ></audio>
+            </div>
+        </section>
+
+        <footer class="result__footer">
+            <a class="result__hint" href="final.html" aria-label="Continuar a la pantalla final">
+                <span>¡Presioná el botón</span>
+                <img src="imagenes/playok.png" alt="OK" class="result__ok">
+                <span>en tu teclado para continuar!</span>
+            </a>
+
+        </footer>
+    </main>
+    <script src="serial.js"></script>
+    <script>
+        document.addEventListener("keydown", (event) => {
+            if (
+                event.key === "Enter" &&
+                !event.repeat &&
+                !(event.target instanceof Element && event.target.closest("a, audio, button, input, select, textarea"))
+            ) {
+                window.location.href = "final.html";
+            }
+        });
+    </script>
+</body>
+</html>
