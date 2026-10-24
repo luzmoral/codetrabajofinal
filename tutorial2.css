@@ -204,7 +204,7 @@ body {
     gap: 10px;
     margin: 0;
     font-family: "Poppins", Arial, sans-serif;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     font-weight: 400;
     text-align: center;
     animation: hint-pulse 1.6s ease-in-out infinite;
@@ -212,8 +212,8 @@ body {
 
 .research__hint kbd {
     display: inline-grid;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     place-items: center;
     border: 3px solid transparent;
     background: transparent;
@@ -251,5 +251,16 @@ body {
     .research__title-front span,
     .research__title-back span {
         display: block;
+    }
+
+    .research__hint {
+        flex-wrap: wrap;
+        gap: 7px;
+        font-size: 0.97rem;
+    }
+
+    .research__hint kbd {
+        width: 36px;
+        height: 36px;
     }
 }
