@@ -22,6 +22,11 @@
 
         <section class="creator__screen" aria-labelledby="step-title">
             <img class="creator__image" id="step-image" src="imagenes/keytar.png" alt="Keytar">
+            <div class="creator__waveform" id="step-waveform" role="img" aria-label="Onda de voz animada" hidden>
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
             <div class="creator__options" id="options" aria-label="Elegí una opción"></div>
         </section>
     </main>
@@ -63,13 +68,18 @@
         const selections = [null, null, null];
         const title = document.querySelector("#step-title");
         const image = document.querySelector("#step-image");
+        const waveform = document.querySelector("#step-waveform");
         const options = document.querySelector("#options");
         let currentStep = 0;
 
         function previewOption(option) {
-            image.src = option.image;
-            image.alt = option.alt;
-            image.classList.toggle("is-wave", option.image === "imagenes/ondamusical.png");
+            const showWaveform = option.image === "imagenes/ondamusical.png";
+            image.hidden = showWaveform;
+            waveform.hidden = !showWaveform;
+            if (!showWaveform) {
+                image.src = option.image;
+                image.alt = option.alt;
+            }
         }
 
         function showStep() {
