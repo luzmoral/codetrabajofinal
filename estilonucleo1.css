@@ -178,6 +178,7 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
     min-width: 240px;
     min-height: 48px;
     margin: 18px 0 0 16px;
@@ -200,6 +201,12 @@ body {
     text-decoration: none;
     text-transform: uppercase;
     transition: transform 150ms ease, filter 150ms ease;
+}
+
+.process__next-key {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
 }
 
 .process__next:hover,
