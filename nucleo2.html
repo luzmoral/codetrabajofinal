@@ -39,8 +39,8 @@
                 alt: "Keytar",
                 options: [
                     { name: "KEYTAR", image: "imagenes/keytar.png", alt: "Keytar" },
-                    { name: "GÜIRO", image: "imagenes/guiro.png", alt: "Güiro" },
-                    { name: "TIMBAL", image: "imagenes/timbal.png", alt: "Timbal" }
+                    { name: "GÜIRO", image: "imagenes/guiro.png", alt: "Güiro", sound: "imagenes/GÜIRO.mp3" },
+                    { name: "TIMBAL", image: "imagenes/timbal.png", alt: "Timbal", sound: "imagenes/TIMBAL.mp3" }
                 ]
             },
             {
@@ -48,9 +48,9 @@
                 image: "imagenes/corazonroto.png",
                 alt: "Corazón roto",
                 options: [
-                    { name: "DESAMOR", image: "imagenes/corazonroto.png", alt: "Corazón roto" },
-                    { name: "AMISTAD", image: "imagenes/caritafeliz.png", alt: "Carita sonriente" },
-                    { name: "FIESTA", image: "imagenes/fiesta.png", alt: "Fiesta" }
+                    { name: "DESAMOR", image: "imagenes/corazonroto.png", alt: "Corazón roto", sound: "imagenes/DESAMOR.mp3" },
+                    { name: "AMISTAD", image: "imagenes/caritafeliz.png", alt: "Carita sonriente", sound: "imagenes/AMISTAD.mp3" },
+                    { name: "FIESTA", image: "imagenes/fiesta.png", alt: "Fiesta", sound: "imagenes/FIESTA.mp3" }
                 ]
             },
             {
@@ -58,9 +58,9 @@
                 image: "imagenes/microfono.png",
                 alt: "Micrófono",
                 options: [
-                    { name: "VOZ 1", image: "imagenes/ondamusical.png", alt: "Micrófono, voz 1" },
-                    { name: "VOZ 2", image: "imagenes/ondamusical.png", alt: "Micrófono, voz 2" },
-                    { name: "VOZ 3", image: "imagenes/ondamusical.png", alt: "Micrófono, voz 3" }
+                    { name: "VOZ 1", image: "imagenes/ondamusical.png", alt: "Micrófono, voz 1", sound: "imagenes/VOZ 1.mp3" },
+                    { name: "VOZ 2", image: "imagenes/ondamusical.png", alt: "Micrófono, voz 2", sound: "imagenes/VOZ 2.mp3" },
+                    { name: "VOZ 3", image: "imagenes/ondamusical.png", alt: "Micrófono, voz 3", sound: "imagenes/VOZ 3.mp3" }
                 ]
             }
         ];
@@ -70,7 +70,19 @@
         const image = document.querySelector("#step-image");
         const waveform = document.querySelector("#step-waveform");
         const options = document.querySelector("#options");
+        const instrumentAudio = new Audio();
         let currentStep = 0;
+
+        function playOptionSound(option) {
+            instrumentAudio.pause();
+            instrumentAudio.currentTime = 0;
+            if (!option.sound) return;
+
+            instrumentAudio.src = option.sound;
+            instrumentAudio.play().catch((error) => {
+                console.error("No se pudo reproducir el sonido de la opción.", error);
+            });
+        }
 
         function previewOption(option) {
             const showWaveform = option.image === "imagenes/ondamusical.png";
@@ -94,8 +106,15 @@
                 button.type = "button";
                 button.textContent = option.name;
                 button.setAttribute("aria-pressed", String(selections[currentStep]?.name === option.name));
-                button.addEventListener("pointerenter", () => previewOption(option));
+                button.addEventListener("pointerenter", () => {
+                    previewOption(option);
+                    if (option.sound) playOptionSound(option);
+                });
                 button.addEventListener("pointerleave", () => {
+                    if (option.sound) {
+                        instrumentAudio.pause();
+                        instrumentAudio.currentTime = 0;
+                    }
                     previewOption(selections[currentStep] || step.options[0]);
                 });
                 button.addEventListener("focus", () => previewOption(option));
@@ -103,6 +122,10 @@
                     previewOption(selections[currentStep] || step.options[0]);
                 });
                 button.addEventListener("click", () => {
+                    if (option.sound) {
+                        instrumentAudio.pause();
+                        instrumentAudio.currentTime = 0;
+                    }
                     selections[currentStep] = option;
                     if (currentStep < steps.length - 1) {
                         currentStep += 1;
@@ -123,13 +146,16 @@
            // ----- Potenciómetro y botón del Arduino -----
         let potIndex = 0;
 
-       function resaltarOpcion(index) {
+      function resaltarOpcion(index) {
     const botones = options.querySelectorAll(".creator__option");
     botones.forEach((boton, i) => {
         boton.classList.toggle("is-pot", i === index);
     });
     const opcion = steps[currentStep].options[index];
-    if (opcion) previewOption(opcion);   // cambia la foto, sin focus()
+    if (opcion) {
+        previewOption(opcion);
+        playOptionSound(opcion);   // <- esto faltaba
+    }
 }
         document.addEventListener("potenciometro", (e) => {
             const cantidad = steps[currentStep].options.length;
