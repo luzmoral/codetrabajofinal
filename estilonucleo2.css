@@ -59,7 +59,7 @@ body {
     width: 100%;
     margin: 0 auto;
     font-family: "Bowlby One SC", Impact, sans-serif;
-    font-size: clamp(2rem, 6.4vw, 5rem);
+    font-size: clamp(1rem, 5vw, 3.5rem);
     font-weight: 400;
     letter-spacing: -0.035em;
     line-height: 1;
@@ -125,24 +125,70 @@ body {
     object-fit: contain;
 }
 
-.creator__image.is-wave {
-    animation: voice-wave 1.2s ease-in-out infinite;
+.creator__image[hidden] {
+    display: none;
 }
 
-/* Movimiento de la ilustración de voz */
-@keyframes voice-wave {
+.creator__waveform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(3px, 0.8vw, 7px);
+    width: min(100%, 400px);
+    height: 330px;
+    justify-self: center;
+    color: #ff387d;
+}
+
+.creator__waveform[hidden] {
+    display: none;
+}
+
+.creator__waveform span {
+    width: clamp(4px, 1vw, 9px);
+    height: 80%;
+    flex: none;
+    border-radius: 999px;
+    background: currentColor;
+    box-shadow: 0 0 12px rgb(255 56 125 / 45%);
+    transform: scaleY(0.12);
+    animation: waveform-talk 1s ease-in-out infinite;
+}
+
+.creator__waveform span:nth-child(7n + 1) { --wave-peak: 0.55; }
+.creator__waveform span:nth-child(7n + 2) { --wave-peak: 0.9; }
+.creator__waveform span:nth-child(7n + 3) { --wave-peak: 0.68; }
+.creator__waveform span:nth-child(7n + 4) { --wave-peak: 1; }
+.creator__waveform span:nth-child(7n + 5) { --wave-peak: 0.72; }
+.creator__waveform span:nth-child(7n + 6) { --wave-peak: 0.88; }
+.creator__waveform span:nth-child(7n) { --wave-peak: 0.58; }
+
+.creator__waveform span:nth-child(1) { animation-delay: -1s; }
+.creator__waveform span:nth-child(2) { animation-delay: -950ms; }
+.creator__waveform span:nth-child(3) { animation-delay: -900ms; }
+.creator__waveform span:nth-child(4) { animation-delay: -850ms; }
+.creator__waveform span:nth-child(5) { animation-delay: -800ms; }
+.creator__waveform span:nth-child(6) { animation-delay: -750ms; }
+.creator__waveform span:nth-child(7) { animation-delay: -700ms; }
+.creator__waveform span:nth-child(8) { animation-delay: -650ms; }
+.creator__waveform span:nth-child(9) { animation-delay: -600ms; }
+.creator__waveform span:nth-child(10) { animation-delay: -550ms; }
+.creator__waveform span:nth-child(11) { animation-delay: -500ms; }
+.creator__waveform span:nth-child(12) { animation-delay: -450ms; }
+.creator__waveform span:nth-child(13) { animation-delay: -400ms; }
+.creator__waveform span:nth-child(14) { animation-delay: -350ms; }
+.creator__waveform span:nth-child(15) { animation-delay: -300ms; }
+.creator__waveform span:nth-child(16) { animation-delay: -250ms; }
+.creator__waveform span:nth-child(17) { animation-delay: -200ms; }
+.creator__waveform span:nth-child(18) { animation-delay: -150ms; }
+.creator__waveform span:nth-child(19) { animation-delay: -100ms; }
+.creator__waveform span:nth-child(20) { animation-delay: -50ms; }
+.creator__waveform span:nth-child(21) { animation-delay: 0ms; }
+
+@keyframes waveform-talk {
     0%,
-    100% {
-        transform: translateY(0) rotate(0);
-    }
-
-    25% {
-        transform: translateY(-7px) rotate(-2deg);
-    }
-
-    75% {
-        transform: translateY(7px) rotate(2deg);
-    }
+    100% { transform: scaleY(0.12); }
+    50% { transform: scaleY(var(--wave-peak, 0.75)); }
 }
 
 /* Botones de selección y sus estados */
@@ -208,7 +254,7 @@ body {
     }
 
     .creator__title {
-        font-size: clamp(1.15rem, 6.1vw, 2.2rem);
+        font-size: clamp(0.9rem, 4.6vw, 1.8rem);
     }
 
     .creator__screen {
@@ -232,6 +278,10 @@ body {
         height: 210px;
     }
 
+    .creator__waveform {
+        height: 210px;
+    }
+
     .creator__options {
         gap: 16px;
         width: min(100%, 420px);
@@ -252,7 +302,4 @@ body {
         transition-duration: 0.01ms !important;
     }
 
-    .creator__image.is-wave {
-        animation: none;
-    }
 }
