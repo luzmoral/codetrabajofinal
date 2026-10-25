@@ -110,17 +110,20 @@
                         src="imagenes/cancionkode.png"
                         alt="Portada de Desalójame el alma de Rastry y Kode Gonzalez"
                     >
-                    <div class="player__controls" aria-label="Controles de reproducción no disponibles">
+                    <div class="player__controls" aria-label="Controles de reproducción">
                         <button class="player__skip" type="button" aria-label="Pista anterior" disabled>
                             <img src="imagenes/flecha%20iz%20paso%205.png" alt="">
                         </button>
-                        <button class="player__play" type="button" aria-label="Reproducir canción" disabled>
+                        <button class="player__play" id="player-play" type="button" aria-label="Reproducir canción">
                             <img src="imagenes/play%20paso%205.png" alt="">
                         </button>
                         <button class="player__skip player__skip--next" type="button" aria-label="Pista siguiente" disabled>
                             <img src="imagenes/flecha%20paso%205.png" alt="">
                         </button>
                     </div>
+                    <audio id="song-audio" preload="metadata">
+                        <source src="imagenes/Desalójameelalma.mp3" type="audio/mpeg">
+                    </audio>
                 </div>
                 <div class="player__track">
                     <h3 class="player__song-title">Desalójame el alma</h3>
@@ -164,9 +167,10 @@
                         <span style="--bar-height: 17px"></span>
                         <span style="--bar-height: 28px"></span>
                     </div>
-                    <div class="player__progress" role="img" aria-label="Progreso de la canción: sin reproducir">
+                    <div class="player__progress" role="progressbar" aria-label="Progreso de la canción" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
                         <span></span>
                     </div>
+                    <p class="player__status" id="player-status" role="status" aria-live="polite" hidden></p>
                 </div>
             </article>
             <article class="story__state story__state--conclusion" data-state="5" aria-label="Estado 6: Conclusión" hidden>
@@ -202,6 +206,12 @@
         const thumb = document.querySelector("#timeline-thumb");
         const states = document.querySelectorAll(".story__state");
         const conclusionButton = document.querySelector(".story__key");
+        const playerState = document.querySelector(".story__state--player");
+        const playerButton = document.querySelector("#player-play");
+        const songAudio = document.querySelector("#song-audio");
+        const progress = document.querySelector(".player__progress");
+        const progressFill = progress.querySelector("span");
+        const playerStatus = document.querySelector("#player-status");
         let currentState = 0;
 
         statePositions.forEach((position, index) => {
@@ -217,6 +227,11 @@
 
         function selectState(index) {
             currentState = Math.max(0, Math.min(statePositions.length - 1, index));
+            if (currentState !== 4) {
+                songAudio.pause();
+                songAudio.currentTime = 0;
+                updateSongProgress();
+            }
             thumb.style.setProperty("--position", `${statePositions[currentState]}%`);
             thumb.setAttribute("aria-valuenow", String(currentState + 1));
             thumb.setAttribute("aria-valuetext", `Estado ${currentState + 1} de 6`);
@@ -237,6 +252,57 @@
                 window.location.href = "entrevistas.html";
             }
         });
+
+        async function playSong() {
+            if (currentState !== 4 || !songAudio.paused) {
+                return;
+            }
+
+            playerStatus.hidden = true;
+            playerStatus.textContent = "";
+            if (songAudio.ended) {
+                songAudio.currentTime = 0;
+            }
+
+            try {
+                await songAudio.play();
+            } catch (error) {
+                playerStatus.textContent = "No se pudo reproducir la canción. Revisá que el archivo de audio esté disponible.";
+                playerStatus.hidden = false;
+                console.error("No se pudo reproducir Desalójame el alma.", error);
+            }
+        }
+
+        function updateSongProgress() {
+            const percentage = songAudio.duration
+                ? (songAudio.currentTime / songAudio.duration) * 100
+                : 0;
+            progressFill.style.width = `${percentage}%`;
+            progress.setAttribute("aria-valuenow", String(Math.round(percentage)));
+        }
+
+        playerButton.addEventListener("click", playSong);
+        songAudio.addEventListener("play", () => {
+            playerState.classList.add("is-playing");
+            playerButton.setAttribute("aria-label", "La canción se está reproduciendo");
+        });
+        songAudio.addEventListener("pause", () => {
+            playerState.classList.remove("is-playing");
+            playerButton.setAttribute("aria-label", "Reproducir canción");
+        });
+        songAudio.addEventListener("timeupdate", updateSongProgress);
+        songAudio.addEventListener("loadedmetadata", updateSongProgress);
+        songAudio.addEventListener("ended", () => {
+            playerState.classList.remove("is-playing");
+            playerButton.setAttribute("aria-label", "Reproducir canción");
+            updateSongProgress();
+        });
+        songAudio.addEventListener("error", () => {
+            playerStatus.textContent = "No se pudo cargar la canción. Revisá que el archivo de audio esté disponible.";
+            playerStatus.hidden = false;
+            console.error("No se pudo cargar el archivo Desalójameelalma.mp3.");
+        });
+        document.addEventListener("boton-arduino", playSong);
 
         function selectNearestState(clientX) {
             const bounds = timeline.getBoundingClientRect();
@@ -286,6 +352,10 @@
         });
 
         document.addEventListener("keydown", (event) => {
+            if (currentState === 4 && event.key === "Enter" && !event.repeat) {
+                playSong();
+                return;
+            }
             if (
                 currentState === 5 &&
                 event.key === "Enter" &&
