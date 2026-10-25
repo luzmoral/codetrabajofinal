@@ -58,13 +58,29 @@ async function conectarManual() {
   }
 }
 
-document.addEventListener("keydown", (e) => {
-  if (
-    e.key.toLowerCase() === "c" &&
-    !e.repeat &&
-    !conectado &&
-    !(e.target instanceof Element && e.target.closest("input, textarea, select, [contenteditable='true']"))
-  ) {
-    conectarManual();
-  }
+document.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" || event.repeat) return;
+
+    if (currentState === 4) {
+        playSong();
+        return;
+    }
+
+    if (
+        currentState === 5 &&
+        !(event.target instanceof Element && event.target.closest("button, a, input, select, textarea"))
+    ) {
+        window.location.href = "entrevistas.html";
+    }
 });
+async function autoconectar() {
+  if (!("serial" in navigator)) return;
+  const puertos = await navigator.serial.getPorts();
+  console.log("Puertos autorizados:", puertos.length);
+  if (puertos.length === 0 || conectado) return;
+  for (let i = 0; i < 5 && !conectado; i++) {
+    abrirPuerto(puertos[0]);
+    await new Promise((r) => setTimeout(r, 400));
+  }
+}
+autoconectar();
