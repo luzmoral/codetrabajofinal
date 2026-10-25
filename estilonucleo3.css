@@ -180,7 +180,7 @@ body {
 .story__image {
     display: block;
     width: 100%;
-    max-height: 260px;
+    max-height: 350px;
     min-width: 0;
     object-fit: contain;
 }
@@ -189,6 +189,7 @@ body {
     aspect-ratio: 1.5;
     border: 6px solid #f1ff00;
     max-height: 240px;
+    filter: grayscale(1);
     object-fit: cover;
 }
 
@@ -405,6 +406,23 @@ body {
     height: var(--bar-height);
     border-radius: 3px;
     background: #ff0054;
+    transform: scaleY(0.35);
+}
+
+.story__state--player.is-playing .player__waveform span {
+    animation: player-wave 700ms ease-in-out infinite alternate;
+}
+
+.story__state--player.is-playing .player__waveform span:nth-child(6n + 1) { animation-delay: -600ms; }
+.story__state--player.is-playing .player__waveform span:nth-child(6n + 2) { animation-delay: -500ms; }
+.story__state--player.is-playing .player__waveform span:nth-child(6n + 3) { animation-delay: -400ms; }
+.story__state--player.is-playing .player__waveform span:nth-child(6n + 4) { animation-delay: -300ms; }
+.story__state--player.is-playing .player__waveform span:nth-child(6n + 5) { animation-delay: -200ms; }
+.story__state--player.is-playing .player__waveform span:nth-child(6n) { animation-delay: -100ms; }
+
+@keyframes player-wave {
+    from { transform: scaleY(0.3); }
+    to { transform: scaleY(1); }
 }
 
 .player__progress {
@@ -414,9 +432,15 @@ body {
 
 .player__progress span {
     display: block;
-    width: 6%;
+    width: 0;
     height: 100%;
     background: #ff0054;
+}
+
+.player__status {
+    margin: 8px 0 0;
+    color: #ff8aae;
+    font-size: 0.85rem;
 }
 
 /* Transición del control deslizante cuando se permiten animaciones */
