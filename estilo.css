@@ -295,7 +295,7 @@ h2 {
     padding: 0 16px;
     font-size: 1.1rem;
     text-align: center;
-    animation: hint-pulse 1.6s ease-in-out infinite;
+    animation: hint-pulse 2s ease-in-out infinite;
 }
 
 @keyframes hint-pulse {
@@ -449,12 +449,5 @@ h2 {
     .artist-label {
         padding-right: 7px;
         padding-left: 7px;
-    }
-}
-
-/* Respeta la preferencia del usuario por menos animaciones */
-@media (prefers-reduced-motion: reduce) {
-    .start-hint {
-        animation: none;
     }
 }
