@@ -12,7 +12,7 @@ window.cumbiaSongs = {
         },
         FIESTA: {
             "VOZ 1": "Keytar, Fiesta, Voz 1.mp3",
-            "VOZ 2": "keytar, fiesta, voz 2 .mp3",
+            "VOZ 2": "Keytar, fiesta, voz 2 .mp3",
             "VOZ 3": "keytar fiesta voz 3 .mp3"
         }
     },
