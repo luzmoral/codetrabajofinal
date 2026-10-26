@@ -138,7 +138,12 @@
                         choice.classList.toggle("is-selected", isSelected);
                         choice.setAttribute("aria-pressed", String(isSelected));
                     });
-                    window.location.href = "nucleo3.html";
+                    const selectionsQuery = new URLSearchParams({
+                        instrument: selections[0].name,
+                        theme: selections[1].name,
+                        voice: selections[2].name
+                    });
+                    window.location.href = `nucleo3.html?${selectionsQuery}`;
                 });
                 options.append(button);
             });
