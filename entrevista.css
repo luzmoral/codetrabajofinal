@@ -13,53 +13,67 @@
 }
 
 body {
+    display: grid;
+    place-items: center;
     min-width: 320px;
-    min-height: 100vh;
+    min-height: 100svh;
     margin: 0;
+    overflow-x: hidden;
     background:
-        linear-gradient(rgb(0 0 0 / 68%), rgb(0 0 0 / 68%)),
+        linear-gradient(rgb(0 0 0 / 76%), rgb(0 0 0 / 76%)),
         url("imagenes/fondo%20entrevistas.png") center / cover fixed;
 }
 
-/* Lienzo principal y título ilustrado */
+/*
+  Escenario horizontal de 1100 x 640 "u".
+  Todo se mide en u, y u se calcula con el ancho Y el alto de la ventana,
+  así la página completa entra en una sola pantalla sin hacer scroll.
+*/
+:root {
+    --u0: min(calc((100vw - 24px) / 1100), calc(100svh / 640), 1.7px);
+    --u: var(--u0);
+}
+
 .interviews {
-    width: min(100%, 1100px);
-    min-height: 150vh;
-    margin: 0 auto;
-    padding: clamp(24px, 4vw, 46px) clamp(18px, 4vw, 42px) 24px;
+    position: relative;
+    width: calc(var(--u) * 1100);
+    height: calc(var(--u) * 640);
+    margin: 0;
+    padding: 0;
 }
 
 .interviews__header {
-    margin-bottom: clamp(22px, 4vw, 42px);
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
 }
 
 .interviews__title {
     display: block;
-    width: min(90%, 560px);
+    width: calc(var(--u) * 360);
     height: auto;
-    left: 200%;
-    transform: translateX(-100px);
 }
 
 /* Collage de testimonios en papeles ilustrados */
 .collage {
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    grid-template-rows: minmax(220px, auto) minmax(220px, auto);
-    gap: 4px 0;
-    align-items: stretch;
-    width: min(300%, 999px);
-    margin: 0 auto;
+    position: absolute;
+    inset: 0;
+}
+
+/* En escritorio el collage se mide en una unidad 12% más chica, así toda la
+   composición (carteles pegados) entra en la pantalla junto al banner. */
+@media (min-width: 701px) {
+    .collage {
+        --u: calc(var(--u0) * 0.88);
+    }
 }
 
 .paper {
-    position: relative;
+    position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     min-width: 0;
-    padding: clamp(24px, 4vw, 42px);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -67,19 +81,18 @@ body {
 }
 
 .paper h2 {
-    margin: 0 0 10px;
+    margin: 0 0 calc(var(--u) * 8);
     font-family: "Bowlby One SC", Impact, sans-serif;
-    font-size: clamp(1.25rem, 2.5vw, 1.8rem);
+    font-size: calc(var(--u) * 25);
     font-weight: 400;
     line-height: 1.05;
 }
 
 .paper p {
-    margin: 0 0 8px;
-    font-size: clamp(0.78rem, 1.25vw, 0.98rem);
+    margin: 0 0 calc(var(--u) * 8);
+    font-size: calc(var(--u) * 15);
     font-weight: 400;
     line-height: 1.3;
-    transform: translateY(-45 px);
 }
 
 .paper p:last-child {
@@ -90,75 +103,177 @@ body {
     font-weight: 400;
 }
 
+/* Cintas adhesivas (pseudo-elementos, no tocan el HTML) */
+.paper::before,
+.paper::after {
+    content: none;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    pointer-events: none;
+}
+
+/* Verde: testimonios */
 .paper--green {
     z-index: 1;
-    grid-column: 1 / 5;
-    grid-row: 1;
-    justify-content: flex-end;
-    padding: 31% 8% 11% 27%;
+    left: calc(var(--u) * 270);
+    top: calc(var(--u) * 213);
+    width: calc(var(--u) * 335);
+    height: calc(var(--u) * 308);
+    padding: calc(var(--u) * 80) calc(var(--u) * 46) calc(var(--u) * 66) calc(var(--u) * 108);
     background-image: url("imagenes/papel%20verde.png");
     transform: rotate(-2deg);
 }
 
-.paper--green .paper__eyebrow {
-    position: absolute;
-    top: 100%;
-    left: 4%;
-    color: #f1ff00;
-    font-size: clamp(1.1rem, 2.2vw, 1.7rem);
-    text-shadow: 2px 2px #111;
-    transform: rotate(-4deg);
+.paper--green .paper__quote {
+    font-size: calc(var(--u) * 14.5);
+    font-weight: 500;
+    line-height: 1.22;
+    color: #151515;
 }
 
+.paper--green strong {
+    font-family: "Bowlby One SC", Impact, sans-serif;
+    color: #ff0054;
+    text-transform: uppercase;
+    font-size: 0.95em;
+}
+
+.paper--green .paper__eyebrow {
+    position: absolute;
+    top: calc(var(--u) * 292);
+    left: 0;
+    margin: 0;
+    line-height: 0;
+    transform: rotate(-2deg);
+    transform-origin: left top;
+}
+
+.paper__eyebrow-img {
+    display: block;
+    width: calc(var(--u) * 160);
+    max-width: none;
+    height: auto;
+}
+
+/* Amarillo: emoción genuina */
 .paper--yellow {
     z-index: 2;
-    grid-column: 5 / 9;
-    grid-row: 1 / 3;
-    padding: 15% 12%;
+    left: calc(var(--u) * 545);
+    top: calc(var(--u) * 100);
+    width: calc(var(--u) * 250);
+    height: calc(var(--u) * 354);
+    padding: calc(var(--u) * 48) calc(var(--u) * 28) calc(var(--u) * 20) calc(var(--u) * 32);
     background-image: url("imagenes/papel%20amarrillo.png");
     transform: rotate(-1deg);
 }
 
 .paper--yellow h2 {
     color: #ff0054;
-    transform: translateY(-80px);
+    font-size: calc(var(--u) * 27);
 }
 
+.paper--yellow p {
+    font-size: calc(var(--u) * 15);
+    font-weight: 500;
+    color: #151515;
+}
+
+/* Gris: Lucas Murúa */
 .paper--lucas {
-    z-index: 1;
-    grid-column: 9 / 13;
-    grid-row: 1;
-    align-self: center;
-    min-height: 205px;
-    padding: 15% 16%;
+    z-index: 3;
+    left: calc(var(--u) * 767);
+    top: calc(var(--u) * 40);
+    width: calc(var(--u) * 240);
+    height: calc(var(--u) * 248);
+    align-items: center;
+    padding: calc(var(--u) * 44) calc(var(--u) * 46) calc(var(--u) * 30) calc(var(--u) * 50);
     background-image: url("imagenes/papel%20blanco.png");
-    transform: rotate(5deg);
-}
-
-.paper__name {
-    color: #ff5a00;
     text-align: center;
-    text-shadow: 2px 2px #111;
+    transform: rotate(-4deg);
 }
 
+.paper--lucas::before {
+    content: "";
+    top: calc(var(--u) * 8);
+    left: calc(var(--u) * 150);
+    width: calc(var(--u) * 62);
+    height: calc(var(--u) * 62);
+    background-image: url("imagenes/pegatina%20amarrilla.png");
+}
+
+.paper--lucas p {
+    font-size: calc(var(--u) * 10.5);
+    line-height: 1.25;
+    color: #151515;
+}
+
+/* Nombres ilustrados (imágenes con letra cursiva anaranjada) */
+.paper .paper__name {
+    margin: 0 0 calc(var(--u) * 6);
+    line-height: 0;
+    text-align: center;
+}
+
+.paper__name-img {
+    display: block;
+    max-width: none;
+    height: auto;
+    margin-inline: auto;
+}
+
+.paper__name-img--lucas {
+    width: calc(var(--u) * 138);
+    margin-top: calc(var(--u) * -12);
+    margin-bottom: calc(var(--u) * -8);
+}
+
+.paper__name-img--arse {
+    width: calc(var(--u) * 215);
+    margin-top: calc(var(--u) * -6);
+    margin-bottom: calc(var(--u) * -28);
+}
+
+/* Etiqueta verde ("Ver más") */
 .paper__tag {
     align-self: center;
-    margin-top: 10px;
-    padding: 2px 12px;
-    border-radius: 999px;
-    background: #16ed00;
-    color: #e60047;
-    font-size: 0.75rem;
-    font-weight: 400;
+    margin-top: auto;
+    display: grid;
+    place-items: center;
+    width: calc(var(--u) * 112);
+    aspect-ratio: 135 / 41;
+    padding: 0 0 calc(var(--u) * 2);
+    background: url("imagenes/nube_rosa_entrevista.png") center / 100% 100% no-repeat;
+    color: #fff;
+    font-size: calc(var(--u) * 11.5);
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
     transform: rotate(-2deg);
 }
 
+/* Lucas: pincelada rosa */
+.paper--lucas .paper__tag {
+    background-image: url("imagenes/nube_rosa_entrevista.png");
+    color: #fff;
+}
+
+/* Arse: pincelada verde */
+.paper--arse .paper__tag {
+    width: calc(var(--u) * 150);
+    aspect-ratio: 139 / 29;
+    background-image: url("imagenes/nube_verde_entrevista.png");
+    color: #151515;
+}
+
+/* Rosa: la paradoja */
 .paper--pink {
     z-index: 2;
-    grid-column: 9 / 13;
-    grid-row: 2;
-    min-height: 240px;
-    padding: 13% 15%;
+    left: calc(var(--u) * 780);
+    top: calc(var(--u) * 262);
+    width: calc(var(--u) * 247);
+    height: calc(var(--u) * 329);
+    padding: calc(var(--u) * 42) calc(var(--u) * 24) calc(var(--u) * 34) calc(var(--u) * 24);
     background-image: url("imagenes/papel%20rosa.png");
     color: #f1ff00;
     font-family: "Aclonica", sans-serif;
@@ -166,72 +281,151 @@ body {
     transform: rotate(2deg);
 }
 
-.paper--pink h2 {
-    color: #16ed00;
+.paper--pink::before {
+    content: "";
+    top: calc(var(--u) * 14);
+    right: calc(var(--u) * -24);
+    width: calc(var(--u) * 58);
+    height: calc(var(--u) * 58);
+    background-image: url("imagenes/pegatina%20verde.png");
 }
 
+.paper--pink h2 {
+    margin-bottom: calc(var(--u) * 4);
+    color: #16ed00;
+    font-size: calc(var(--u) * 22);
+    white-space: nowrap;
+    text-transform: uppercase;
+    text-shadow: calc(var(--u) * 1.5) calc(var(--u) * 1.5) #111;
+}
+
+.paper--pink p {
+    margin-bottom: calc(var(--u) * 6);
+    font-size: calc(var(--u) * 14);
+    line-height: 1.22;
+}
+
+/* Gris ancho: Arse */
 .paper--arse {
     z-index: 3;
-    grid-column: 3 / 7;
-    grid-row: 2;
-    align-self: end;
-    min-height: 190px;
-    padding: 15% 15%;
-    background-image: url("imagenes/papel%20blanco.png");
-    transform: rotate(-3deg);
+    left: calc(var(--u) * 529);
+    top: calc(var(--u) * 404);
+    width: calc(var(--u) * 246);
+    height: calc(var(--u) * 185);
+    align-items: center;
+    padding: calc(var(--u) * 26) calc(var(--u) * 50) calc(var(--u) * 34);
+    background-image: url("imagenes/fondo%20entrevista.png");
+    text-align: center;
+    transform: rotate(-1deg);
 }
 
+.paper--arse::before,
+.paper--arse::after {
+    content: "";
+    width: calc(var(--u) * 26);
+    height: calc(var(--u) * 42);
+    background-image: url("imagenes/pegatina%20rosa.png");
+}
+
+.paper--arse::before {
+    left: calc(var(--u) * 2);
+    top: calc(var(--u) * 70);
+    transform: rotate(-8deg);
+}
+
+.paper--arse::after {
+    right: calc(var(--u) * 8);
+    bottom: calc(var(--u) * 14);
+    transform: rotate(40deg);
+}
+
+.paper--arse p {
+    font-size: calc(var(--u) * 13.5);
+    color: #151515;
+}
+
+/* Garabatos decorativos */
 .collage__doodle {
     position: absolute;
     z-index: 4;
-    width: clamp(28px, 5vw, 58px);
     height: auto;
     pointer-events: none;
 }
 
+.collage__doodle--ribbon {
+    left: calc(var(--u) * 217);
+    top: calc(var(--u) * 112);
+    width: calc(var(--u) * 44);
+}
+
 .collage__doodle--star {
-    top: 12%;
-    left: 45%;
+    left: calc(var(--u) * 457);
+    top: calc(var(--u) * 125);
+    width: calc(var(--u) * 58);
+}
+
+.collage__doodle--note {
+    left: calc(var(--u) * 762);
+    top: calc(var(--u) * 566);
+    width: calc(var(--u) * 48);
 }
 
 .collage__doodle--smile {
-    top: 13%;
-    right: -2%;
-    width: clamp(42px, 7vw, 76px);
+    left: calc(var(--u) * 1034);
+    top: calc(var(--u) * 100);
+    width: calc(var(--u) * 96);
 }
 
 /* Llamado a escuchar la cumbia y enlace para volver */
 .interviews__footer {
+    position: absolute;
+    left: calc(var(--u) * 270);
+    top: calc(var(--u) * 530);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-    width: min(100%, 760px);
-    min-height: 108px;
-    margin: clamp(22px, 4vw, 42px) auto 0;
-    padding: 24px clamp(24px, 5vw, 54px);
+    gap: calc(var(--u) * 30);
+    width: calc(var(--u) * 610);
+    aspect-ratio: 817 / 137;
+    margin: 0;
+    padding: 0 calc(var(--u) * 78) 0 calc(var(--u) * 36);
     background: url("imagenes/banner%20entrevista.png") center / 100% 100% no-repeat;
     color: #fff;
 }
 
+.interviews__footer::after {
+    content: "";
+    position: absolute;
+    top: -14%;
+    right: -3%;
+    width: 11%;
+    aspect-ratio: 1;
+    background: url("imagenes/pegatina%20verde.png") center / 100% 100% no-repeat;
+    pointer-events: none;
+}
+
 .interviews__question {
     margin: 0;
-    font-family: "Bowlby One SC", Impact, sans-serif;
-    font-size: clamp(1rem, 2vw, 1.35rem);
-    font-weight: 400;
-    line-height: 1.15;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: calc(var(--u) * 17);
+    font-weight: 700;
+    line-height: 1.2;
     text-transform: uppercase;
 }
 
+.interviews__question > span:first-child {
+    text-transform: lowercase;
+}
+
 .interviews__prompt {
-    width: min(40%, 250px);
+    flex: 0 0 38%;
 }
 
 .interviews__line {
     display: block;
     width: 100%;
     height: auto;
-    margin-top: 4px;
+    margin-top: calc(var(--u) * 3);
 }
 
 .interviews__question-highlight {
@@ -240,18 +434,20 @@ body {
 
 .interviews__listen {
     display: inline-flex;
+    flex: 0 0 46%;
     align-items: center;
     justify-content: center;
-    width: min(100%, 320px);
-    min-height: 62px;
-    padding: 14px 34px;
+    min-height: calc(var(--u) * 66);
+    padding: calc(var(--u) * 10) calc(var(--u) * 32);
     background: url("imagenes/nube%20amarrilla.png") center / 100% 100% no-repeat;
     color: #ed004c;
     font-family: "Poppins", Arial, sans-serif;
-    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    font-size: calc(var(--u) * 14);
     font-weight: 700;
+    line-height: 1.15;
     text-align: center;
     text-decoration: none;
+    text-transform: uppercase;
     transition: transform 150ms ease, filter 150ms ease;
 }
 
@@ -285,10 +481,95 @@ body {
     text-underline-offset: 4px;
 }
 
-/* Orden vertical en pantallas angostas */
+/*
+  Efecto "foco": al pasar el mouse por un cartel (o por el botón del banner)
+  ese cartel se ve a todo color, con brillo y un poquito más grande, y los demás
+  quedan oscurecidos (sin perder el color). La estructura pegada del collage no cambia.
+  El botón del Arduino activa el mismo efecto con la clase .is-active.
+
+  Todos los filtros usan la MISMA lista de funciones, así la transición es suave.
+*/
+.paper {
+    --glow-color: transparent;
+    --glow-size: 0;
+    --dim: 1;
+    --lift: 1;
+    z-index: var(--z, 1);
+    scale: calc(var(--lift) * var(--grow, 1));
+    filter:
+        drop-shadow(0 5px 5px rgb(0 0 0 / 35%))
+        drop-shadow(0 0 calc(var(--u) * var(--glow-size)) var(--glow-color))
+        brightness(var(--dim))
+        saturate(1);
+    transition: filter 220ms ease, scale 220ms ease;
+}
+
+.interviews__footer {
+    transition: filter 220ms ease;
+}
+
+/* Cada cartel guarda su capa original y su color de brillo */
+.paper--green  { --z: 1; --grow: 1.15; }
+.paper--yellow { --z: 2; }
+.paper--pink   { --z: 2; }
+.paper--lucas  { --z: 3; --grow: 1.14; --glow-color: rgb(240 255 0 / 90%); }
+.paper--arse   { --z: 3; --grow: 1.15; --glow-color: rgb(255 0 84 / 85%); }
+
+/* Estado "enfocado": a todo color + brillo + un poco más grande, por encima de los demás */
+
+.paper:is(:hover, :focus-visible) {
+    z-index: 6;
+    --glow-size: 16;
+    --lift: 1.03;
+    --dim: 1.05;
+    outline: none;
+}
+
+/* Estado "apagado": se oscurece pero conserva el color */
+.interviews:has(.paper:is(:hover, :focus-visible)) .paper:not(:is(:hover, :focus-visible)),
+.interviews:has(.interviews__listen.is-active) .paper {
+    --glow-size: 0;
+    --lift: 1;
+    --dim: 0.42;
+}
+
+.interviews__listen.is-active {
+    background-image: url("imagenes/nube%20rosa.png");
+    color: #fff200;
+    filter: brightness(1.08);
+    transform: scale(1.04);
+}
+
+@media (hover: hover) {
+    .interviews:has(.paper:hover) .interviews__footer {
+        filter: brightness(0.42);
+    }
+
+    .interviews:has(.interviews__listen:hover) .paper {
+        --glow-size: 0;
+        --lift: 1;
+        --dim: 0.42;
+    }
+}
+
+/* Orden vertical en pantallas angostas (celular): ahí sí se puede hacer scroll */
 @media (max-width: 700px) {
+    :root {
+        --u: 1.5px;
+    }
+
+    body {
+        display: block;
+    }
+
     .interviews {
+        width: auto;
+        height: auto;
         padding: 22px 18px;
+    }
+
+    .interviews__header {
+        position: static;
     }
 
     .interviews__title {
@@ -297,10 +578,13 @@ body {
     }
 
     .collage {
+        position: relative;
+        inset: auto;
+        display: grid;
         grid-template-columns: minmax(0, 1fr);
-        grid-template-rows: none;
         gap: 12px;
         width: min(100%, 440px);
+        margin: 0 auto;
     }
 
     .paper--green,
@@ -308,9 +592,11 @@ body {
     .paper--lucas,
     .paper--pink,
     .paper--arse {
-        grid-column: 1;
-        grid-row: auto;
+        position: relative;
+        left: auto;
+        top: auto;
         width: min(100%, 390px);
+        height: auto;
         min-height: 250px;
         margin: 0 auto;
         padding: 46px 42px;
@@ -318,6 +604,7 @@ body {
 
     .paper--green {
         min-height: 280px;
+        margin-bottom: 36px;
         padding: 94px 36px 35px 102px;
     }
 
@@ -331,52 +618,118 @@ body {
         padding: 46px 48px;
     }
 
-    .paper--lucas,
+    .paper--lucas {
+        min-height: 240px;
+        padding: 66px 62px 40px;
+    }
+
+    .paper--lucas::before {
+        top: -6px;
+        left: auto;
+        right: 36px;
+    }
+
     .paper--arse {
         min-height: 240px;
+        padding: 56px 56px 40px;
     }
 
     .paper h2 {
         font-size: clamp(1.35rem, 5.8vw, 1.8rem);
     }
 
-    .paper p {
+    .paper p,
+    .paper--green .paper__quote,
+    .paper--yellow p,
+    .paper--lucas p,
+    .paper--pink p,
+    .paper--arse p {
         font-size: clamp(0.85rem, 3.5vw, 1rem);
+    }
+
+    .paper__tag {
+        font-size: 0.8rem;
+    }
+
+    .paper__name-img--lucas {
+        width: 150px;
+        margin-top: -12px;
+        margin-bottom: -8px;
+    }
+
+    .paper__name-img--arse {
+        width: 200px;
+        margin-top: -6px;
+        margin-bottom: -26px;
     }
 
     .paper--green .paper__eyebrow {
         top: auto;
-        bottom: -22px;
+        bottom: -34px;
         left: 8px;
+    }
+
+    .paper__eyebrow-img {
+        width: 150px;
+    }
+
+    .collage__doodle--ribbon {
+        top: 0;
+        left: 4px;
+        width: 30px;
     }
 
     .collage__doodle--star {
         top: 28%;
         left: auto;
         right: 0;
+        width: 44px;
+    }
+
+    .collage__doodle--note {
+        top: auto;
+        bottom: 34%;
+        left: 4px;
+        width: 40px;
     }
 
     .collage__doodle--smile {
         top: 58%;
+        left: auto;
         right: -4px;
+        width: 60px;
     }
 
     .interviews__footer {
+        position: relative;
+        left: auto;
+        top: auto;
         flex-direction: column;
         justify-content: center;
         gap: 12px;
+        width: min(100%, 420px);
+        aspect-ratio: auto;
         min-height: 140px;
+        margin: 22px auto 0;
         padding: 32px 30px;
-        background-size: 100% 100%;
         text-align: center;
     }
 
     .interviews__question {
         max-width: 100%;
+        font-size: 1.1rem;
     }
 
     .interviews__prompt {
+        flex: none;
         width: min(100%, 280px);
+    }
+
+    .interviews__listen {
+        flex: none;
+        width: min(100%, 300px);
+        min-height: 62px;
+        font-size: 0.9rem;
     }
 }
 
