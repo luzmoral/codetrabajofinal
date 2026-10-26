@@ -70,7 +70,7 @@ document.addEventListener("keydown", (event) => {
         currentState === 5 &&
         !(event.target instanceof Element && event.target.closest("button, a, input, select, textarea"))
     ) {
-        window.location.href = "entrevistas.html";
+        window.location.href = `entrevistas.html${window.location.search}`;
     }
 });
 async function autoconectar() {
