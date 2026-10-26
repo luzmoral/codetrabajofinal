@@ -26,8 +26,8 @@
             <div class="result-player__details">
                 <h2 class="result-player__song">Tu canción</h2>
                 <p class="result-player__artist">feat. IA</p>
-                <!-- Cuando tengas la canción, agregá src="imagenes/nombre-de-tu-cancion.mp3" al audio. -->
                 <audio
+                    id="result-audio"
                     class="result-player__audio"
                     controls
                     preload="none"
@@ -45,8 +45,22 @@
 
         </footer>
     </main>
+    <script src="canciones.js"></script>
     <script src="serial.js"></script>
     <script>
+        const selection = new URLSearchParams(window.location.search);
+        const instrument = selection.get("instrument")?.toLocaleUpperCase("es");
+        const theme = selection.get("theme")?.toLocaleUpperCase("es");
+        const voice = selection.get("voice")?.toLocaleUpperCase("es");
+        const selectedSong = window.cumbiaSongs[instrument]?.[theme]?.[voice];
+        if (selectedSong) {
+            const audio = document.querySelector("#result-audio");
+            audio.src = encodeURI(`imagenes/${selectedSong}`);
+            audio.load();
+            document.querySelector(".result-player__song").textContent =
+                `${instrument}, ${theme}, ${voice}`;
+        }
+
         document.addEventListener("keydown", (event) => {
             if (
                 event.key === "Enter" &&
