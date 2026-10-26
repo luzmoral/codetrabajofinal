@@ -41,7 +41,7 @@
                 </p>
             </article>
 
-            <article class="paper paper--lucas">
+            <article class="paper paper--lucas" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Lucas Murúa: ver más" data-perfil="perfil-lucas">
                 <h2 class="paper__name"><img class="paper__name-img paper__name-img--lucas" src="imagenes/lucas%20murua.png" alt="Lucas Murúa"></h2>
                 <p>
                     Crear música con IA abre nuevas posibilidades y preguntas sobre el
@@ -51,7 +51,7 @@
             </article>
 
             <article class="paper paper--pink">
-                <h2>La paradoja</h2>
+                <h2>paradoja</h2>
                 <p>
                     Según <strong>Los Andes</strong>, aunque la IA facilita crear música,
                     cada vez hay más personas produciéndola y menos oyentes interesados
@@ -63,7 +63,7 @@
                 </p>
             </article>
 
-            <article class="paper paper--arse">
+            <article class="paper paper--arse" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Arse: ver más" data-perfil="perfil-arse">
                 <h2 class="paper__name"><img class="paper__name-img paper__name-img--arse" src="imagenes/arse.png" alt="Arse"></h2>
                 <p>
                     ¿Una voz creada con IA también puede conmover?
@@ -89,6 +89,78 @@
             </a>
         </footer>
     </main>
+
+    <!-- Perfiles que se abren al apretar los carteles blancos -->
+    <dialog class="profile profile--arse" id="perfil-arse" aria-labelledby="perfil-arse-titulo">
+        <div class="profile__paper">
+            <button class="profile__close" type="button" aria-label="Cerrar">✕</button>
+            <svg class="profile__star" viewBox="0 0 150 150" aria-hidden="true"><path d="M76 6 L96 56 L146 60 L106 92 L122 144 L76 114 L30 144 L46 92 L4 60 L56 56 Z" fill="none" stroke="#5bff00" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            <header class="profile__head">
+                <h2 id="perfil-arse-titulo"><svg class="profile__name" viewBox="0 0 380 150" role="img" aria-label="Arse">
+                        <defs><linearGradient id="grad-arse" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff0054"/><stop offset=".5" stop-color="#ff7a1a"/><stop offset="1" stop-color="#ffe600"/></linearGradient></defs>
+                        <g font-family="Lobster, cursive" font-size="128" text-anchor="middle" stroke-linejoin="round" stroke-linecap="round">
+                            <text x="190" y="112" fill="#ff0054" stroke="#ff0054" stroke-width="28" transform="translate(0 4)">Arse</text>
+                            <text x="190" y="112" fill="#111" stroke="#111" stroke-width="19">Arse</text>
+                            <text x="190" y="112" fill="url(#grad-arse)">Arse</text>
+                        </g>
+                    </svg></h2>
+                <span class="profile__tag">Productor de Khea</span>
+            </header>
+            <blockquote class="profile__quote">
+                Si le pedís todo íntegro a la IA, es bastante<br class="profile__br"> difícil [...] pierde como alma en un punto
+            </blockquote>
+            <div class="profile__row">
+                <figure class="profile__photo">
+                    <img src="imagenes/productor_khea.png" alt="Arse, productor de Khea">
+                </figure>
+                <div class="profile__text">
+                    <p>Arse considera que la IA es una <mark>herramienta útil</mark>, especialmente para explorar ideas y facilitar la comunicación entre artistas y productores.</p>
+                    <p>También reconoce que una canción generada con IA puede emocionar, aunque lograrlo resulta <mark>más difícil</mark> cuando tanto la letra como la música se crean automáticamente.</p>
+                </div>
+            </div>
+            <svg class="profile__line" viewBox="0 0 560 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 9 C70 3 130 13 210 7 S350 3 430 9 S520 6 557 5" fill="none" stroke="#ff0054" stroke-width="4.5" stroke-linecap="round"/><path d="M40 12 C150 8 260 14 380 10" fill="none" stroke="#ff0054" stroke-width="2" stroke-linecap="round" opacity=".7"/></svg>
+            <p class="profile__closing">
+                La intervención humana puede <strong class="profile__accent profile__accent--lg">marcar una diferencia:</strong>
+                una letra escrita por una persona o una producción musical trabajada por alguien puede aportar aquello que hace que una canción conecte con quien la escucha.
+            </p>
+        </div>
+    </dialog>
+
+    <dialog class="profile profile--lucas" id="perfil-lucas" aria-labelledby="perfil-lucas-titulo">
+        <div class="profile__paper">
+            <button class="profile__close" type="button" aria-label="Cerrar">✕</button>
+            <svg class="profile__star" viewBox="0 0 150 150" aria-hidden="true"><path d="M76 6 L96 56 L146 60 L106 92 L122 144 L76 114 L30 144 L46 92 L4 60 L56 56 Z" fill="none" stroke="#5bff00" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            <header class="profile__head">
+                <h2 id="perfil-lucas-titulo"><svg class="profile__name" viewBox="0 0 780 150" role="img" aria-label="Lucas Murúa">
+                        <defs><linearGradient id="grad-lucas" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff0054"/><stop offset=".5" stop-color="#ff7a1a"/><stop offset="1" stop-color="#ffe600"/></linearGradient></defs>
+                        <g font-family="Lobster, cursive" font-size="116" text-anchor="middle" stroke-linejoin="round" stroke-linecap="round">
+                            <text x="390" y="112" fill="#ff0054" stroke="#ff0054" stroke-width="28" transform="translate(0 4)">Lucas Murúa</text>
+                            <text x="390" y="112" fill="#111" stroke="#111" stroke-width="19">Lucas Murúa</text>
+                            <text x="390" y="112" fill="url(#grad-lucas)">Lucas Murúa</text>
+                        </g>
+                    </svg></h2>
+                <span class="profile__tag">Productor de K4OS</span>
+            </header>
+            <blockquote class="profile__quote">
+                Se debe usar como una herramienta<br class="profile__br"> y no como un reemplazo de nada.
+            </blockquote>
+            <div class="profile__row">
+                <figure class="profile__photo">
+                    <img src="imagenes/productorkoas.png" alt="Lucas Murúa, productor de K4OS">
+                </figure>
+                <div class="profile__text">
+                    <p>Para Lucas, la IA puede facilitar la <mark>creación musical,</mark> pero todavía presenta <mark>patrones repetitivos</mark> que dificultan reproducir la singularidad humana.</p>
+                    <p>Aunque democratiza el acceso a la producción, también puede generar una sobreoferta de canciones y hacer que se valore menos el trabajo detrás de cada producción.</p>
+                </div>
+            </div>
+            <svg class="profile__line" viewBox="0 0 560 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 9 C70 3 130 13 210 7 S350 3 430 9 S520 6 557 5" fill="none" stroke="#ff0054" stroke-width="4.5" stroke-linecap="round"/><path d="M40 12 C150 8 260 14 380 10" fill="none" stroke="#ff0054" stroke-width="2" stroke-linecap="round" opacity=".7"/></svg>
+            <p class="profile__closing">
+                Lucas considera que las personas podrían volver a valorar lo artesanal: las voces, los instrumentos y el trabajo de quienes participan en la creación de una canción.
+                La IA puede reproducir los rasgos sonoros de la cumbia, pero
+                <strong class="profile__accent">¿alcanza con imitar un estilo para transmitir todo lo que hay detrás de él?</strong>
+            </p>
+        </div>
+    </dialog>
     <script src="serial.js"></script>
     <script>
         // El botón del Arduino (ENTER) actúa como el botón "Escuchá el resultado de tu cumbia"
@@ -99,6 +171,28 @@
             setTimeout(() => {
                 window.location.href = botonEscuchar.href;
             }, 300);
+        });
+
+        // Al apretar los carteles blancos (Lucas y Arse) se abre su perfil completo
+        document.querySelectorAll("[data-perfil]").forEach((cartel) => {
+            const perfil = document.getElementById(cartel.dataset.perfil);
+            const abrir = () => perfil.showModal();
+
+            cartel.addEventListener("click", abrir);
+            cartel.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    abrir();
+                }
+            });
+        });
+
+        document.querySelectorAll("dialog.profile").forEach((perfil) => {
+            // cerrar con la ✕ o tocando afuera del papel (Esc cierra solo)
+            perfil.querySelector(".profile__close").addEventListener("click", () => perfil.close());
+            perfil.addEventListener("click", (e) => {
+                if (e.target === perfil) perfil.close();
+            });
         });
     </script>
 </body>
