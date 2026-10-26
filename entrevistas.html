@@ -7,7 +7,7 @@
     <title>¿Conmueve de la misma manera? | Cumbia e IA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Bowlby+One+SC&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Bowlby+One+SC&family=Lobster&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="entrevista.css">
 </head>
 <body>
@@ -22,7 +22,7 @@
 
         <section class="collage" aria-label="Testimonios y preguntas sobre la música creada con inteligencia artificial">
             <article class="paper paper--green">
-                <h2 class="paper__eyebrow">Testimonios</h2>
+                <h2 class="paper__eyebrow"><img class="paper__eyebrow-img" src="imagenes/testimonios.png" alt="Testimonios"></h2>
                 <p class="paper__quote">
                     “Si la inteligencia artificial puede crear música, ¿dónde empieza la
                     <strong>creatividad humana</strong> y dónde termina la de los algoritmos?”
@@ -42,7 +42,7 @@
             </article>
 
             <article class="paper paper--lucas">
-                <h2 class="paper__name">Lucas Murúa</h2>
+                <h2 class="paper__name"><img class="paper__name-img paper__name-img--lucas" src="imagenes/lucas%20murua.png" alt="Lucas Murúa"></h2>
                 <p>
                     Crear música con IA abre nuevas posibilidades y preguntas sobre el
                     lugar de las personas.
@@ -64,14 +64,16 @@
             </article>
 
             <article class="paper paper--arse">
-                <h2 class="paper__name">Arse</h2>
+                <h2 class="paper__name"><img class="paper__name-img paper__name-img--arse" src="imagenes/arse.png" alt="Arse"></h2>
                 <p>
                     ¿Una voz creada con IA también puede conmover?
                 </p>
                 <span class="paper__tag">Escuchá y decidí</span>
             </article>
 
-            <img class="collage__doodle collage__doodle--star" src="imagenes/estrella%20amarilla.png" alt="" aria-hidden="true">
+            <img class="collage__doodle collage__doodle--ribbon" src="imagenes/mo%C3%B1o.png" alt="" aria-hidden="true">
+            <img class="collage__doodle collage__doodle--star" src="imagenes/estrella%20entrevista.png" alt="" aria-hidden="true">
+            <img class="collage__doodle collage__doodle--note" src="imagenes/musica.png" alt="" aria-hidden="true">
             <img class="collage__doodle collage__doodle--smile" src="imagenes/caritafeliz.png" alt="" aria-hidden="true">
         </section>
 
@@ -87,5 +89,17 @@
             </a>
         </footer>
     </main>
+    <script src="serial.js"></script>
+    <script>
+        // El botón del Arduino (ENTER) actúa como el botón "Escuchá el resultado de tu cumbia"
+        const botonEscuchar = document.querySelector(".interviews__listen");
+
+        document.addEventListener("boton-arduino", () => {
+            botonEscuchar.classList.add("is-active");
+            setTimeout(() => {
+                window.location.href = botonEscuchar.href;
+            }, 300);
+        });
+    </script>
 </body>
 </html>
