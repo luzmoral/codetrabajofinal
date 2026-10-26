@@ -165,6 +165,7 @@
     <script>
         // El botón del Arduino (ENTER) actúa como el botón "Escuchá el resultado de tu cumbia"
         const botonEscuchar = document.querySelector(".interviews__listen");
+        botonEscuchar.href += window.location.search;
 
         document.addEventListener("boton-arduino", () => {
             botonEscuchar.classList.add("is-active");
