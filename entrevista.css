@@ -65,7 +65,7 @@ body {
    composición (carteles pegados) entra en la pantalla junto al banner. */
 @media (min-width: 701px) {
     .collage {
-        --u: calc(var(--u0) * 0.88);
+        --u: calc(var(--u0) * 0.84);
     }
 }
 
@@ -116,17 +116,17 @@ body {
 /* Verde: testimonios */
 .paper--green {
     z-index: 1;
-    left: calc(var(--u) * 270);
-    top: calc(var(--u) * 213);
-    width: calc(var(--u) * 335);
-    height: calc(var(--u) * 308);
-    padding: calc(var(--u) * 80) calc(var(--u) * 46) calc(var(--u) * 66) calc(var(--u) * 108);
+    left: calc(var(--u) * 142);
+    top: calc(var(--u) * 175);
+    width: calc(var(--u) * 480);
+    height: calc(var(--u) * 385);
+    padding: calc(var(--u) * 100) calc(var(--u) * 74) calc(var(--u) * 81) calc(var(--u) * 173);
     background-image: url("imagenes/papel%20verde.png");
     transform: rotate(-2deg);
 }
 
 .paper--green .paper__quote {
-    font-size: calc(var(--u) * 14.5);
+    font-size: calc(var(--u) * 19.5);
     font-weight: 500;
     line-height: 1.22;
     color: #151515;
@@ -141,8 +141,8 @@ body {
 
 .paper--green .paper__eyebrow {
     position: absolute;
-    top: calc(var(--u) * 292);
-    left: 0;
+    top: calc(var(--u) * 335);
+    left: calc(var(--u) * 4);
     margin: 0;
     line-height: 0;
     transform: rotate(-2deg);
@@ -151,7 +151,7 @@ body {
 
 .paper__eyebrow-img {
     display: block;
-    width: calc(var(--u) * 160);
+    width: calc(var(--u) * 185);
     max-width: none;
     height: auto;
 }
@@ -159,22 +159,22 @@ body {
 /* Amarillo: emoción genuina */
 .paper--yellow {
     z-index: 2;
-    left: calc(var(--u) * 545);
-    top: calc(var(--u) * 100);
-    width: calc(var(--u) * 250);
-    height: calc(var(--u) * 354);
-    padding: calc(var(--u) * 48) calc(var(--u) * 28) calc(var(--u) * 20) calc(var(--u) * 32);
+    left: calc(var(--u) * 565);
+    top: calc(var(--u) * 95);
+    width: calc(var(--u) * 320);
+    height: calc(var(--u) * 370);
+    padding: calc(var(--u) * 46) calc(var(--u) * 38) calc(var(--u) * 20) calc(var(--u) * 32);
     background-image: url("imagenes/papel%20amarrillo.png");
     transform: rotate(-1deg);
 }
 
 .paper--yellow h2 {
     color: #ff0054;
-    font-size: calc(var(--u) * 27);
+    font-size: calc(var(--u) * 29);
 }
 
 .paper--yellow p {
-    font-size: calc(var(--u) * 15);
+    font-size: calc(var(--u) * 16.5);
     font-weight: 500;
     color: #151515;
 }
@@ -182,12 +182,12 @@ body {
 /* Gris: Lucas Murúa */
 .paper--lucas {
     z-index: 3;
-    left: calc(var(--u) * 767);
-    top: calc(var(--u) * 40);
-    width: calc(var(--u) * 240);
-    height: calc(var(--u) * 248);
+    left: calc(var(--u) * 851);
+    top: calc(var(--u) * 12);
+    width: calc(var(--u) * 340);
+    height: calc(var(--u) * 305);
     align-items: center;
-    padding: calc(var(--u) * 44) calc(var(--u) * 46) calc(var(--u) * 30) calc(var(--u) * 50);
+    padding: calc(var(--u) * 53) calc(var(--u) * 65) calc(var(--u) * 38) calc(var(--u) * 71);
     background-image: url("imagenes/papel%20blanco.png");
     text-align: center;
     transform: rotate(-4deg);
@@ -195,15 +195,15 @@ body {
 
 .paper--lucas::before {
     content: "";
-    top: calc(var(--u) * 8);
-    left: calc(var(--u) * 150);
-    width: calc(var(--u) * 62);
-    height: calc(var(--u) * 62);
+    top: calc(var(--u) * 9);
+    left: calc(var(--u) * 228);
+    width: calc(var(--u) * 70);
+    height: calc(var(--u) * 70);
     background-image: url("imagenes/pegatina%20amarrilla.png");
 }
 
 .paper--lucas p {
-    font-size: calc(var(--u) * 10.5);
+    font-size: calc(var(--u) * 14);
     line-height: 1.25;
     color: #151515;
 }
@@ -223,15 +223,15 @@ body {
 }
 
 .paper__name-img--lucas {
-    width: calc(var(--u) * 138);
-    margin-top: calc(var(--u) * -12);
-    margin-bottom: calc(var(--u) * -8);
+    width: calc(var(--u) * 157);
+    margin-top: calc(var(--u) * -14);
+    margin-bottom: calc(var(--u) * -9);
 }
 
 .paper__name-img--arse {
-    width: calc(var(--u) * 215);
-    margin-top: calc(var(--u) * -6);
-    margin-bottom: calc(var(--u) * -28);
+    width: calc(var(--u) * 240);
+    margin-top: calc(var(--u) * -7);
+    margin-bottom: calc(var(--u) * -32);
 }
 
 /* Etiqueta verde ("Ver más") */
@@ -256,24 +256,27 @@ body {
 .paper--lucas .paper__tag {
     background-image: url("imagenes/nube_rosa_entrevista.png");
     color: #fff;
+    width: calc(var(--u) * 128);
+    font-size: calc(var(--u) * 13);
 }
 
 /* Arse: pincelada verde */
 .paper--arse .paper__tag {
-    width: calc(var(--u) * 150);
+    width: calc(var(--u) * 172);
     aspect-ratio: 139 / 29;
     background-image: url("imagenes/nube_verde_entrevista.png");
     color: #151515;
+    font-size: calc(var(--u) * 13);
 }
 
 /* Rosa: la paradoja */
 .paper--pink {
     z-index: 2;
-    left: calc(var(--u) * 780);
-    top: calc(var(--u) * 262);
-    width: calc(var(--u) * 247);
-    height: calc(var(--u) * 329);
-    padding: calc(var(--u) * 42) calc(var(--u) * 24) calc(var(--u) * 34) calc(var(--u) * 24);
+    left: calc(var(--u) * 870);
+    top: calc(var(--u) * 270);
+    width: calc(var(--u) * 315);
+    height: calc(var(--u) * 355);
+    padding: calc(var(--u) * 52) calc(var(--u) * 31) calc(var(--u) * 35) calc(var(--u) * 31);
     background-image: url("imagenes/papel%20rosa.png");
     color: #f1ff00;
     font-family: "Aclonica", sans-serif;
@@ -293,7 +296,7 @@ body {
 .paper--pink h2 {
     margin-bottom: calc(var(--u) * 4);
     color: #16ed00;
-    font-size: calc(var(--u) * 22);
+    font-size: calc(var(--u) * 26);
     white-space: nowrap;
     text-transform: uppercase;
     text-shadow: calc(var(--u) * 1.5) calc(var(--u) * 1.5) #111;
@@ -301,19 +304,19 @@ body {
 
 .paper--pink p {
     margin-bottom: calc(var(--u) * 6);
-    font-size: calc(var(--u) * 14);
+    font-size: calc(var(--u) * 16);
     line-height: 1.22;
 }
 
 /* Gris ancho: Arse */
 .paper--arse {
     z-index: 3;
-    left: calc(var(--u) * 529);
-    top: calc(var(--u) * 404);
-    width: calc(var(--u) * 246);
-    height: calc(var(--u) * 185);
+    left: calc(var(--u) * 540);
+    top: calc(var(--u) * 405);
+    width: calc(var(--u) * 356);
+    height: calc(var(--u) * 225);
     align-items: center;
-    padding: calc(var(--u) * 26) calc(var(--u) * 50) calc(var(--u) * 34);
+    padding: calc(var(--u) * 28) calc(var(--u) * 70) calc(var(--u) * 36);
     background-image: url("imagenes/fondo%20entrevista.png");
     text-align: center;
     transform: rotate(-1deg);
@@ -322,25 +325,25 @@ body {
 .paper--arse::before,
 .paper--arse::after {
     content: "";
-    width: calc(var(--u) * 26);
-    height: calc(var(--u) * 42);
+    width: calc(var(--u) * 30);
+    height: calc(var(--u) * 48);
     background-image: url("imagenes/pegatina%20rosa.png");
 }
 
 .paper--arse::before {
-    left: calc(var(--u) * 2);
-    top: calc(var(--u) * 70);
+    left: calc(var(--u) * 3);
+    top: calc(var(--u) * 80);
     transform: rotate(-8deg);
 }
 
 .paper--arse::after {
-    right: calc(var(--u) * 8);
-    bottom: calc(var(--u) * 14);
+    right: calc(var(--u) * 9);
+    bottom: calc(var(--u) * 16);
     transform: rotate(40deg);
 }
 
 .paper--arse p {
-    font-size: calc(var(--u) * 13.5);
+    font-size: calc(var(--u) * 15.5);
     color: #151515;
 }
 
@@ -353,26 +356,26 @@ body {
 }
 
 .collage__doodle--ribbon {
-    left: calc(var(--u) * 217);
-    top: calc(var(--u) * 112);
+    left: calc(var(--u) * 112);
+    top: calc(var(--u) * 100);
     width: calc(var(--u) * 44);
 }
 
 .collage__doodle--star {
-    left: calc(var(--u) * 457);
-    top: calc(var(--u) * 125);
+    left: calc(var(--u) * 477);
+    top: calc(var(--u) * 120);
     width: calc(var(--u) * 58);
 }
 
 .collage__doodle--note {
-    left: calc(var(--u) * 762);
-    top: calc(var(--u) * 566);
+    left: calc(var(--u) * 480);
+    top: calc(var(--u) * 590);
     width: calc(var(--u) * 48);
 }
 
 .collage__doodle--smile {
-    left: calc(var(--u) * 1034);
-    top: calc(var(--u) * 100);
+    left: calc(var(--u) * 1200);
+    top: calc(var(--u) * 95);
     width: calc(var(--u) * 96);
 }
 
@@ -509,11 +512,11 @@ body {
 }
 
 /* Cada cartel guarda su capa original y su color de brillo */
-.paper--green  { --z: 1; --grow: 1.15; }
+.paper--green  { --z: 1; }
 .paper--yellow { --z: 2; }
 .paper--pink   { --z: 2; }
-.paper--lucas  { --z: 3; --grow: 1.14; --glow-color: rgb(240 255 0 / 90%); }
-.paper--arse   { --z: 3; --grow: 1.15; --glow-color: rgb(255 0 84 / 85%); }
+.paper--lucas  { --z: 3; --glow-color: rgb(240 255 0 / 90%); }
+.paper--arse   { --z: 3; --glow-color: rgb(255 0 84 / 85%); }
 
 /* Estado "enfocado": a todo color + brillo + un poco más grande, por encima de los demás */
 
@@ -549,6 +552,390 @@ body {
         --glow-size: 0;
         --lift: 1;
         --dim: 0.42;
+    }
+}
+
+/* ============================================================
+   Perfiles ampliados: se abren al apretar Lucas Murúa o Arse
+   (<dialog class="profile">). Se miden en la unidad --m.
+   ============================================================ */
+.paper--lucas,
+.paper--arse {
+    cursor: pointer;
+}
+
+.profile {
+    --m: min(calc((100vw - 24px) / 840), calc((100svh - 24px) / 620), 1.7px);
+    --fs: 16;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #151515;
+    font-family: "Poppins", Arial, sans-serif;
+    overflow: auto;
+}
+
+.profile[open] {
+    display: grid;
+    place-items: center;
+}
+
+.profile::backdrop {
+    background: rgb(0 0 0 / 62%);
+}
+
+.profile--lucas {
+    --fs: 15;
+}
+
+.profile__paper {
+    position: relative;
+    width: calc(var(--m) * 800);
+    min-height: calc(var(--m) * 590);
+    padding: calc(var(--m) * 54) calc(var(--m) * 98) calc(var(--m) * 56);
+    background: url("imagenes/fondo%20entrevista.png") center / 100% 100% no-repeat;
+    filter: drop-shadow(0 10px 22px rgb(0 0 0 / 55%));
+    transform: rotate(-0.6deg);
+    animation: profile-in 220ms ease-out;
+}
+
+/* Pegatinas rosas en los bordes */
+.profile__paper::before,
+.profile__paper::after {
+    content: "";
+    position: absolute;
+    background: url("imagenes/pegatina%20rosa.png") center / 100% 100% no-repeat;
+    pointer-events: none;
+}
+
+.profile__paper::before {
+    left: calc(var(--m) * -14);
+    top: calc(var(--m) * 330);
+    width: calc(var(--m) * 40);
+    height: calc(var(--m) * 64);
+    transform: rotate(-8deg);
+}
+
+.profile__paper::after {
+    right: calc(var(--m) * 26);
+    bottom: calc(var(--m) * -16);
+    width: calc(var(--m) * 40);
+    height: calc(var(--m) * 64);
+    transform: rotate(40deg);
+}
+
+.profile__star {
+    position: absolute;
+    top: calc(var(--m) * 4);
+    right: calc(var(--m) * 72);
+    width: calc(var(--m) * 110);
+    height: auto;
+    transform: rotate(14deg);
+    pointer-events: none;
+}
+
+.profile__close {
+    position: absolute;
+    z-index: 3;
+    top: calc(var(--m) * 20);
+    right: calc(var(--m) * 26);
+    display: grid;
+    place-items: center;
+    width: calc(var(--m) * 36);
+    height: calc(var(--m) * 36);
+    padding: 0;
+    border: calc(var(--m) * 3) solid #151515;
+    border-radius: 50%;
+    background: #ff0054;
+    color: #fff;
+    font-family: "Poppins", Arial, sans-serif;
+    font-size: calc(var(--m) * 16);
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 150ms ease, background 150ms ease;
+}
+
+.profile__close:hover,
+.profile__close:focus-visible {
+    background: #16ed00;
+    color: #151515;
+    transform: scale(1.1) rotate(8deg);
+    outline: none;
+}
+
+/* Nombre ilustrado + etiqueta "Productor de ..." */
+.profile__head {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 calc(var(--m) * 16);
+}
+
+.profile__head h2 {
+    margin: 0;
+    line-height: 0;
+}
+
+.profile__name {
+    display: block;
+    height: auto;
+    max-width: none;
+    overflow: visible;
+}
+
+.profile--arse .profile__name {
+    width: calc(var(--m) * 360);
+}
+
+.profile--lucas .profile__name {
+    width: calc(var(--m) * 680);
+    margin-inline: calc(var(--m) * -40);
+}
+
+.profile__tag {
+    position: absolute;
+    padding: calc(var(--m) * 1) calc(var(--m) * 9);
+    background: #f1ff00;
+    color: #e60047;
+    font-size: calc(var(--m) * 14.5);
+    font-weight: 700;
+    line-height: 1.35;
+    white-space: nowrap;
+    transform: rotate(-1.5deg);
+}
+
+.profile--arse .profile__tag {
+    right: 0;
+    bottom: calc(var(--m) * 14);
+}
+
+.profile--lucas .profile__tag {
+    right: calc(var(--m) * -40);
+    bottom: calc(var(--m) * -10);
+}
+
+/* Cita con comillas rosas */
+.profile__quote {
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto calc(var(--m) * 16);
+    font-size: calc(var(--m) * 19.5);
+    font-style: italic;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: center;
+}
+
+.profile--lucas .profile__quote {
+    max-width: none;
+    margin-top: calc(var(--m) * 22);
+}
+
+.profile--arse .profile__quote {
+    max-width: none;
+}
+
+.profile__quote::before,
+.profile__quote::after {
+    position: absolute;
+    color: #ff0054;
+    font-size: calc(var(--m) * 50);
+    font-style: italic;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.profile__quote::before {
+    content: "\201C";
+    left: calc(var(--m) * -28);
+    top: calc(var(--m) * -4);
+}
+
+.profile__quote::after {
+    content: "\201D";
+    right: calc(var(--m) * -28);
+    bottom: calc(var(--m) * -30);
+}
+
+/* Foto redonda con aro rosa + texto */
+.profile__row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--m) * 26);
+    margin-top: calc(var(--m) * 14);
+}
+
+.profile__photo {
+    position: relative;
+    flex: none;
+    width: calc(var(--m) * 146);
+    aspect-ratio: 1;
+    margin: 0;
+}
+
+.profile__photo::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--m) * -7);
+    bottom: calc(var(--m) * -7);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #ff0054;
+}
+
+.profile__photo img {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile__text {
+    flex: 1;
+    min-width: 0;
+}
+
+.profile__text p {
+    margin: 0 0 calc(var(--m) * 16);
+    font-size: calc(var(--m) * var(--fs));
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.profile__text p:last-child {
+    margin-bottom: 0;
+}
+
+.profile mark {
+    padding: 0 calc(var(--m) * 3);
+    background: #f1ff00;
+    color: #151515;
+    font-weight: 600;
+}
+
+.profile__line {
+    display: block;
+    width: calc(var(--m) * 540);
+    height: calc(var(--m) * 14);
+    margin: calc(var(--m) * 18) auto calc(var(--m) * 16);
+}
+
+.profile__closing {
+    margin: 0 calc(var(--m) * -18);
+    font-size: calc(var(--m) * var(--fs));
+    line-height: 1.5;
+}
+
+.profile__accent {
+    color: #ff0054;
+    font-weight: 600;
+}
+
+.profile__accent--lg {
+    font-size: 1.4em;
+    line-height: 1;
+}
+
+.profile--lucas .profile__accent {
+    font-size: 1.12em;
+    font-weight: 700;
+}
+
+@keyframes profile-in {
+    from {
+        opacity: 0;
+        transform: scale(0.93) rotate(-1.4deg);
+    }
+}
+
+/* Celular: el perfil ocupa el ancho y se desplaza hacia abajo */
+@media (max-width: 700px) {
+    .profile {
+        --m: 1px;
+        --fs: 15;
+    }
+
+    .profile[open] {
+        display: block;
+        padding: 14px 10px 30px;
+    }
+
+    .profile__paper {
+        width: 100%;
+        min-height: 0;
+        padding: 64px 28px 54px;
+        transform: none;
+    }
+
+    .profile--arse .profile__name {
+        width: 240px;
+    }
+
+    .profile--lucas .profile__name {
+        width: 100%;
+        max-width: 420px;
+        margin-inline: 0;
+    }
+
+    .profile__br {
+        display: none;
+    }
+
+    .profile__tag {
+        position: static;
+        align-self: center;
+    }
+
+    .profile__head {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .profile__quote,
+    .profile--lucas .profile__quote,
+    .profile--arse .profile__quote {
+        max-width: 92%;
+        font-size: 17px;
+    }
+
+    .profile__row {
+        flex-direction: column;
+        gap: 22px;
+    }
+
+    .profile__photo {
+        width: 130px;
+    }
+
+    .profile__line {
+        width: 100%;
+    }
+
+    .profile__closing {
+        margin: 0;
+    }
+
+    .profile__star {
+        width: 80px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .profile__paper {
+        animation: none;
     }
 }
 
