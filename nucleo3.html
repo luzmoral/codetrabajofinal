@@ -37,36 +37,122 @@
         </div>
 
         <section class="story__card" aria-label="Información del estado seleccionado">
-            <article class="story__state is-active" data-state="0" aria-label="Estado 1">
+            <article class="story__state story__state--origins is-active" data-state="0" aria-label="Estado 1: Orígenes">
                 <img
                     class="story__image"
                     src="imagenes/microfono.png"
-                    alt="Ilustración rosa de un micrófono y ondas musicales"
+                    alt="Ilustración rosa de un micrófono con ondas de sonido"
                 >
-                <p class="story__copy">
-                    Las primeras generaciones de música sintética presentaban
-                    <span>voces poco naturales</span> y
-                    <span>entonaciones extrañas.</span><br>
-                    <br>
-                    Estas limitaciones hacían que
-                    algunas canciones fueran más fáciles de identificar como artificiales.
-                </p>
+                <div class="story__details">
+                    <h2 class="story__state-title">Orígenes</h2>
+                    <p class="story__copy">
+                        Las primeras generaciones de música sintética presentaban
+                        <span>voces poco naturales</span> y
+                        <span>entonaciones extrañas.</span>
+                    </p>
+                    <p class="story__copy">
+                        Estas limitaciones hacían que algunas canciones fueran más fáciles de
+                        <strong>identificar como artificiales.</strong>
+                    </p>
+                    <div class="origins__example">
+                        <p class="origins__hint">
+                            <span>¡Presioná</span>
+                            <button class="origins__play" id="origins-play" type="button" aria-label="Escuchar un ejemplo">
+                                <img src="imagenes/playok.png" alt="">
+                            </button>
+                            <span>y escuchá un ejemplo!</span>
+                        </p>
+                        <div class="origins__waveform" aria-hidden="true">
+                            <span style="--bar-height: 5px"></span>
+                            <span style="--bar-height: 8px"></span>
+                            <span style="--bar-height: 11px"></span>
+                            <span style="--bar-height: 7px"></span>
+                            <span style="--bar-height: 15px"></span>
+                            <span style="--bar-height: 9px"></span>
+                            <span style="--bar-height: 18px"></span>
+                            <span style="--bar-height: 11px"></span>
+                            <span style="--bar-height: 7px"></span>
+                            <span style="--bar-height: 14px"></span>
+                            <span style="--bar-height: 9px"></span>
+                            <span style="--bar-height: 19px"></span>
+                            <span style="--bar-height: 12px"></span>
+                            <span style="--bar-height: 7px"></span>
+                            <span style="--bar-height: 15px"></span>
+                            <span style="--bar-height: 10px"></span>
+                            <span style="--bar-height: 17px"></span>
+                            <span style="--bar-height: 9px"></span>
+                            <span style="--bar-height: 13px"></span>
+                            <span style="--bar-height: 6px"></span>
+                            <span style="--bar-height: 12px"></span>
+                            <span style="--bar-height: 8px"></span>
+                            <span style="--bar-height: 5px"></span>
+                            <span style="--bar-height: 10px"></span>
+                        </div>
+                        <audio id="origins-audio" preload="metadata"></audio>
+                        <p class="origins__status" id="origins-status" role="status" aria-live="polite" hidden></p>
+                    </div>
+                </div>
             </article>
-            <article class="story__state" data-state="1" aria-label="Estado 2" hidden>
+            <article class="story__state story__state--origins story__state--now" data-state="1" aria-label="Estado 2: ¿Y ahora?" hidden>
                 <img
                     class="story__image"
                     src="imagenes/aurisrosa.png"
                     alt="Ilustración rosa de auriculares, inteligencia artificial y ondas musicales"
                 >
-                <p class="story__copy">
-                    Los modelos actuales pueden generar
-                    <span>canciones completas y reproducir con mayor complejidad voces</span>,
-                    melodías, instrumentos, géneros y tempos.<br>
-                    <br>
-                    La diferencia entre una
-                    producción humana y una generada por IA ya no siempre resulta evidente
-                    al escucharla.
-                </p>
+                <div class="story__details">
+                    <h2 class="story__state-title">¿Y ahora?</h2>
+                    <p class="story__copy">
+                        Los modelos actuales pueden generar
+                        <em>canciones completas y reproducir con mayor complejidad</em>:
+                    </p>
+                    <ul class="origins__list">
+                        <li>Voces</li>
+                        <li>Melodías</li>
+                        <li>Instrumentos</li>
+                        <li>Géneros</li>
+                        <li>Tempos.</li>
+                    </ul>
+                    <p class="story__copy">
+                        Ya no siempre la diferencia resulta evidente.
+                    </p>
+                    <div class="origins__example">
+                        <p class="origins__hint">
+                            <span>¡Presioná</span>
+                            <button class="origins__play" id="now-play" type="button" aria-label="Escuchar un ejemplo">
+                                <img src="imagenes/playok.png" alt="">
+                            </button>
+                            <span>y escuchá un ejemplo!</span>
+                        </p>
+                        <div class="origins__waveform" aria-hidden="true">
+                            <span style="--bar-height: 5px"></span>
+                            <span style="--bar-height: 8px"></span>
+                            <span style="--bar-height: 11px"></span>
+                            <span style="--bar-height: 7px"></span>
+                            <span style="--bar-height: 15px"></span>
+                            <span style="--bar-height: 9px"></span>
+                            <span style="--bar-height: 18px"></span>
+                            <span style="--bar-height: 11px"></span>
+                            <span style="--bar-height: 7px"></span>
+                            <span style="--bar-height: 14px"></span>
+                            <span style="--bar-height: 9px"></span>
+                            <span style="--bar-height: 19px"></span>
+                            <span style="--bar-height: 12px"></span>
+                            <span style="--bar-height: 7px"></span>
+                            <span style="--bar-height: 15px"></span>
+                            <span style="--bar-height: 10px"></span>
+                            <span style="--bar-height: 17px"></span>
+                            <span style="--bar-height: 9px"></span>
+                            <span style="--bar-height: 13px"></span>
+                            <span style="--bar-height: 6px"></span>
+                            <span style="--bar-height: 12px"></span>
+                            <span style="--bar-height: 8px"></span>
+                            <span style="--bar-height: 5px"></span>
+                            <span style="--bar-height: 10px"></span>
+                        </div>
+                        <audio id="now-audio" preload="metadata"></audio>
+                        <p class="origins__status" id="now-status" role="status" aria-live="polite" hidden></p>
+                    </div>
+                </div>
             </article>
             <article class="story__state" data-state="2" aria-label="Estado 3: El caso argentino" hidden>
                 <img
@@ -80,7 +166,7 @@
                         En 2026, el productor argentino Rastry presentó a Kode González,
                         un <span>artista de cumbia creado mediante inteligencia artificial.</span><br>
                         <br>
-                        Su caso permite explorar estos avances dentro de un género musical
+                        Su caso permite explorar estos <span class="story__accent">avances</span> dentro de un género musical
                         reconocible para el público argentino.
                     </p>
                 </div>
@@ -116,13 +202,13 @@
                         alt="Portada de Desalójame el alma de Rastry y Kode Gonzalez"
                     >
                     <div class="player__controls" aria-label="Controles de reproducción">
-                        <button class="player__skip" type="button" aria-label="Pista anterior" disabled>
+                        <button class="player__skip" type="button" aria-label="Pista anterior">
                             <img src="imagenes/flecha%20iz%20paso%205.png" alt="">
                         </button>
                         <button class="player__play" id="player-play" type="button" aria-label="Reproducir canción">
                             <img src="imagenes/playok.png" alt="">
                         </button>
-                        <button class="player__skip player__skip--next" type="button" aria-label="Pista siguiente" disabled>
+                        <button class="player__skip player__skip--next" type="button" aria-label="Pista siguiente">
                             <img src="imagenes/flecha%20paso%205.png" alt="">
                         </button>
                     </div>
@@ -175,6 +261,15 @@
                     </div>
                     <p class="player__status" id="player-status" role="status" aria-live="polite" hidden></p>
                 </div>
+                <p class="player__hint">
+                    <svg class="player__hint-arrow" viewBox="0 0 70 40" aria-hidden="true">
+                        <path d="M3 2 C 5 18, 14 26, 28 24 C 38 22, 38 10, 30 12 C 22 14, 28 30, 62 30" fill="none" stroke="#f1ff00" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M56 24 L64 30 L56 36" fill="none" stroke="#f1ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>¡Seleccioná con</span>
+                    <img class="player__hint-button" src="imagenes/perilla.png" alt="perilla verde">
+                    <span>y escuchá otro ejemplo!</span>
+                </p>
             </article>
             <article class="story__state story__state--conclusion" data-state="5" aria-label="Estado 6: Conclusión" hidden>
                 <img
@@ -187,7 +282,8 @@
                         La mejora de las herramientas generativas y la producción masiva
                         de contenido pueden <span>dificultar la diferenciación.</span><br>
                         <br>
-                        Manuel Cullen relaciona este problema con el dumping cognitivo:
+                        Manuel Cullen, <em class="story__ate">delegado en ATE Cultura,</em>
+                        relaciona este problema con el <strong>dumping cognitivo:</strong>
                         la naturalización de la IA puede contribuir a que se debilite
                         nuestra capacidad de valorar sus particularidades.
                     </p>
@@ -210,6 +306,14 @@
         const stopsContainer = document.querySelector("#timeline-stops");
         const thumb = document.querySelector("#timeline-thumb");
         const states = document.querySelectorAll(".story__state");
+        const originsState = document.querySelector(".story__state--origins");
+        const originsButton = document.querySelector("#origins-play");
+        const originsAudio = document.querySelector("#origins-audio");
+        const originsStatus = document.querySelector("#origins-status");
+        const nowState = document.querySelector('.story__state[data-state="1"]');
+        const nowButton = document.querySelector("#now-play");
+        const nowAudio = document.querySelector("#now-audio");
+        const nowStatus = document.querySelector("#now-status");
         const conclusionButton = document.querySelector(".story__key");
         const playerState = document.querySelector(".story__state--player");
         const playerButton = document.querySelector("#player-play");
@@ -218,6 +322,10 @@
         const progress = document.querySelector(".player__progress");
         const progressFill = progress.querySelector("span");
         const playerStatus = document.querySelector("#player-status");
+        const songArtist = document.querySelector(".player__artist");
+        const songCover = document.querySelector(".player__cover");
+        const skipPrevious = document.querySelector(".player__skip");
+        const skipNext = document.querySelector(".player__skip--next");
         let currentState = 0;
 
         const selection = new URLSearchParams(window.location.search);
@@ -225,11 +333,65 @@
         const theme = selection.get("theme")?.toLocaleUpperCase("es");
         const voice = selection.get("voice")?.toLocaleUpperCase("es");
         const selectedSong = window.cumbiaSongs[instrument]?.[theme]?.[voice];
+        const originsAudioPath = `imagenes/${selectedSong || "Desalójameelalma.mp3"}`;
+        // Audio del ejemplo del estado 2 (¿Y ahora?): cambiá el nombre del archivo si usás otro
+        const nowAudioPath = originsAudioPath;
         if (selectedSong) {
             songAudio.src = encodeURI(`imagenes/${selectedSong}`);
             songAudio.load();
             songTitle.textContent = `${instrument}, ${theme}, ${voice}`;
         }
+
+        // Canciones del estado 5: las flechas del reproductor pasan de una a otra
+        const tracks = [
+            {
+                title: songTitle.textContent,
+                artist: songArtist.textContent,
+                cover: songCover.getAttribute("src"),
+                audio: songAudio.getAttribute("src")
+            },
+            {
+                title: "Un par de fernet",
+                artist: "Rastry x Kode Gonzalez",
+                cover: "imagenes/cancionfernet.png",
+                audio: "imagenes/Unpardefernet.mp3"
+            }
+        ];
+        if (selectedSong) {
+            tracks.splice(1, 0, {
+                title: "Desalójame el alma",
+                artist: "Rastry x Kode Gonzalez",
+                cover: "imagenes/cancionkode.png",
+                audio: "imagenes/Desalójameelalma.mp3"
+            });
+        }
+        let trackIndex = 0;
+
+        function changeTrack(step) {
+            if (currentState !== 4) {
+                return;
+            }
+
+            const wasPlaying = !songAudio.paused;
+            trackIndex = (trackIndex + step + tracks.length) % tracks.length;
+            const track = tracks[trackIndex];
+            songAudio.pause();
+            songAudio.src = track.audio;
+            songAudio.load();
+            songTitle.textContent = track.title;
+            songArtist.textContent = track.artist;
+            songCover.src = track.cover;
+            songCover.alt = `Portada de ${track.title} de ${track.artist}`;
+            playerStatus.hidden = true;
+            playerStatus.textContent = "";
+            updateSongProgress();
+            if (wasPlaying) {
+                playSong();
+            }
+        }
+
+        skipPrevious.addEventListener("click", () => changeTrack(-1));
+        skipNext.addEventListener("click", () => changeTrack(1));
 
         statePositions.forEach((position, index) => {
             const stop = document.createElement("button");
@@ -244,6 +406,12 @@
 
         function selectState(index) {
             currentState = Math.max(0, Math.min(statePositions.length - 1, index));
+            examples.forEach(({ stateIndex, audio }) => {
+                if (currentState !== stateIndex) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
+            });
             if (currentState !== 4) {
                 songAudio.pause();
                 songAudio.currentTime = 0;
@@ -269,6 +437,61 @@
                 window.location.href = `entrevistas.html${window.location.search}`;
             }
         });
+
+        function setupExample(stateIndex, stateElement, button, audio, status, path) {
+            async function play() {
+                if (currentState !== stateIndex || !audio.paused) {
+                    return;
+                }
+
+                status.hidden = true;
+                status.textContent = "";
+                if (audio.ended) {
+                    audio.currentTime = 0;
+                }
+
+                try {
+                    if (!audio.hasAttribute("src")) {
+                        audio.src = encodeURI(path);
+                    }
+                    await audio.play();
+                } catch (error) {
+                    status.textContent = "No se pudo reproducir el ejemplo. Revisá que el archivo de audio esté disponible.";
+                    status.hidden = false;
+                    console.error("No se pudo reproducir el ejemplo de audio.", error);
+                }
+            }
+
+            function setPlaying(isPlaying) {
+                stateElement.classList.toggle("is-playing", isPlaying);
+                button.classList.toggle("is-playing", isPlaying);
+                button.setAttribute("aria-label", isPlaying ? "Pausar ejemplo" : "Escuchar un ejemplo");
+            }
+
+            button.addEventListener("click", () => {
+                if (audio.paused) {
+                    play();
+                } else {
+                    audio.pause();
+                }
+            });
+            audio.addEventListener("play", () => setPlaying(true));
+            audio.addEventListener("pause", () => setPlaying(false));
+            audio.addEventListener("ended", () => setPlaying(false));
+            audio.addEventListener("error", () => {
+                status.textContent = "No se pudo cargar el ejemplo. Revisá que el archivo de audio esté disponible.";
+                status.hidden = false;
+                console.error("No se pudo cargar el archivo de audio del ejemplo.");
+            });
+
+            return { stateIndex, audio, play };
+        }
+
+        // Estado 1 (Orígenes) y estado 2 (¿Y ahora?) comparten el mismo reproductor de ejemplo
+        const examples = [
+            setupExample(0, originsState, originsButton, originsAudio, originsStatus, originsAudioPath),
+            setupExample(1, nowState, nowButton, nowAudio, nowStatus, nowAudioPath)
+        ];
 
         async function playSong() {
             if (currentState !== 4 || !songAudio.paused) {
@@ -319,7 +542,14 @@
             playerStatus.hidden = false;
             console.error("No se pudo cargar el archivo Desalójameelalma.mp3.");
         });
-        document.addEventListener("boton-arduino", playSong);
+        document.addEventListener("boton-arduino", () => {
+            const activeExample = examples.find((example) => example.stateIndex === currentState);
+            if (activeExample) {
+                activeExample.play();
+            } else {
+                playSong();
+            }
+        });
 
         function selectNearestState(clientX) {
             const bounds = timeline.getBoundingClientRect();
@@ -369,6 +599,16 @@
         });
 
         document.addEventListener("keydown", (event) => {
+            const activeExample = examples.find((example) => example.stateIndex === currentState);
+            if (
+                activeExample &&
+                event.key === "Enter" &&
+                !event.repeat &&
+                !event.target.closest("button, a, input, select, textarea")
+            ) {
+                activeExample.play();
+                return;
+            }
             if (currentState === 4 && event.key === "Enter" && !event.repeat) {
                 playSong();
                 return;
