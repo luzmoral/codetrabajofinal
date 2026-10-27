@@ -46,8 +46,9 @@
             </span>
             <span>en tu teclado para comenzar!</span>
         </div>
+           <button onclick="conectarManual()">Conectar Arduino</button>
     </main>
-    <script src="serial.js"></script>
+       <script src="serial.js" defer></script>
     <script>
         document.addEventListener("keydown", (event) => {
             if (event.key === "Enter" && !event.repeat) {
