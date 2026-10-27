@@ -30,6 +30,12 @@
 
         <section class="process__card" aria-label="Pasos del proceso de creación musical">
             <div class="process__content" aria-live="polite" aria-atomic="true">
+                <img
+                    class="process__image"
+                    id="process-step-image"
+                    src="imagenes/paso1_sin_fondo.gif"
+                    alt="Animación del paso 1: Idea"
+                >
                 <div class="process__copy">
                     <h2 id="process-step-title">1. Idea</h2>
                     <p id="process-step-description">
@@ -42,23 +48,6 @@
                         <img class="process__next-key" src="imagenes/playok.png" alt="">
                     </a>
                 </div>
-                <img
-                    class="process__image"
-                    id="process-step-image"
-                    src="imagenes/idea.png"
-                    alt="Ilustración de una idea musical"
-                >
-                <video
-                    class="process__image process__video"
-                    id="process-step-video"
-                    src="imagenes/paso1.mp4"
-                    autoplay
-                    muted
-                    loop
-                    playsinline
-                    aria-label="Animación del paso 1: Idea"
-                    hidden
-                ></video>
             </div>
         </section>
 
@@ -102,8 +91,8 @@
                     { text: ": se selecciona género + emoción + instrumentos + estilo + tema. Ahí, la persona define " },
                     { text: "qué quiere transmitir con la canción.", tone: "pink" }
                 ],
-                image: "imagenes/idea2.png",
-                alt: "Ilustración de una idea musical"
+                image: "imagenes/paso1_sin_fondo.gif",
+                alt: "Animación del paso 1: Idea"
             },
             {
                 title: "2. Prompt",
@@ -113,7 +102,7 @@
                     { text: " escrita para la IA. Por ej: " },
                     { text: "“Una canción pop melancólica, con piano, voz femenina y un tempo lento.”", tone: "pink", weight: "medium" }
                 ],
-                image: "imagenes/paso2.gif",
+                image: "imagenes/paso2_sin_fondo.gif",
                 alt: "Animación del paso 2: Prompt"
             },
             {
@@ -124,7 +113,7 @@
                     { text: " la indicación y genera música con " },
                     { text: "ritmos, instrumentos, voces y estructuras.", tone: "pink" }
                 ],
-                image: "imagenes/paso3.gif",
+                image: "imagenes/paso3_sin_fondo.gif",
                 alt: "Animación del paso 3: Generación"
             },
             {
@@ -165,11 +154,46 @@
         const title = document.querySelector("#process-step-title");
         const description = document.querySelector("#process-step-description");
         const image = document.querySelector("#process-step-image");
-        const video = document.querySelector("#process-step-video");
         const nextButton = document.querySelector("#process-next");
         const keys = document.querySelectorAll(".piano__key");
+        const card = document.querySelector(".process__card");
+        let currentStep = 0;
+
+        // Toma el color de fondo del gif/video (píxel de la esquina superior izquierda).
+        // Si algún paso tiene `bg: "#xxxxxx"` en el arreglo steps, se usa ese color.
+        function sampleBackground(media, width, height) {
+            try {
+                if (!width || !height) return null;
+                const canvas = document.createElement("canvas");
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext("2d", { willReadFrequently: true });
+                ctx.drawImage(media, 0, 0, width, height);
+                const [r, g, b, a] = ctx.getImageData(2, 2, 1, 1).data;
+                return a === 0 ? null : `rgb(${r} ${g} ${b})`;
+            } catch (error) {
+                return null; // canvas bloqueado (por ej. abriendo el archivo con file://)
+            }
+        }
+
+        function updateCardBackground() {
+            const step = steps[currentStep];
+            if (currentStep === 0) {
+                card.style.removeProperty("--card-bg");
+                return;
+            }
+
+            const color = step.bg || (image.currentSrc.endsWith(step.image)
+                ? sampleBackground(image, image.naturalWidth, image.naturalHeight)
+                : null);
+            if (color) card.style.setProperty("--card-bg", color);
+            else card.style.removeProperty("--card-bg");
+        }
+
+        image.addEventListener("load", updateCardBackground);
 
         function selectStep(index) {
+            currentStep = index;
             const step = steps[index];
             title.textContent = step.title;
             description.replaceChildren();
@@ -187,19 +211,11 @@
                 highlight.textContent = part.text;
                 description.append(highlight);
             });
-            const showVideo = index === 0;
-            video.hidden = !showVideo;
-            image.hidden = showVideo;
-            if (showVideo) {
-                video.play().catch((error) => {
-                    console.error("No se pudo reproducir el video del paso 1.", error);
-                });
-            } else {
-                video.pause();
-            }
+            image.hidden = false;
             image.src = step.image;
             image.alt = step.alt;
             nextButton.hidden = index !== steps.length - 1;
+            updateCardBackground();
 
             keys.forEach((key, keyIndex) => {
                 const isActive = keyIndex === index;
