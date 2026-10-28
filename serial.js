@@ -13,6 +13,8 @@
     if (mensaje === "ENTER") {
       enviarTecla("Enter");
       document.dispatchEvent(new CustomEvent("boton-arduino"));
+    } else if (mensaje === "PAUSA") {
+      document.dispatchEvent(new CustomEvent("pausa-arduino"));
     } else if (/^[1-6]$/.test(mensaje)) {
       enviarTecla(mensaje);
     } else if (mensaje.startsWith("POT:")) {
@@ -72,7 +74,7 @@
     if (conectado) return;
 
     if (!("serial" in navigator)) {
-     alert("Usá Google Chrome o Microsoft Edge y abrí la página mediante HTTPS o un servidor local.");
+      alert("Usá Google Chrome o Microsoft Edge y abrí la página mediante HTTPS o un servidor local.");
       return;
     }
     try {
