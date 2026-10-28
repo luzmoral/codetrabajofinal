@@ -264,15 +264,26 @@ body {
     object-fit: contain;
 }
 
-.origins__play.is-playing img {
+.origins__play.is-playing img,
+.player__play.is-playing img {
     visibility: hidden;
 }
 
-.origins__play.is-playing::after {
+.origins__play.is-playing::after,
+.player__play.is-playing::after {
     position: absolute;
-    color: #222;
-    content: "Ⅱ";
-    font: 700 15px/1 Arial, sans-serif;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 18px;
+    background: linear-gradient(
+        to right,
+        #222 0 4px,
+        transparent 4px 10px,
+        #222 10px 14px
+    );
+    content: "";
+    transform: translate(-50%, -50%);
 }
 
 .origins__play:focus-visible {
