@@ -99,6 +99,7 @@
 
   // Enter: solo actúa en las páginas que definen currentState / playSong
   document.addEventListener("keydown", (event) => {
+    if (!event.isTrusted) return;
     if (event.key !== "Enter" || event.repeat) return;
     if (typeof currentState === "undefined") return;
 
