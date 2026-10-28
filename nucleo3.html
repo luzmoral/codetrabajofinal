@@ -88,7 +88,7 @@
                             <span style="--bar-height: 5px"></span>
                             <span style="--bar-height: 10px"></span>
                         </div>
-                        <audio id="origins-audio" preload="metadata"></audio>
+                        <audio id="origins-audio" src="imagenes/Instancia%201.mp3" preload="metadata"></audio>
                         <p class="origins__status" id="origins-status" role="status" aria-live="polite" hidden></p>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                             <span style="--bar-height: 5px"></span>
                             <span style="--bar-height: 10px"></span>
                         </div>
-                        <audio id="now-audio" preload="metadata"></audio>
+                        <audio id="now-audio" src="imagenes/Instancia%202.mp3" preload="metadata"></audio>
                         <p class="origins__status" id="now-status" role="status" aria-live="polite" hidden></p>
                     </div>
                 </div>
@@ -334,9 +334,6 @@
         const theme = selection.get("theme")?.toLocaleUpperCase("es");
         const voice = selection.get("voice")?.toLocaleUpperCase("es");
         const selectedSong = window.cumbiaSongs[instrument]?.[theme]?.[voice];
-        const originsAudioPath = `imagenes/${selectedSong || "Desalójameelalma.mp3"}`;
-        // Audio del ejemplo del estado 2 (¿Y ahora?): cambiá el nombre del archivo si usás otro
-        const nowAudioPath = originsAudioPath;
         if (selectedSong) {
             songAudio.src = encodeURI(`imagenes/${selectedSong}`);
             songAudio.load();
@@ -441,7 +438,7 @@
             }
         });
 
-        function setupExample(stateIndex, stateElement, button, audio, status, path) {
+        function setupExample(stateIndex, stateElement, button, audio, status) {
             const buttonIcon = button.querySelector("img");
 
             async function play() {
@@ -456,9 +453,6 @@
                 }
 
                 try {
-                    if (!audio.hasAttribute("src")) {
-                        audio.src = encodeURI(path);
-                    }
                     await audio.play();
                 } catch (error) {
                     status.textContent = "No se pudo reproducir el ejemplo. Revisá que el archivo de audio esté disponible.";
@@ -495,8 +489,8 @@
 
         // Estado 1 (Orígenes) y estado 2 (¿Y ahora?) comparten el mismo reproductor de ejemplo
         const examples = [
-            setupExample(0, originsState, originsButton, originsAudio, originsStatus, originsAudioPath),
-            setupExample(1, nowState, nowButton, nowAudio, nowStatus, nowAudioPath)
+            setupExample(0, originsState, originsButton, originsAudio, originsStatus),
+            setupExample(1, nowState, nowButton, nowAudio, nowStatus)
         ];
 
         async function playSong() {
