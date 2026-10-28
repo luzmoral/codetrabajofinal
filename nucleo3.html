@@ -339,7 +339,9 @@
         if (selectedSong) {
             songAudio.src = encodeURI(`imagenes/${selectedSong}`);
             songAudio.load();
-            songTitle.textContent = `${instrument}, ${theme}, ${voice}`;
+            songTitle.textContent = "Un par de fernet";
+            songCover.src = "imagenes/cancionfernet.png";
+            songCover.alt = "Portada de Un par de fernet de Rastry x Kode Gonzalez";
         }
 
         // Canciones del estado 5: las flechas del reproductor pasan de una a otra
