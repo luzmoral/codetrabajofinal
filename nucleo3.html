@@ -619,6 +619,10 @@
                 conclusionButton.click();
             }
         });
+        document.addEventListener("pausa-arduino", () => {
+            examples.forEach(({ audio }) => audio.pause());
+            songAudio.pause();
+        });
 
         function selectNearestState(clientX) {
             const bounds = timeline.getBoundingClientRect();
