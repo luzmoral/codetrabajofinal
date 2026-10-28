@@ -264,28 +264,6 @@ body {
     object-fit: contain;
 }
 
-.origins__play.is-playing img,
-.player__play.is-playing img {
-    visibility: hidden;
-}
-
-.origins__play.is-playing::after,
-.player__play.is-playing::after {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 14px;
-    height: 18px;
-    background: linear-gradient(
-        to right,
-        #222 0 4px,
-        transparent 4px 10px,
-        #222 10px 14px
-    );
-    content: "";
-    transform: translate(-50%, -50%);
-}
-
 .origins__play:focus-visible {
     outline: 2px solid #fff;
     outline-offset: 3px;
