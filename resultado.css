@@ -60,6 +60,35 @@ body {
     line-height: 1.2;
 }
 
+.result__choices {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(24px, 6vw, 56px);
+    margin-top: 24px;
+}
+
+.result__choice {
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    min-width: 72px;
+}
+
+.result__choice-icon {
+    width: clamp(48px, 8vw, 68px);
+    height: clamp(48px, 8vw, 68px);
+    object-fit: contain;
+}
+
+.result__choice-name {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
 /* Marco del reproductor y espacio reservado para el audio */
 .result-player {
     display: grid;
@@ -83,25 +112,6 @@ body {
     aspect-ratio: 1;
     border: 2px solid #ff0054;
     object-fit: cover;
-}
-
-.result-player__details {
-    min-width: 0;
-}
-
-.result-player__song {
-    margin: 0;
-    color: #ff0054;
-    font-family: "Bowlby One SC", Impact, sans-serif;
-    font-size: clamp(1.15rem, 2.5vw, 1.65rem);
-    font-weight: 400;
-    line-height: 1.15;
-}
-
-.result-player__artist {
-    margin: 6px 0 14px;
-    font-size: 0.85rem;
-    font-weight: 400;
 }
 
 .result-player__audio {
@@ -193,14 +203,6 @@ body {
         width: clamp(110px, 35vw, 150px);
     }
 
-    .result-player__details {
-        width: 100%;
-    }
-
-    .result-player__song,
-    .result-player__artist {
-        text-align: center;
-    }
 }
 
 @media (prefers-reduced-motion: reduce) {
