@@ -94,6 +94,7 @@ body {
 
 .result__subtitle span {
     color: #ff0054;
+    
 }
 
 .result-teaser {
@@ -103,6 +104,7 @@ body {
     width: min(100%, 700px);
     min-height: 260px;
     margin: 0 auto;
+    
 }
 
 .result-teaser__player {
@@ -258,11 +260,13 @@ body {
 @keyframes hint-pulse {
     0%,
     100% {
-        opacity: 0.45;
+        opacity: 0.35;
+        
     }
 
     50% {
         opacity: 1;
+        
     }
 }
 
