@@ -157,8 +157,26 @@
         const nextButton = document.querySelector("#process-next");
         const keys = document.querySelectorAll(".piano__key");
         const card = document.querySelector(".process__card");
-        const keySound = new Audio("imagenes/tecla%20teclado.mp3");
+        const keySounds = [
+            new Audio("imagenes/do.mp4"),
+            new Audio("imagenes/iso.mp4"),
+            new Audio("imagenes/fa.mp4"),
+            new Audio("imagenes/re.mp4"),
+            new Audio("imagenes/tecla%20teclado.mp3"),
+            new Audio("imagenes/tecla%20teclado.mp3")
+        ];
         let currentStep = 0;
+
+        function playKeySound(index) {
+            keySounds.forEach((sound) => {
+                sound.pause();
+                sound.currentTime = 0;
+            });
+
+            keySounds[index].play().catch((error) => {
+                console.error(`No se pudo reproducir el sonido de la tecla ${index + 1}.`, error);
+            });
+        }
 
         // Toma el color de fondo del gif/video (píxel de la esquina superior izquierda).
         // Si algún paso tiene `bg: "#xxxxxx"` en el arreglo steps, se usa ese color.
@@ -225,17 +243,19 @@
             });
         }
 
-                keys.forEach((key) => {
-            key.addEventListener("click", () => selectStep(Number(key.dataset.step)));
+        keys.forEach((key) => {
+            key.addEventListener("click", () => {
+                const index = Number(key.dataset.step);
+                playKeySound(index);
+                selectStep(index);
+            });
         });
 
         document.addEventListener("keydown", (event) => {
             if (!event.repeat && /^[1-6]$/.test(event.key)) {
-                keySound.currentTime = 0;
-                keySound.play().catch((error) => {
-                    console.error("No se pudo reproducir el sonido de la tecla.", error);
-                });
-                selectStep(Number(event.key) - 1);
+                const index = Number(event.key) - 1;
+                playKeySound(index);
+                selectStep(index);
             }
         });
 
