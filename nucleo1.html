@@ -157,8 +157,24 @@
         const nextButton = document.querySelector("#process-next");
         const keys = document.querySelectorAll(".piano__key");
         const card = document.querySelector(".process__card");
-        const keySound = new Audio("imagenes/tecla%20teclado.mp3");
+        const keySounds = [
+            "imagenes/DO.mp4",
+            "imagenes/RE.mp4",
+            "imagenes/MINUEVO(2).mp4",
+            "imagenes/FANUEVO%20(2).mp4",
+            "imagenes/SOLNUEVO%20(2).mp4",
+            "imagenes/LA.mp4"
+        ];
+        const keySound = new Audio();
         let currentStep = 0;
+
+        function playKeySound(index) {
+            keySound.src = keySounds[index];
+            keySound.currentTime = 0;
+            keySound.play().catch((error) => {
+                console.error("No se pudo reproducir el sonido de la tecla.", error);
+            });
+        }
 
         // Toma el color de fondo del gif/video (píxel de la esquina superior izquierda).
         // Si algún paso tiene `bg: "#xxxxxx"` en el arreglo steps, se usa ese color.
@@ -225,17 +241,19 @@
             });
         }
 
-                keys.forEach((key) => {
-            key.addEventListener("click", () => selectStep(Number(key.dataset.step)));
+        keys.forEach((key) => {
+            key.addEventListener("click", () => {
+                const index = Number(key.dataset.step);
+                playKeySound(index);
+                selectStep(index);
+            });
         });
 
         document.addEventListener("keydown", (event) => {
             if (!event.repeat && /^[1-6]$/.test(event.key)) {
-                keySound.currentTime = 0;
-                keySound.play().catch((error) => {
-                    console.error("No se pudo reproducir el sonido de la tecla.", error);
-                });
-                selectStep(Number(event.key) - 1);
+                const index = Number(event.key) - 1;
+                playKeySound(index);
+                selectStep(index);
             }
         });
 
