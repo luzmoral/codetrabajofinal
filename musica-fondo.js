@@ -1,6 +1,6 @@
 (() => {
     const CLAVE = "musica-fondo-estado";
-    const audio = new Audio("imagenes/Musica%20de%20fondo.mp3");
+    const audio = new Audio("musica/Musica%20de%20fondo.mp3");
     audio.loop = true;
     audio.preload = "auto";
     audio.volume = 0.3;
@@ -82,7 +82,7 @@
     }
 
     audio.addEventListener("error", () => {
-        console.error("No se pudo cargar imagenes/Musica de fondo.mp3.");
+        console.error("No se pudo cargar musica/Musica de fondo.mp3.");
     });
 
     document.addEventListener("pointerdown", iniciarConInteraccion);
