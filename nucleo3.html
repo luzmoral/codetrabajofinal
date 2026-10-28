@@ -327,13 +327,24 @@
         const songCover = document.querySelector(".player__cover");
         const skipPrevious = document.querySelector(".player__skip");
         const skipNext = document.querySelector(".player__skip--next");
+        const playerControls = [skipPrevious, playerButton, skipNext];
         let currentState = 0;
+        let selectedPlayerControl = 1;
+
+        function selectPlayerControl(index) {
+            selectedPlayerControl = Math.max(0, Math.min(playerControls.length - 1, index));
+            playerControls.forEach((control, controlIndex) => {
+                control.classList.toggle("is-pot-selected", controlIndex === selectedPlayerControl);
+            });
+        }
+
+        selectPlayerControl(selectedPlayerControl);
 
         const selection = new URLSearchParams(window.location.search);
         const instrument = selection.get("instrument")?.toLocaleUpperCase("es");
         const theme = selection.get("theme")?.toLocaleUpperCase("es");
         const voice = selection.get("voice")?.toLocaleUpperCase("es");
-        const selectedSong = window.cumbiaSongs[instrument]?.[theme]?.[voice];
+        const selectedSong = window.cumbiaSongs?.[instrument]?.[theme]?.[voice];
         if (selectedSong) {
             songAudio.src = encodeURI(`imagenes/${selectedSong}`);
             songAudio.load();
@@ -413,11 +424,20 @@
             }
 
             const clampedValue = Math.max(0, Math.min(1023, value));
-            const selectedIndex = Math.min(
-                tracks.length - 1,
-                Math.floor((clampedValue / 1024) * tracks.length)
+            const zoneSize = 1024 / playerControls.length;
+            const margin = 25; // evita que el botón "tiemble" cuando la perilla queda entre dos zonas
+            const zoneStart = selectedPlayerControl * zoneSize;
+            const zoneEnd = zoneStart + zoneSize;
+
+            if (clampedValue >= zoneStart - margin && clampedValue <= zoneEnd + margin) {
+                return;
+            }
+
+            const selectedControl = Math.min(
+                playerControls.length - 1,
+                Math.floor(clampedValue / zoneSize)
             );
-            selectTrack(selectedIndex);
+            selectPlayerControl(selectedControl);
         });
 
         statePositions.forEach((position, index) => {
@@ -548,7 +568,7 @@
             progress.setAttribute("aria-valuenow", String(Math.round(percentage)));
         }
 
-        function toggleSongPlayback() {
+        function togglePlayPause() {
             if (songAudio.paused) {
                 playSong();
             } else {
@@ -556,7 +576,13 @@
             }
         }
 
-        playerButton.addEventListener("click", toggleSongPlayback);
+        // serial.js llama a esta función cuando se aprieta Enter en el estado 5:
+        // confirma el botón que está seleccionado con la perilla (anterior, play/pausa o siguiente)
+        function toggleSongPlayback() {
+            playerControls[selectedPlayerControl].click();
+        }
+
+        playerButton.addEventListener("click", togglePlayPause);
         songAudio.addEventListener("play", () => {
             playerState.classList.add("is-playing");
             playerButton.classList.add("is-playing");
@@ -587,8 +613,10 @@
             const activeExample = examples.find((example) => example.stateIndex === currentState);
             if (activeExample) {
                 activeExample.play();
-            } else if (currentState !== 4) {
-                playSong();
+            } else if (currentState === 4) {
+                playerControls[selectedPlayerControl].click();
+            } else if (currentState === 5) {
+                conclusionButton.click();
             }
         });
 
@@ -640,6 +668,10 @@
         });
 
         document.addEventListener("keydown", (event) => {
+            if (!event.isTrusted) {
+                return;
+            }
+
             const activeExample = examples.find((example) => example.stateIndex === currentState);
             if (
                 activeExample &&
