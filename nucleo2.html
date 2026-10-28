@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="estilonucleo2.css">
 </head>
 <body>
-    <main class="creator">
+    <main class="creator" inert aria-hidden="true">
         <img class="creator__star creator__star--yellow" src="imagenes/estrellararaama.png" alt="" aria-hidden="true">
         <img class="creator__star creator__star--green" src="imagenes/estrellararaver.png" alt="" aria-hidden="true">
         <h1 class="creator__title">
@@ -27,9 +27,29 @@
                 <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
                 <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
             </div>
-            <div class="creator__options" id="options" aria-label="Elegí una opción"></div>
+            <div class="creator__option-list">
+                <div class="creator__options" id="options" aria-label="Elegí una opción"></div>
+                <p class="creator__hint">
+                    ¡Elegí la opción que más te guste y presioná
+                    <img src="imagenes/playok.png" alt="botón de continuar">
+                    para continuar!
+                </p>
+            </div>
         </section>
     </main>
+    <aside class="creator-tutorial" id="creator-tutorial" role="status" aria-live="polite">
+        <div class="creator-tutorial__content">
+            <p class="creator-tutorial__message">
+                <img class="creator-tutorial__knob" src="imagenes/perilla.png" alt="">
+                ¡<strong>Girá la perilla</strong> para escuchar las opciones!
+            </p>
+            <img
+                class="creator-tutorial__character"
+                src="imagenes/muneco%20tutorial%20nucleo1.png"
+                alt=""
+            >
+        </div>
+    </aside>
        <script src="serial.js" defer></script>
     <script>
         const steps = [
@@ -70,6 +90,8 @@
         const image = document.querySelector("#step-image");
         const waveform = document.querySelector("#step-waveform");
         const options = document.querySelector("#options");
+        const tutorial = document.querySelector("#creator-tutorial");
+        const creator = document.querySelector(".creator");
         const instrumentAudio = new Audio();
         let currentStep = 0;
 
@@ -163,6 +185,7 @@
     }
 }
         document.addEventListener("potenciometro", (e) => {
+            if (!tutorial.classList.contains("is-dismissed")) return;
             const cantidad = steps[currentStep].options.length;
             const index = Math.min(cantidad - 1, Math.floor((e.detail / 1024) * cantidad));
             if (index !== potIndex) {
@@ -173,11 +196,18 @@
 
         // Botón físico: confirma la opción elegida con el potenciómetro
         document.addEventListener("boton-arduino", () => {
+            if (!tutorial.classList.contains("is-dismissed")) return;
             const botones = options.querySelectorAll(".creator__option");
             if (botones[potIndex]) botones[potIndex].click();
         });
 
         showStep();
+        window.setTimeout(() => {
+            tutorial.classList.add("is-dismissed");
+            tutorial.setAttribute("aria-hidden", "true");
+            creator.removeAttribute("inert");
+            creator.removeAttribute("aria-hidden");
+        }, 6000);
     </script>
 </body>
 </html>
