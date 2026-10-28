@@ -102,8 +102,16 @@
     if (event.key !== "Enter" || event.repeat) return;
     if (typeof currentState === "undefined") return;
 
-    if (currentState === 4 && typeof playSong === "function") {
-      playSong();
+    if (
+      currentState === 4 &&
+      typeof playSong === "function" &&
+      !(event.target instanceof Element && event.target.closest("button, a, input, select, textarea"))
+    ) {
+      if (typeof toggleSongPlayback === "function") {
+        toggleSongPlayback();
+      } else {
+        playSong();
+      }
       return;
     }
 
