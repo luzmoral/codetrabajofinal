@@ -15,6 +15,7 @@
         <header class="result__header">
             <h1 class="result__title">Tu cumbia con IA</h1>
             <p class="result__subtitle">¡Escuchá tu resultado!</p>
+            <div class="result__choices" id="result-choices" role="list" aria-label="Tus elecciones"></div>
         </header>
 
         <section class="result-player" aria-label="Reproductor de la canción">
@@ -23,17 +24,13 @@
                 src="imagenes/cancionkode.png"
                 alt="Portada de la canción"
             >
-            <div class="result-player__details">
-                <h2 class="result-player__song">Tu canción</h2>
-                <p class="result-player__artist">feat. IA</p>
-                <audio
-                    id="result-audio"
-                    class="result-player__audio"
-                    controls
-                    preload="none"
-                    aria-label="Escuchar tu canción"
-                ></audio>
-            </div>
+            <audio
+                id="result-audio"
+                class="result-player__audio"
+                controls
+                preload="none"
+                aria-label="Escuchar tu canción"
+            ></audio>
         </section>
 
         <footer class="result__footer">
@@ -53,12 +50,51 @@
         const theme = selection.get("theme")?.toLocaleUpperCase("es");
         const voice = selection.get("voice")?.toLocaleUpperCase("es");
         const selectedSong = window.cumbiaSongs[instrument]?.[theme]?.[voice];
+        const choiceDetails = {
+            instrument: {
+                KEYTAR: { name: "Keytar", image: "imagenes/keytar.png" },
+                "GÜIRO": { name: "Güiro", image: "imagenes/guiro.png" },
+                TIMBAL: { name: "Timbal", image: "imagenes/timbal.png" }
+            },
+            theme: {
+                DESAMOR: { name: "Desamor", image: "imagenes/corazonroto.png" },
+                AMISTAD: { name: "Amistad", image: "imagenes/caritafeliz.png" },
+                FIESTA: { name: "Fiesta", image: "imagenes/fiesta.png" }
+            },
+            voice: {
+                "VOZ 1": { name: "Voz 1", image: "imagenes/ondamusical.png" },
+                "VOZ 2": { name: "Voz 2", image: "imagenes/ondamusical.png" },
+                "VOZ 3": { name: "Voz 3", image: "imagenes/ondamusical.png" }
+            }
+        };
+        const choices = [
+            choiceDetails.instrument[instrument],
+            choiceDetails.theme[theme],
+            choiceDetails.voice[voice]
+        ].filter(Boolean);
+        const choicesContainer = document.querySelector("#result-choices");
+        choices.forEach((choice) => {
+            const item = document.createElement("div");
+            item.className = "result__choice";
+            item.setAttribute("role", "listitem");
+
+            const icon = document.createElement("img");
+            icon.className = "result__choice-icon";
+            icon.src = choice.image;
+            icon.alt = "";
+
+            const name = document.createElement("span");
+            name.className = "result__choice-name";
+            name.textContent = choice.name;
+
+            item.append(icon, name);
+            choicesContainer.append(item);
+        });
+
         if (selectedSong) {
             const audio = document.querySelector("#result-audio");
             audio.src = encodeURI(`imagenes/${selectedSong}`);
             audio.load();
-            document.querySelector(".result-player__song").textContent =
-                `${instrument}, ${theme}, ${voice}`;
         }
 
         document.addEventListener("keydown", (event) => {
