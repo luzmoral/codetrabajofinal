@@ -317,6 +317,7 @@
         const conclusionButton = document.querySelector(".story__key");
         const playerState = document.querySelector(".story__state--player");
         const playerButton = document.querySelector("#player-play");
+        const playerButtonIcon = playerButton.querySelector("img");
         const songAudio = document.querySelector("#song-audio");
         const songTitle = document.querySelector(".player__song-title");
         const progress = document.querySelector(".player__progress");
@@ -441,6 +442,8 @@
         });
 
         function setupExample(stateIndex, stateElement, button, audio, status, path) {
+            const buttonIcon = button.querySelector("img");
+
             async function play() {
                 if (currentState !== stateIndex || !audio.paused) {
                     return;
@@ -467,6 +470,7 @@
             function setPlaying(isPlaying) {
                 stateElement.classList.toggle("is-playing", isPlaying);
                 button.classList.toggle("is-playing", isPlaying);
+                buttonIcon.src = isPlaying ? "imagenes/botonpausa.png" : "imagenes/playok.png";
                 button.setAttribute("aria-label", isPlaying ? "Pausar ejemplo" : "Escuchar un ejemplo");
             }
 
@@ -533,11 +537,13 @@
         songAudio.addEventListener("play", () => {
             playerState.classList.add("is-playing");
             playerButton.classList.add("is-playing");
+            playerButtonIcon.src = "imagenes/botonpausa.png";
             playerButton.setAttribute("aria-label", "Pausar canción");
         });
         songAudio.addEventListener("pause", () => {
             playerState.classList.remove("is-playing");
             playerButton.classList.remove("is-playing");
+            playerButtonIcon.src = "imagenes/playok.png";
             playerButton.setAttribute("aria-label", "Reproducir canción");
         });
         songAudio.addEventListener("timeupdate", updateSongProgress);
@@ -545,6 +551,7 @@
         songAudio.addEventListener("ended", () => {
             playerState.classList.remove("is-playing");
             playerButton.classList.remove("is-playing");
+            playerButtonIcon.src = "imagenes/playok.png";
             playerButton.setAttribute("aria-label", "Reproducir canción");
             updateSongProgress();
         });
