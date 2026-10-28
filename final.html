@@ -17,7 +17,10 @@
 
     <!-- ===== PANTALLA 1: la IA puede... (3 imágenes rosas, se pasan con el botón OK) ===== -->
     <section class="pantalla pantalla--ia" id="pantalla-1" aria-labelledby="titulo-1">
-      <h1 class="titulo titulo--gradiente" id="titulo-1" data-text="COMO YA VISTE...">COMO YA VISTE...</h1>
+      <h1 class="creator__title" id="titulo-1">
+        <span class="creator__title-back" aria-hidden="true">COMO YA VISTE...</span>
+        <span class="creator__title-front">COMO YA VISTE...</span>
+      </h1>
 
       <p class="texto">La inteligencia artificial puede</p>
 
@@ -57,7 +60,10 @@
 
         <!-- ===== PANTALLA 2: la cumbia está hecha de... (carrusel de Bootstrap) ===== -->
     <section class="pantalla pantalla--cumbia" id="pantalla-2" aria-labelledby="titulo-2" hidden>
-      <h2 class="titulo titulo--gradiente" id="titulo-2" data-text="COMO YA VISTE...">COMO YA VISTE...</h2>
+      <h2 class="creator__title" id="titulo-2">
+        <span class="creator__title-back" aria-hidden="true">COMO YA VISTE...</span>
+        <span class="creator__title-front">COMO YA VISTE...</span>
+      </h2>
 
       <p class="texto">La cumbia también está hecha de…</p>
 
@@ -67,21 +73,21 @@
             <p class="subtitulo-rosa">Barrios</p>
             <figure class="slot">
               <img src="imagenes/barrios.png" alt="Barrios">
-              <span class="slot__texto">Acá va la imagen<br>imagenes/barrios.png</span>
+        
             </figure>
           </div>
           <div class="carousel-item">
             <p class="subtitulo-rosa">Vivencias</p>
             <figure class="slot">
               <img src="imagenes/vivencias.png" alt="Vivencias">
-              <span class="slot__texto">Acá va la imagen<br>imagenes/vivencias.png</span>
+      
             </figure>
           </div>
           <div class="carousel-item">
             <p class="subtitulo-rosa">Identidad</p>
             <figure class="slot">
               <img src="imagenes/identidad.png" alt="Identidad">
-              <span class="slot__texto">Acá va la imagen<br>imagenes/identidad.png</span>
+          
             </figure>
           </div>
         </div>
@@ -111,9 +117,12 @@
 
     <!-- ===== PANTALLA 3: cierre con el robot ===== -->
     <section class="pantalla pantalla--cierre" id="pantalla-3" hidden>
-      <img class="robot" src="imagenes/robot.png" alt="Robot con un corazón y un acordeón">
+      <img class="robot" src="imagenes/robot final.png" alt="Robot con un corazón y un acordeón">
 
-      <h2 class="titulo titulo--rosa" data-text="¿VOS QUE PENSÁS?">¿VOS QUE PENSÁS?</h2>
+      <h2 class="creator__title">
+        <span class="creator__title-back" aria-hidden="true">¿VOS QUE PENSÁS?</span>
+        <span class="creator__title-front">¿VOS QUE PENSÁS?</span>
+      </h2>
 
       <p class="texto texto--cierre">
         ¿Puede una máquina generar el sonido <span class="resaltado">sin haber vivido la historia</span> que lo construyó?
@@ -145,6 +154,10 @@
       pantallas.forEach((pantalla, i) => {
         pantalla.hidden = i !== indice;
       });
+      if (carrusel) {
+        if (indice === 1) carrusel.cycle();
+        else carrusel.pause();
+      }
     }
 
     const DURACION_PASO = 4000; // milisegundos que dura cada imagen (4 s)
@@ -211,7 +224,6 @@
       if (valor >= zonaPerilla * tamano - margen && valor <= (zonaPerilla + 1) * tamano + margen) return;
 
       zonaPerilla = Math.min(totalSlides - 1, Math.floor(valor / tamano));
-      carrusel.pause();
       carrusel.to(zonaPerilla);
     });
 
