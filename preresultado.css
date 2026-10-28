@@ -331,4 +331,8 @@ body {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
     }
+
+    .result__hint {
+        animation: hint-pulse 1.6s ease-in-out infinite !important;
+    }
 }
