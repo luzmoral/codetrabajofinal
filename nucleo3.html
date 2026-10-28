@@ -523,19 +523,28 @@
             progress.setAttribute("aria-valuenow", String(Math.round(percentage)));
         }
 
-        playerButton.addEventListener("click", playSong);
+        playerButton.addEventListener("click", () => {
+            if (songAudio.paused) {
+                playSong();
+            } else {
+                songAudio.pause();
+            }
+        });
         songAudio.addEventListener("play", () => {
             playerState.classList.add("is-playing");
-            playerButton.setAttribute("aria-label", "La canción se está reproduciendo");
+            playerButton.classList.add("is-playing");
+            playerButton.setAttribute("aria-label", "Pausar canción");
         });
         songAudio.addEventListener("pause", () => {
             playerState.classList.remove("is-playing");
+            playerButton.classList.remove("is-playing");
             playerButton.setAttribute("aria-label", "Reproducir canción");
         });
         songAudio.addEventListener("timeupdate", updateSongProgress);
         songAudio.addEventListener("loadedmetadata", updateSongProgress);
         songAudio.addEventListener("ended", () => {
             playerState.classList.remove("is-playing");
+            playerButton.classList.remove("is-playing");
             playerButton.setAttribute("aria-label", "Reproducir canción");
             updateSongProgress();
         });
