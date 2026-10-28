@@ -69,8 +69,10 @@
   }
 
   async function conectarManual() {
+    if (conectado) return;
+
     if (!("serial" in navigator)) {
-      alert("Usá Chrome o Edge, abierto con Live Server.");
+     alert("Usá Google Chrome o Microsoft Edge y abrí la página mediante HTTPS o un servidor local.");
       return;
     }
     try {
