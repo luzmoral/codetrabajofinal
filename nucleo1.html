@@ -158,23 +158,22 @@
         const keys = document.querySelectorAll(".piano__key");
         const card = document.querySelector(".process__card");
         const keySounds = [
-            new Audio("imagenes/do.mp4"),
-            new Audio("imagenes/iso.mp4"),
-            new Audio("imagenes/fa.mp4"),
-            new Audio("imagenes/re.mp4"),
-            new Audio("imagenes/tecla%20teclado.mp3"),
-            new Audio("imagenes/tecla%20teclado.mp3")
+            "imagenes/DO.mp4",
+            "imagenes/RE.mp4",
+            "imagenes/MINUEVO(2).mp4",
+            "imagenes/FANUEVO%20(2).mp4",
+            "imagenes/SOLNUEVO%20(2).mp4",
+            "imagenes/LA.mp4"
         ];
+        const keySound = new Audio();
         let currentStep = 0;
 
         function playKeySound(index) {
-            keySounds.forEach((sound) => {
-                sound.pause();
-                sound.currentTime = 0;
-            });
-
-            keySounds[index].play().catch((error) => {
-                console.error(`No se pudo reproducir el sonido de la tecla ${index + 1}.`, error);
+            keySound.pause();
+            keySound.src = keySounds[index];
+            keySound.currentTime = 0;
+            keySound.play().catch((error) => {
+                console.error("No se pudo reproducir el sonido de la tecla.", error);
             });
         }
 
@@ -271,7 +270,7 @@
         window.setTimeout(() => {
             tutorial.classList.add("is-dismissed");
             tutorial.setAttribute("aria-hidden", "true");
-        }, 6000);
+        }, 5000);
     </script>
 </body>
 </html>
