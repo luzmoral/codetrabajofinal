@@ -157,6 +157,7 @@
         const nextButton = document.querySelector("#process-next");
         const keys = document.querySelectorAll(".piano__key");
         const card = document.querySelector(".process__card");
+        const keySound = new Audio("imagenes/tecla%20teclado.mp3");
         let currentStep = 0;
 
         // Toma el color de fondo del gif/video (píxel de la esquina superior izquierda).
@@ -230,6 +231,10 @@
 
         document.addEventListener("keydown", (event) => {
             if (!event.repeat && /^[1-6]$/.test(event.key)) {
+                keySound.currentTime = 0;
+                keySound.play().catch((error) => {
+                    console.error("No se pudo reproducir el sonido de la tecla.", error);
+                });
                 selectStep(Number(event.key) - 1);
             }
         });
