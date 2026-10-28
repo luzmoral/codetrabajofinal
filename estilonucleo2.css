@@ -30,7 +30,7 @@ body {
     min-height: 100vh;
     min-height: 100svh;
     margin: 0 auto;
-    padding: clamp(35px, 7vh, 64px) clamp(20px, 5vw, 60px);
+    padding: clamp(35px, 7vh, 64px) clamp(20px, 5vw, 60px) 72px;
 }
 
 /* Estrellas decorativas de la pantalla */
@@ -192,10 +192,42 @@ body {
 }
 
 /* Botones de selección y sus estados */
+.creator__option-list {
+    display: grid;
+    gap: 14px;
+    width: 100%;
+}
+
 .creator__options {
     display: grid;
     gap: 26px;
     width: 100%;
+}
+
+.creator__hint {
+    position: fixed;
+    z-index: 2;
+    right: 12px;
+    bottom: 24px;
+    left: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    color: #fff;
+    font-size: clamp(0.78rem, 1.6vw, 1rem);
+    font-style: italic;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.creator__hint img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    vertical-align: middle;
 }
 
 .creator__option {
@@ -242,10 +274,98 @@ body {
     color: #f1ff00;
 }
 
+/* Tutorial de inicio para la perilla */
+.creator-tutorial {
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgb(0 0 0 / 78%);
+    opacity: 1;
+    transition: opacity 450ms ease;
+}
+
+.creator-tutorial.is-dismissed {
+    pointer-events: none;
+    opacity: 0;
+}
+
+.creator-tutorial__content {
+    position: relative;
+    width: min(90vw, 760px);
+    height: min(70svh, 380px);
+    min-height: 210px;
+}
+
+.creator-tutorial__knob {
+    display: inline-block;
+    width: clamp(26px, 4vw, 36px);
+    height: clamp(26px, 4vw, 36px);
+    margin-right: 6px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.creator-tutorial__character {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 34%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom right;
+}
+
+.creator-tutorial__message {
+    position: absolute;
+    z-index: 1;
+    top: 10%;
+    left: 19%;
+    width: 57%;
+    margin: 0;
+    padding: 18px 20px;
+    border: 3px solid #f1ff00;
+    border-radius: 23px;
+    background: #f8f8f3;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 45%);
+    color: #171717;
+    font-size: clamp(0.9rem, 2.4vw, 1.2rem);
+    line-height: 1.35;
+}
+
+.creator-tutorial__message::before,
+.creator-tutorial__message::after {
+    position: absolute;
+    content: "";
+    border: 3px solid #f1ff00;
+    border-radius: 50%;
+    background: #f8f8f3;
+}
+
+.creator-tutorial__message::before {
+    right: -17px;
+    bottom: -16px;
+    width: 17px;
+    height: 15px;
+}
+
+.creator-tutorial__message::after {
+    right: -31px;
+    bottom: -32px;
+    width: 10px;
+    height: 9px;
+}
+
+.creator-tutorial__message strong {
+    color: #ff0054;
+    font-weight: 600;
+}
+
 /* Adaptación para pantallas pequeñas */
 @media (max-width: 620px) {
     .creator {
-        padding: 38px 20px 30px;
+        padding: 38px 20px 72px;
     }
 
     .creator__step {
@@ -291,6 +411,24 @@ body {
     .creator__option {
         min-height: 60px;
         font-size: clamp(1rem, 4.5vw, 1.2rem);
+    }
+
+    .creator-tutorial__content {
+        width: 92vw;
+        height: min(62svh, 320px);
+        min-height: 190px;
+    }
+
+    .creator-tutorial__character {
+        width: 39%;
+    }
+
+    .creator-tutorial__message {
+        top: 12%;
+        left: 16%;
+        width: 62%;
+        padding: 12px 13px;
+        font-size: clamp(0.76rem, 3.2vw, 0.95rem);
     }
 }
 
