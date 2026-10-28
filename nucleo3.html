@@ -367,13 +367,18 @@
         }
         let trackIndex = 0;
 
-        function changeTrack(step) {
+        function selectTrack(index) {
             if (currentState !== 4) {
                 return;
             }
 
+            const nextIndex = Math.max(0, Math.min(tracks.length - 1, index));
+            if (nextIndex === trackIndex) {
+                return;
+            }
+
             const wasPlaying = !songAudio.paused;
-            trackIndex = (trackIndex + step + tracks.length) % tracks.length;
+            trackIndex = nextIndex;
             const track = tracks[trackIndex];
             songAudio.pause();
             songAudio.src = track.audio;
@@ -390,8 +395,30 @@
             }
         }
 
+        function changeTrack(step) {
+            selectTrack((trackIndex + step + tracks.length) % tracks.length);
+        }
+
         skipPrevious.addEventListener("click", () => changeTrack(-1));
         skipNext.addEventListener("click", () => changeTrack(1));
+
+        document.addEventListener("potenciometro", (event) => {
+            if (currentState !== 4) {
+                return;
+            }
+
+            const value = Number(event.detail);
+            if (!Number.isFinite(value)) {
+                return;
+            }
+
+            const clampedValue = Math.max(0, Math.min(1023, value));
+            const selectedIndex = Math.min(
+                tracks.length - 1,
+                Math.floor((clampedValue / 1024) * tracks.length)
+            );
+            selectTrack(selectedIndex);
+        });
 
         statePositions.forEach((position, index) => {
             const stop = document.createElement("button");
@@ -521,13 +548,15 @@
             progress.setAttribute("aria-valuenow", String(Math.round(percentage)));
         }
 
-        playerButton.addEventListener("click", () => {
+        function toggleSongPlayback() {
             if (songAudio.paused) {
                 playSong();
             } else {
                 songAudio.pause();
             }
-        });
+        }
+
+        playerButton.addEventListener("click", toggleSongPlayback);
         songAudio.addEventListener("play", () => {
             playerState.classList.add("is-playing");
             playerButton.classList.add("is-playing");
@@ -558,7 +587,7 @@
             const activeExample = examples.find((example) => example.stateIndex === currentState);
             if (activeExample) {
                 activeExample.play();
-            } else {
+            } else if (currentState !== 4) {
                 playSong();
             }
         });
@@ -619,10 +648,6 @@
                 !event.target.closest("button, a, input, select, textarea")
             ) {
                 activeExample.play();
-                return;
-            }
-            if (currentState === 4 && event.key === "Enter" && !event.repeat) {
-                playSong();
                 return;
             }
             if (
