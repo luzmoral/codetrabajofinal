@@ -1,4 +1,5 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
 
 body {
   min-height: 100vh;
@@ -12,61 +13,143 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-/* ---------- Celular: una columna, en el orden del HTML ----------
-   título > robot > texto > título rosa > texto amarillo > botón */
 .final {
   width: 100%;
   max-width: 1000px;
   padding: 40px 24px 56px;
+}
+
+/* ---------- Cada pantalla: una columna centrada ---------- */
+.pantalla {
+  width: 100%;
+  min-height: calc(100vh - 96px);
+  min-height: calc(100svh - 96px);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 22px;
-  text-align: left;
+  text-align: center;
+  animation: pantalla-in 0.5s ease-out;
 }
+
+.texto {
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.subtitulo-rosa {
+  color: #ff0054;
+  font-family: "Bowlby One SC", Impact, sans-serif;
+  font-size: clamp(1.3rem, 3.4vw, 2rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+/* Cada una de las 3 imágenes rosas de la pantalla 1 */
+.paso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  animation: text-appear 0.5s ease-out;
+}
+
+/* ---------- Espacio para las imágenes que subís vos ---------- */
+.slot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 520px, 80svh);
+  margin-inline: auto;
+  aspect-ratio: 16 / 9;
+  border: 3px dashed rgb(255 0 84 / 60%);
+  border-radius: 16px;
+  color: #ff8aae;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: center;
+}
+.slot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.slot--lista { border-color: transparent; }
+.slot--lista .slot__texto { display: none; }
+
+/* ---------- Indicador del botón OK ---------- */
+.hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+  font-size: clamp(0.85rem, 1.7vw, 1rem);
+  text-align: center;
+  animation: hint-pulse 1.6s ease-in-out infinite;
+}
+.hint__ok {
+  display: block;
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+/* ---------- Carrusel de Bootstrap (pantalla 2) ---------- */
+.carrusel {
+  position: relative;
+  width: min(100%, 560px, 80svh);
+}
+.carrusel .carousel-item { text-align: center; }
+.carrusel .subtitulo-rosa { margin-bottom: 16px; }
+.carrusel .slot { width: 100%; }
+.carrusel .carousel-indicators {
+  position: static;
+  margin: 14px 0 0;
+}
+.carrusel .carousel-control-prev,
+.carrusel .carousel-control-next { width: 12%; }
+
+/* ---------- Pantalla 3: robot + pregunta final ---------- */
+.pantalla--cierre { text-align: left; }
+.pantalla--cierre .texto--cierre {
+  width: 100%;
+  font-size: clamp(1.3rem, 3.2vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+.resaltado { color: #f5ff1f; }
+
 .robot {
   width: min(70%, 300px);
   height: auto;
   opacity: 0;
   animation: image-appear 1.2s ease-out 0.2s forwards;
 }
-.texto {
-  width: 100%;
-  font-size: 1.1rem;
-  line-height: 1.3;
-  text-align: justify;
-}
-.texto--amarillo { color: #f5ff1f; font-weight: 500; }
-.final .titulo--gradiente { text-align: center; }
-
-/* El robot aparece primero; después entran los textos en secuencia */
-.titulo--gradiente {
+.pantalla--cierre .titulo--rosa {
   opacity: 0;
-  animation: text-appear 0.8s ease-out 1.4s forwards;
+  animation: text-appear 0.8s ease-out 0.8s forwards;
 }
-
-.texto--blanco span {
-  display: block;
+.pantalla--cierre .texto--cierre {
   opacity: 0;
-  animation: text-appear 0.8s ease-out forwards;
+  animation: text-appear 0.8s ease-out 1.2s forwards;
 }
-
-.texto--blanco span:first-child { animation-delay: 1.8s; }
-.texto--blanco span:last-child { animation-delay: 2.2s; }
-
-.titulo--rosa {
+.pantalla--cierre .boton {
   opacity: 0;
-  animation: text-appear 0.8s ease-out 2.6s forwards;
+  animation: text-fade 0.8s ease-out 1.6s forwards;
 }
+.pantalla--cierre { align-items: center; justify-content: center; }
+.pantalla--cierre .titulo--rosa,
+.pantalla--cierre .boton { align-self: flex-start; }
 
-.texto--amarillo {
-  opacity: 0;
-  animation: text-appear 0.8s ease-out 3s forwards;
-}
-
-.boton {
-  opacity: 0;
-  animation: text-fade 0.8s ease-out 3.4s forwards;
+@keyframes pantalla-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes image-appear {
@@ -84,30 +167,34 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ---------- Escritorio: igual a la imagen ---------- */
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+/* ---------- Escritorio: robot a la izquierda, texto a la derecha ---------- */
 @media (min-width: 800px) {
-  .final {
+  .pantalla--cierre {
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
-    grid-template-rows: auto repeat(4, auto);
+    grid-template-rows: auto auto auto;
     column-gap: 48px;
     row-gap: 18px;
+    align-content: center;
     align-items: start;
-    padding: 60px 40px;
   }
-  .titulo--gradiente { grid-column: 1 / -1; justify-self: center; margin-bottom: 30px; }
-  .robot {
+  .pantalla--cierre .robot {
     grid-column: 1;
-    grid-row: 2 / span 4;
+    grid-row: 1 / span 3;
     align-self: center;
     justify-self: center;
     width: 100%;
     max-width: 380px;
   }
-  .texto, .titulo--rosa, .boton { grid-column: 2; }
-  .texto { font-size: 1.45rem; line-height: 1.25; }
-  .texto--amarillo { font-size: 1.35rem; font-weight: 700; }
-  .boton { justify-self: start; }
+  .pantalla--cierre .titulo--rosa,
+  .pantalla--cierre .texto--cierre,
+  .pantalla--cierre .boton { grid-column: 2; }
+  .pantalla--cierre .boton { justify-self: start; }
 }
 
 /* ---------- Títulos: contorno negro + relleno ---------- */
@@ -182,12 +269,15 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .pantalla,
+  .paso,
+  .hint {
+    animation: none;
+  }
   .robot,
-  .titulo--gradiente,
-  .texto--blanco span,
-  .titulo--rosa,
-  .texto--amarillo,
-  .boton {
+  .pantalla--cierre .titulo--rosa,
+  .pantalla--cierre .texto--cierre,
+  .pantalla--cierre .boton {
     opacity: 1;
     animation: none;
   }
