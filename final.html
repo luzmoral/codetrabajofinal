@@ -3,44 +3,231 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Como ya viste...</title>
+  <meta name="theme-color" content="#222222">
+  <title>Como ya viste... | Cumbia e IA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Poppins:wght@400;500;700&family=Rubik:wght@900&display=swap" rel="stylesheet">
+  <!-- Bootstrap (solo para el carrusel). Va ANTES de final.css para que final.css tenga la última palabra -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="final.css">
 </head>
 <body>
   <main class="final">
 
-    <h1 class="titulo titulo--gradiente" data-text="COMO YA VISTE...">COMO YA VISTE...</h1>
+    <!-- ===== PANTALLA 1: la IA puede... (3 imágenes rosas, se pasan con el botón OK) ===== -->
+    <section class="pantalla pantalla--ia" id="pantalla-1" aria-labelledby="titulo-1">
+      <h1 class="titulo titulo--gradiente" id="titulo-1" data-text="COMO YA VISTE...">COMO YA VISTE...</h1>
 
-    <img class="robot" src="imagenes/robot final.png" alt="Robot con un corazón y un acordeón">
+      <p class="texto">La inteligencia artificial puede</p>
 
-    <p class="texto texto--blanco">
-      <span>La inteligencia artificial puede aprender patrones, combinar sonidos y crear canciones que nos hagan bailar.</span>
-      <span>Pero la cumbia también está hecha de barrios, vivencias, identidad y personas.</span>
-    </p>
+      <!-- IMAGEN 1: subila como imagenes/ia-patrones.png (o cambiá el src) -->
+      <div class="paso">
+        <p class="subtitulo-rosa">Aprender patrones</p>
+        <figure class="slot">
+          <img src="imagenes/ia-patrones.png" alt="Aprender patrones">
+          <span class="slot__texto">Acá va la imagen 1<br>imagenes/ia-patrones.png</span>
+        </figure>
+      </div>
 
-    <h2 class="titulo titulo--rosa" data-text="¿VOS QUE PENSÁS?">¿VOS QUE PENSÁS?</h2>
+      <!-- IMAGEN 2: imagenes/ia-sonidos.png -->
+      <div class="paso" hidden>
+        <p class="subtitulo-rosa">Combinar sonidos</p>
+        <figure class="slot">
+          <img src="imagenes/ia-sonidos.png" alt="Combinar sonidos">
+          <span class="slot__texto">Acá va la imagen 2<br>imagenes/ia-sonidos.png</span>
+        </figure>
+      </div>
 
-    <p class="texto texto--amarillo">
-      ¿Puede una máquina generar el sonido sin haber vivido la historia que lo construyó?
-    </p>
+      <!-- IMAGEN 3: imagenes/ia-canciones.png -->
+      <div class="paso" hidden>
+        <p class="subtitulo-rosa">Crear canciones para bailar</p>
+        <figure class="slot">
+          <img src="imagenes/ia-canciones.png" alt="Crear canciones para bailar">
+          <span class="slot__texto">Acá va la imagen 3<br>imagenes/ia-canciones.png</span>
+        </figure>
+      </div>
 
-    <a class="boton" href="index.html">VOLVER A INICIAR</a>
+    <p class="hint" id="hintIA" hidden>
+  <span>¡Presioná el botón</span>
+  <img class="hint__ok" src="imagenes/playok.png" alt="OK">
+  <span>en tu teclado para continuar!</span>
+</p>
+        </section>
+
+        <!-- ===== PANTALLA 2: la cumbia está hecha de... (carrusel de Bootstrap) ===== -->
+    <section class="pantalla pantalla--cumbia" id="pantalla-2" aria-labelledby="titulo-2" hidden>
+      <h2 class="titulo titulo--gradiente" id="titulo-2" data-text="COMO YA VISTE...">COMO YA VISTE...</h2>
+
+      <p class="texto">La cumbia también está hecha de…</p>
+
+      <div id="carruselCumbia" class="carousel slide carrusel" aria-label="De qué está hecha la cumbia">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <p class="subtitulo-rosa">Barrios</p>
+            <figure class="slot">
+              <img src="imagenes/barrios.png" alt="Barrios">
+              <span class="slot__texto">Acá va la imagen<br>imagenes/barrios.png</span>
+            </figure>
+          </div>
+          <div class="carousel-item">
+            <p class="subtitulo-rosa">Vivencias</p>
+            <figure class="slot">
+              <img src="imagenes/vivencias.png" alt="Vivencias">
+              <span class="slot__texto">Acá va la imagen<br>imagenes/vivencias.png</span>
+            </figure>
+          </div>
+          <div class="carousel-item">
+            <p class="subtitulo-rosa">Identidad</p>
+            <figure class="slot">
+              <img src="imagenes/identidad.png" alt="Identidad">
+              <span class="slot__texto">Acá va la imagen<br>imagenes/identidad.png</span>
+            </figure>
+          </div>
+        </div>
+
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carruselCumbia" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Barrios"></button>
+          <button type="button" data-bs-target="#carruselCumbia" data-bs-slide-to="1" aria-label="Vivencias"></button>
+          <button type="button" data-bs-target="#carruselCumbia" data-bs-slide-to="2" aria-label="Identidad"></button>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carruselCumbia" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carruselCumbia" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Siguiente</span>
+        </button>
+      </div>
+
+      <p class="hint">
+        <span>¡Presioná el botón</span>
+        <img class="hint__ok" src="imagenes/playok.png" alt="OK">
+        <span>en tu teclado para continuar!</span>
+      </p>
+    </section>
+
+    <!-- ===== PANTALLA 3: cierre con el robot ===== -->
+    <section class="pantalla pantalla--cierre" id="pantalla-3" hidden>
+      <img class="robot" src="imagenes/robot.png" alt="Robot con un corazón y un acordeón">
+
+      <h2 class="titulo titulo--rosa" data-text="¿VOS QUE PENSÁS?">¿VOS QUE PENSÁS?</h2>
+
+      <p class="texto texto--cierre">
+        ¿Puede una máquina generar el sonido <span class="resaltado">sin haber vivido la historia</span> que lo construyó?
+      </p>
+
+      <a class="boton" href="index.html">VOLVER A INICIAR</a>
+    </section>
+
   </main>
-    <script src="musica-fondo.js" defer></script>
-    <script src="serial.js"></script>
-       <script>
-        document.addEventListener("keydown", (event) => {
-            if (
-                event.key === "Enter" &&
-                !event.repeat &&
-                !(event.target instanceof Element && event.target.closest("a, audio, button, input, select, textarea"))
-            ) {
-                window.location.href = "index.html";
-            }
-        });
-    </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="musica-fondo.js" defer></script>
+  <script src="serial.js" defer></script>
+  <script>
+    const pantallas = [...document.querySelectorAll(".pantalla")];
+    const pasosIA = [...document.querySelectorAll("#pantalla-1 .paso")];
+    const carruselEl = document.querySelector("#carruselCumbia");
+    const totalSlides = carruselEl.querySelectorAll(".carousel-item").length;
+    const carrusel = typeof bootstrap !== "undefined"
+      ? bootstrap.Carousel.getOrCreateInstance(carruselEl, { interval: 4000, ride: false, pause: false, wrap: true })
+      : null;
+
+    let pantallaActual = 0;
+    let pasoIA = 0;
+    let zonaPerilla = null;
+
+    function mostrarPantalla(indice) {
+      pantallaActual = indice;
+      pantallas.forEach((pantalla, i) => {
+        pantalla.hidden = i !== indice;
+      });
+    }
+
+    const DURACION_PASO = 4000; // milisegundos que dura cada imagen (4 s)
+    const hintIA = document.querySelector("#hintIA");
+    let timerPasos = null;
+
+    function mostrarPaso(indice) {
+      pasosIA.forEach((paso, i) => { paso.hidden = i !== indice; });
+      hintIA.hidden = indice !== pasosIA.length - 1;
+    }
+
+    function programarPaso() {
+      clearTimeout(timerPasos);
+      if (pasoIA >= pasosIA.length - 1) return;
+      timerPasos = setTimeout(() => {
+        pasoIA += 1;
+        mostrarPaso(pasoIA);
+        programarPaso();
+      }, DURACION_PASO);
+    }
+
+    function avanzar() {
+      if (pantallaActual === 0 && pasoIA < pasosIA.length - 1) {
+        pasoIA += 1;
+        mostrarPaso(pasoIA);
+        programarPaso();
+        return;
+      }
+      clearTimeout(timerPasos);
+      if (pantallaActual < pantallas.length - 1) {
+        mostrarPantalla(pantallaActual + 1);
+        return;
+      }
+      window.location.href = "index.html";
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (
+        event.key !== "Enter" ||
+        event.repeat ||
+        (event.target instanceof Element && event.target.closest("button, a, input, select, textarea"))
+      ) {
+        return;
+      }
+      avanzar();
+    });
+
+    mostrarPantalla(0);
+    mostrarPaso(0);
+    programarPaso();
+
+    // Perilla del Arduino: mueve el carrusel de la pantalla 2
+    document.addEventListener("potenciometro", (event) => {
+      if (pantallaActual !== 1 || !carrusel) return;
+
+      const tamano = 1024 / totalSlides;
+      const valor = Math.max(0, Math.min(1023, event.detail));
+      const margen = 25;
+
+      if (zonaPerilla === null) {
+        zonaPerilla = Math.min(totalSlides - 1, Math.floor(valor / tamano));
+        return; // primera lectura: solo toma la posición actual de la perilla
+      }
+      if (valor >= zonaPerilla * tamano - margen && valor <= (zonaPerilla + 1) * tamano + margen) return;
+
+      zonaPerilla = Math.min(totalSlides - 1, Math.floor(valor / tamano));
+      carrusel.pause();
+      carrusel.to(zonaPerilla);
+    });
+
+    // Espacios para tus imágenes: si la imagen existe se muestra, si no queda el cartel punteado
+    document.querySelectorAll(".slot").forEach((slot) => {
+      const img = slot.querySelector("img");
+      const lista = () => slot.classList.add("slot--lista");
+      const fallo = () => { img.hidden = true; };
+
+      if (img.complete) {
+        if (img.naturalWidth > 0) lista(); else fallo();
+      } else {
+        img.addEventListener("load", lista);
+        img.addEventListener("error", fallo);
+      }
+    });
+  </script>
 </body>
 </html>
