@@ -208,7 +208,7 @@ body {
     position: fixed;
     z-index: 2;
     right: 12px;
-    bottom: 24px;
+    bottom: 48px;
     left: 12px;
     display: flex;
     align-items: center;
@@ -217,15 +217,15 @@ body {
     gap: 6px;
     margin: 0;
     color: #fff;
-    font-size: clamp(0.78rem, 1.6vw, 1rem);
+    font-size: clamp(1rem, 2vw, 1.25rem);
     font-style: italic;
     line-height: 1.4;
     text-align: center;
 }
 
 .creator__hint img {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     object-fit: contain;
     vertical-align: middle;
 }
@@ -300,8 +300,8 @@ body {
 
 .creator-tutorial__knob {
     display: inline-block;
-    width: clamp(26px, 4vw, 36px);
-    height: clamp(26px, 4vw, 36px);
+    width: clamp(40px, 6vw, 50px);
+    height: clamp(40px, 6vw, 50px);
     margin-right: 6px;
     object-fit: contain;
     vertical-align: middle;
@@ -311,7 +311,7 @@ body {
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 34%;
+    width: 42%;
     height: 100%;
     object-fit: contain;
     object-position: bottom right;
@@ -330,7 +330,7 @@ body {
     background: #f8f8f3;
     box-shadow: 0 4px 10px rgb(0 0 0 / 45%);
     color: #171717;
-    font-size: clamp(0.9rem, 2.4vw, 1.2rem);
+    font-size: clamp(1rem, 2.8vw, 1.4rem);
     line-height: 1.35;
 }
 
@@ -394,7 +394,7 @@ body {
     }
 
     .creator__image {
-        width: min(100%, 260px);
+        width: min(150%, 265px);
         height: 210px;
     }
 
@@ -420,7 +420,7 @@ body {
     }
 
     .creator-tutorial__character {
-        width: 39%;
+        width: 60%;
     }
 
     .creator-tutorial__message {
@@ -428,7 +428,7 @@ body {
         left: 16%;
         width: 62%;
         padding: 12px 13px;
-        font-size: clamp(0.76rem, 3.2vw, 0.95rem);
+        font-size: clamp(0.88rem, 3.8vw, 1.1rem);
     }
 }
 
