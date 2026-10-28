@@ -46,11 +46,22 @@
             </span>
             <span>en tu teclado para comenzar!</span>
         </div>
-           <button onclick="conectarManual()">Conectar Arduino</button>
     </main>
        <script src="serial.js" defer></script>
     <script>
         document.addEventListener("keydown", (event) => {
+            if (
+                event.key.toLowerCase() === "c" &&
+                !event.repeat &&
+                !event.ctrlKey &&
+                !event.metaKey &&
+                !event.altKey &&
+                typeof window.conectarManual === "function"
+            ) {
+                window.conectarManual();
+                return;
+            }
+
             if (event.key === "Enter" && !event.repeat) {
                 window.location.href = "tutorial1.html";
             }

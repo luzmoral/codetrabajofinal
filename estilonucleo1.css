@@ -240,9 +240,9 @@ body {
 
 .tutorial-overlay__content {
     position: relative;
-    width: min(90vw, 460px);
-    height: min(70svh, 340px);
-    min-height: 210px;
+    width: min(92vw, 620px);
+    height: min(76svh, 460px);
+    min-height: 250px;
 }
 
 .tutorial-overlay__character {
@@ -250,7 +250,7 @@ body {
     z-index: 1;
     right: 0;
     bottom: 0;
-    width: 49%;
+    width: 54%;
     height: 100%;
     object-fit: contain;
     object-position: bottom right;
@@ -261,16 +261,16 @@ body {
     z-index: 2;
     top: 11%;
     left: 0;
-    width: 62%;
+    width: 64%;
     margin: 0;
-    padding: 14px 15px;
+    padding: 18px 20px;
     border: 3px solid #f1ff00;
     border-radius: 23px;
     background: #f8f8f3;
     box-shadow: 0 4px 10px rgb(0 0 0 / 45%);
     color: #171717;
-    font-size: clamp(0.76rem, 2.2vw, 0.95rem);
-    line-height: 1.35;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    line-height: 1.4;
 }
 
 .tutorial-overlay__message::before,
@@ -483,15 +483,15 @@ body {
 /* Ajustes adicionales para teléfonos angostos */
 @media (max-width: 390px) {
     .tutorial-overlay__content {
-        width: 92vw;
-        height: min(62svh, 300px);
-        min-height: 190px;
+        width: 94vw;
+        height: min(68svh, 370px);
+        min-height: 210px;
     }
 
     .tutorial-overlay__message {
         width: 64%;
-        padding: 11px 12px;
-        font-size: 0.76rem;
+        padding: 12px 14px;
+        font-size: clamp(0.9rem, 4vw, 1.08rem);
     }
 
     .process__content {
