@@ -100,19 +100,19 @@ body {
     position: relative;
     display: grid;
     place-items: center;
-    width: min(100%, 560px);
-    min-height: 230px;
+    width: min(100%, 700px);
+    min-height: 260px;
     margin: 0 auto;
 }
 
 .result-teaser__player {
     display: grid;
-    grid-template-columns: 72px minmax(0, 1fr);
+    grid-template-columns: 90px minmax(0, 1fr);
     align-items: center;
     gap: 20px;
-    width: min(100%, 430px);
-    min-height: 160px;
-    padding: 20px 24px;
+    width: min(100%, 500px);
+    min-height: 190px;
+    padding: 24px 28px;
     overflow: hidden;
     border: 4px solid #ff0054;
     border-radius: 20px;
@@ -123,7 +123,7 @@ body {
 
 .result-teaser__cover {
     display: block;
-    width: 72px;
+    width: 90px;
     aspect-ratio: 1;
     object-fit: cover;
 }
@@ -136,14 +136,14 @@ body {
 
 .result-teaser__song {
     color: #ff0054;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     font-weight: 700;
 }
 
 .result-teaser__artist {
     margin-top: 2px;
     color: #aaa;
-    font-size: 0.65rem;
+    font-size: 0.8rem;
 }
 
 .result-teaser__wave {
@@ -206,11 +206,9 @@ body {
 
 .result-teaser__question {
     position: absolute;
-    color: #ff0054;
-    font-size: clamp(3.2rem, 7vw, 5rem);
-    font-weight: 400;
-    line-height: 1;
-    text-shadow: 0 0 8px rgb(255 0 84 / 70%);
+    width: clamp(4.2rem, 8vw, 5.8rem);
+    height: auto;
+    filter: drop-shadow(0 0 8px rgb(255 0 84 / 70%));
 }
 
 .result-teaser__question--right {
@@ -278,19 +276,31 @@ body {
     }
 
     .result-teaser {
-        min-height: 190px;
+        min-height: 230px;
     }
 
     .result-teaser__player {
-        grid-template-columns: 58px minmax(0, 1fr);
-        gap: 12px;
-        width: min(100%, 430px);
-        min-height: 130px;
-        padding: 14px;
+        grid-template-columns: 64px minmax(0, 1fr);
+        gap: 10px;
+        width: min(calc(100% - 76px), 500px);
+        min-height: 160px;
+        padding: 14px 12px;
     }
 
     .result-teaser__cover {
-        width: 58px;
+        width: 64px;
+    }
+
+    .result-teaser__song {
+        font-size: 1rem;
+    }
+
+    .result-teaser__artist {
+        font-size: 0.75rem;
+    }
+
+    .result-teaser__question {
+        width: clamp(2.4rem, 11vw, 3.2rem);
     }
 
     .result-teaser__question--right {
