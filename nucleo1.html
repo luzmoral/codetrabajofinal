@@ -158,6 +158,7 @@
         const keys = document.querySelectorAll(".piano__key");
         const card = document.querySelector(".process__card");
         const keySounds = [
+<<<<<<< HEAD
             "imagenes/DO.mp4",
             "imagenes/RE.mp4",
             "imagenes/MINUEVO(2).mp4",
@@ -173,6 +174,25 @@
             keySound.currentTime = 0;
             keySound.play().catch((error) => {
                 console.error("No se pudo reproducir el sonido de la tecla.", error);
+=======
+            new Audio("imagenes/do.mp4"),
+            new Audio("imagenes/iso.mp4"),
+            new Audio("imagenes/fa.mp4"),
+            new Audio("imagenes/re.mp4"),
+            new Audio("imagenes/tecla%20teclado.mp3"),
+            new Audio("imagenes/tecla%20teclado.mp3")
+        ];
+        let currentStep = 0;
+
+        function playKeySound(index) {
+            keySounds.forEach((sound) => {
+                sound.pause();
+                sound.currentTime = 0;
+            });
+
+            keySounds[index].play().catch((error) => {
+                console.error(`No se pudo reproducir el sonido de la tecla ${index + 1}.`, error);
+>>>>>>> 0cfe5788aaf48389c977e8b71219c9d57d2df0a2
             });
         }
 
