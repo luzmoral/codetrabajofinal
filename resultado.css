@@ -64,7 +64,7 @@ body {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: clamp(24px, 6vw, 56px);
+    gap: clamp(32px, 6vw, 64px);
     margin-top: 24px;
 }
 
@@ -72,18 +72,18 @@ body {
     display: grid;
     justify-items: center;
     gap: 8px;
-    min-width: 72px;
+    min-width: 96px;
 }
 
 .result__choice-icon {
-    width: clamp(48px, 8vw, 68px);
-    height: clamp(48px, 8vw, 68px);
+    width: clamp(100px, 35vw, 150px);
+    height: clamp(100px, 35vw, 150px);
     object-fit: contain;
 }
-
+/*  ac color*/
 .result__choice-name {
-    color: #fff;
-    font-size: 0.9rem;
+    color: #fff200;
+    font-size: 1.05rem;
     font-weight: 700;
     line-height: 1.2;
     text-transform: uppercase;
@@ -92,13 +92,13 @@ body {
 /* Marco del reproductor y espacio reservado para el audio */
 .result-player {
     display: grid;
-    grid-template-columns: clamp(112px, 18vw, 170px) minmax(0, 1fr);
+    grid-template-columns: clamp(96px, 14vw, 132px) minmax(0, 1fr);
     align-items: center;
-    gap: clamp(20px, 4vw, 36px);
-    width: min(100%, 760px);
-    min-height: 230px;
+    gap: clamp(16px, 3vw, 28px);
+    width: min(100%, 640px);
+    min-height: 180px;
     margin: 0 auto;
-    padding: clamp(24px, 5vw, 48px);
+    padding: clamp(18px, 3vw, 30px);
     border: 12px solid transparent;
     border-image-source: url("imagenes/recuadro%20de%20caja.png");
     border-image-slice: 18 fill;
@@ -112,6 +112,26 @@ body {
     aspect-ratio: 1;
     border: 2px solid #ff0054;
     object-fit: cover;
+}
+
+.result-player__details {
+    min-width: 0;
+}
+
+.result-player__song {
+    margin: 0;
+    color: #ff0054;
+    font-family: "Bowlby One SC", Impact, sans-serif;
+    font-size: clamp(1.25rem, 3vw, 2rem);
+    font-weight: 400;
+    line-height: 1.05;
+}
+
+.result-player__artist {
+    margin: 4px 0 14px;
+    color: #fff;
+    font-size: 0.95rem;
+    line-height: 1.2;
 }
 
 .result-player__audio {
@@ -194,13 +214,23 @@ body {
     .result-player {
         grid-template-columns: minmax(0, 1fr);
         justify-items: center;
-        gap: 18px;
-        width: min(100%, 460px);
-        padding: 26px 24px;
+        gap: 14px;
+        width: min(100%, 400px);
+        min-height: 0;
+        padding: 20px;
     }
 
     .result-player__cover {
         width: clamp(110px, 35vw, 150px);
+    }
+
+    .result-player__details {
+        width: 100%;
+    }
+
+    .result-player__song,
+    .result-player__artist {
+        text-align: center;
     }
 
 }
