@@ -240,8 +240,10 @@ body {
 .paper__tag {
     align-self: center;
     margin-top: auto;
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--u) * 4);
     width: calc(var(--u) * 112);
     aspect-ratio: 135 / 41;
     padding: 0 0 calc(var(--u) * 2);
@@ -252,6 +254,12 @@ body {
     line-height: 1;
     white-space: nowrap;
     transform: rotate(-2deg);
+}
+
+.paper__tag-icon {
+    display: block;
+    width: calc(var(--u) * 18);
+    height: auto;
 }
 
 /* Lucas: pincelada rosa */
@@ -393,7 +401,7 @@ body {
     width: calc(var(--u) * 610);
     aspect-ratio: 817 / 137;
     margin: 0;
-    padding: 0 calc(var(--u) * 78) 0 calc(var(--u) * 36);
+    padding: 0 calc(var(--u) * 66) 0 calc(var(--u) * 36);
     background: url("imagenes/banner%20entrevista.png") center / 100% 100% no-repeat;
     color: #fff;
 }
@@ -439,11 +447,11 @@ body {
 
 .interviews__listen {
     display: inline-flex;
-    flex: 0 0 46%;
+    flex: 0 0 42%;
     align-items: center;
     justify-content: center;
-    min-height: calc(var(--u) * 66);
-    padding: calc(var(--u) * 10) calc(var(--u) * 32);
+    min-height: calc(var(--u) * 58);
+    padding: calc(var(--u) * 8) calc(var(--u) * 24);
     background: url("imagenes/nube%20amarrilla.png") center / 100% 100% no-repeat;
     color: #ed004c;
     font-family: "Poppins", Arial, sans-serif;
@@ -454,6 +462,13 @@ body {
     text-decoration: none;
     text-transform: uppercase;
     transition: transform 150ms ease, filter 150ms ease;
+}
+
+.interviews__listen-icon {
+    display: block;
+    width: calc(var(--u) * 35);
+    height: auto;
+    left: calc(var(--u) * -8);
 }
 
 .interviews__listen:hover,
@@ -1116,8 +1131,8 @@ body {
 
     .interviews__listen {
         flex: none;
-        width: min(100%, 300px);
-        min-height: 62px;
+        width: min(100%, 280px);
+        min-height: 56px;
         font-size: 0.9rem;
     }
 }
