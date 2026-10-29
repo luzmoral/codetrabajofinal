@@ -29,46 +29,32 @@
                 </p>
             </article>
 
-            <article class="paper paper--yellow">
+            <article class="paper paper--yellow" role="button" tabindex="0" aria-haspopup="dialog" aria-label="¿Emoción genuina?: ver más" data-perfil="perfil-emocion">
                 <h2>¿Emoción genuina?</h2>
-                <p>
-                    La cuestión es si una persona puede emocionarse igual con una cumbia
-                    hecha por IA que con una creada por un ser humano.
-                </p>
-                <p>
-                    Manuel Cullen sugiere que la emoción genuina suele estar ligada a la
-                    creación humana.
-                </p>
+                <svg class="paper__squiggle" viewBox="0 0 220 24" preserveAspectRatio="none" aria-hidden="true"><path d="M3 15 C25 4 40 22 62 12 S100 6 120 14 S170 20 190 9 S212 12 217 10" fill="none" stroke="#ff0054" stroke-width="5" stroke-linecap="round"/><path d="M30 21 C80 16 130 22 180 17" fill="none" stroke="#ff0054" stroke-width="2.2" stroke-linecap="round" opacity=".75"/></svg>
             </article>
 
             <article class="paper paper--lucas" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Lucas Murúa: ver más" data-perfil="perfil-lucas">
                 <h2 class="paper__name"><img class="paper__name-img paper__name-img--lucas" src="imagenes/lucas%20murua.png" alt="Lucas Murúa"></h2>
                 <p>
-                    Crear música con IA abre nuevas posibilidades y preguntas sobre el
-                    lugar de las personas.
+                    “La IA democratiza la creación, pero la sobreoferta hace que
+                    valoremos mucho más a quien graba de verdad.”
                 </p>
-                <span class="paper__tag">Una mirada</span>
+                <span class="paper__tag">Ver más</span>
             </article>
 
-            <article class="paper paper--pink">
+            <article class="paper paper--pink" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Paradoja: ver más" data-perfil="perfil-paradoja">
                 <h2>paradoja</h2>
-                <p>
-                    Según <strong>Los Andes</strong>, aunque la IA facilita crear música,
-                    cada vez hay más personas produciéndola y menos oyentes interesados
-                    en descubrirla.
-                </p>
-                <p>
-                    Las plataformas se llenan de canciones para el consumo rápido.
-                    Encontrar algo verdaderamente personal se vuelve más difícil.
-                </p>
+                <p>Según el diario <strong>Los Andes</strong>.</p>
+                <svg class="paper__arrow" viewBox="0 0 60 22" aria-hidden="true"><path d="M2 12 C18 8 38 14 56 10 M47 3 L57 10 L48 18" fill="none" stroke="#111" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </article>
 
             <article class="paper paper--arse" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Arse: ver más" data-perfil="perfil-arse">
                 <h2 class="paper__name"><img class="paper__name-img paper__name-img--arse" src="imagenes/arse.png" alt="Arse"></h2>
                 <p>
-                    ¿Una voz creada con IA también puede conmover?
+                    “La IA es una herramienta útil”
                 </p>
-                <span class="paper__tag">Escuchá y decidí</span>
+                <span class="paper__tag">Ver más</span>
             </article>
 
             <img class="collage__doodle collage__doodle--ribbon" src="imagenes/mo%C3%B1o.png" alt="" aria-hidden="true">
@@ -161,6 +147,58 @@
             </p>
         </div>
     </dialog>
+    <dialog class="profile profile--simple profile--emocion" id="perfil-emocion" aria-labelledby="perfil-emocion-titulo">
+        <div class="profile__paper">
+            <button class="profile__close" type="button" aria-label="Cerrar">✕</button>
+            <svg class="profile__star" viewBox="0 0 150 150" aria-hidden="true"><path d="M76 6 L96 56 L146 60 L106 92 L122 144 L76 114 L30 144 L46 92 L4 60 L56 56 Z" fill="none" stroke="#5bff00" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            <header class="profile__head">
+                <h2 id="perfil-emocion-titulo"><svg class="profile__name" viewBox="0 0 520 262" role="img" aria-label="¿Emoción genuina?">
+                        <defs><linearGradient id="grad-emocion" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff0054"/><stop offset=".5" stop-color="#ff7a1a"/><stop offset="1" stop-color="#ffe600"/></linearGradient></defs>
+                        <g font-family="Lobster, cursive" font-size="116" text-anchor="middle" stroke-linejoin="round" stroke-linecap="round">
+                            <text x="260" y="112" fill="#ff0054" stroke="#ff0054" stroke-width="28" transform="translate(0 4)"><tspan x="260" dy="0">¿Emoción</tspan><tspan x="260" dy="124">genuina?</tspan></text>
+                            <text x="260" y="112" fill="#111" stroke="#111" stroke-width="19"><tspan x="260" dy="0">¿Emoción</tspan><tspan x="260" dy="124">genuina?</tspan></text>
+                            <text x="260" y="112" fill="url(#grad-emocion)"><tspan x="260" dy="0">¿Emoción</tspan><tspan x="260" dy="124">genuina?</tspan></text>
+                        </g>
+                    </svg></h2>
+                <span class="profile__tag">Manuel Cullen</span>
+            </header>
+            <p class="profile__lead">
+                La cuestión es si una persona <mark>puede emocionarse igual</mark> con una cumbia hecha por IA que con una creada por un ser humano.
+            </p>
+            <svg class="profile__line" viewBox="0 0 560 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 9 C70 3 130 13 210 7 S350 3 430 9 S520 6 557 5" fill="none" stroke="#ff0054" stroke-width="4.5" stroke-linecap="round"/><path d="M40 12 C150 8 260 14 380 10" fill="none" stroke="#ff0054" stroke-width="2" stroke-linecap="round" opacity=".7"/></svg>
+            <p class="profile__closing profile__closing--center">
+                Manuel Cullen sugiere que la emoción genuina suele estar ligada a la
+                <strong class="profile__accent profile__accent--lg">creación humana.</strong>
+            </p>
+        </div>
+    </dialog>
+
+    <dialog class="profile profile--simple profile--paradoja" id="perfil-paradoja" aria-labelledby="perfil-paradoja-titulo">
+        <div class="profile__paper">
+            <button class="profile__close" type="button" aria-label="Cerrar">✕</button>
+            <svg class="profile__star" viewBox="0 0 150 150" aria-hidden="true"><path d="M76 6 L96 56 L146 60 L106 92 L122 144 L76 114 L30 144 L46 92 L4 60 L56 56 Z" fill="none" stroke="#5bff00" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            <header class="profile__head">
+                <h2 id="perfil-paradoja-titulo"><svg class="profile__name" viewBox="0 0 520 150" role="img" aria-label="Paradoja">
+                        <defs><linearGradient id="grad-paradoja" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff0054"/><stop offset=".5" stop-color="#ff7a1a"/><stop offset="1" stop-color="#ffe600"/></linearGradient></defs>
+                        <g font-family="Lobster, cursive" font-size="128" text-anchor="middle" stroke-linejoin="round" stroke-linecap="round">
+                            <text x="260" y="112" fill="#ff0054" stroke="#ff0054" stroke-width="28" transform="translate(0 4)">Paradoja</text>
+                            <text x="260" y="112" fill="#111" stroke="#111" stroke-width="19">Paradoja</text>
+                            <text x="260" y="112" fill="url(#grad-paradoja)">Paradoja</text>
+                        </g>
+                    </svg></h2>
+                <span class="profile__tag">Según el diario Los Andes</span>
+            </header>
+            <p class="profile__lead">
+                Según <mark>Los Andes</mark>, aunque la IA facilita crear música, cada vez hay más personas produciéndola y menos oyentes interesados en descubrirla.
+            </p>
+            <svg class="profile__line" viewBox="0 0 560 16" preserveAspectRatio="none" aria-hidden="true"><path d="M3 9 C70 3 130 13 210 7 S350 3 430 9 S520 6 557 5" fill="none" stroke="#ff0054" stroke-width="4.5" stroke-linecap="round"/><path d="M40 12 C150 8 260 14 380 10" fill="none" stroke="#ff0054" stroke-width="2" stroke-linecap="round" opacity=".7"/></svg>
+            <p class="profile__closing profile__closing--center">
+                Las plataformas se llenan de canciones para el consumo rápido.
+                <strong class="profile__accent">Encontrar algo verdaderamente personal se vuelve más difícil.</strong>
+            </p>
+        </div>
+    </dialog>
+
       <script src="musica-fondo.js" defer></script>
       <script src="serial.js" defer></script>
     <script>
