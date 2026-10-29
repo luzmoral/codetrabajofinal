@@ -19,6 +19,9 @@
 
         <div class="timeline" id="timeline" aria-label="Seis estados sobre música sintética">
             <img class="timeline__bar" src="imagenes/barra%20con%20lineas.png" alt="">
+            <span class="timeline__progress" id="timeline-progress" aria-hidden="true"></span>
+            <img class="timeline__speaker timeline__speaker--quiet" src="imagenes/parlante.png" alt="" aria-hidden="true">
+            <img class="timeline__speaker timeline__speaker--loud" src="imagenes/parlantevolumen.png" alt="" aria-hidden="true">
             <div class="timeline__stops" id="timeline-stops"></div>
             <button
                 class="timeline__thumb"
@@ -31,9 +34,7 @@
                 aria-valuenow="1"
                 aria-valuetext="Estado 1 de 6"
                 tabindex="0"
-            >
-                <img src="imagenes/botoncito%20que%20se%20desliza.png" alt="">
-            </button>
+            ></button>
         </div>
 
         <section class="story__card" aria-label="Información del estado seleccionado">
@@ -305,6 +306,7 @@
         const timeline = document.querySelector("#timeline");
         const stopsContainer = document.querySelector("#timeline-stops");
         const thumb = document.querySelector("#timeline-thumb");
+        const timelineProgress = document.querySelector("#timeline-progress");
         const states = document.querySelectorAll(".story__state");
         const originsState = document.querySelector(".story__state--origins");
         const originsButton = document.querySelector("#origins-play");
@@ -465,6 +467,7 @@
                 updateSongProgress();
             }
             thumb.style.setProperty("--position", `${statePositions[currentState]}%`);
+            timelineProgress.style.width = `${statePositions[currentState]}%`;
             thumb.setAttribute("aria-valuenow", String(currentState + 1));
             thumb.setAttribute("aria-valuetext", `Estado ${currentState + 1} de 6`);
 
