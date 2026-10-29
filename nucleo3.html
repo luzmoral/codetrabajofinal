@@ -348,7 +348,7 @@
         const voice = selection.get("voice")?.toLocaleUpperCase("es");
         const selectedSong = window.cumbiaSongs?.[instrument]?.[theme]?.[voice];
         if (selectedSong) {
-            songAudio.src = encodeURI(`imagenes/${selectedSong}`);
+            songAudio.src = encodeURI(`musica/${selectedSong}`);
             songAudio.load();
             songTitle.textContent = "Un par de fernet";
             songCover.src = "imagenes/cancionfernet.png";
