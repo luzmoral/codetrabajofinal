@@ -199,8 +199,8 @@
                 <div class="player__cover-column">
                     <img
                         class="player__cover"
-                        src="imagenes/cancionkode.png"
-                        alt="Portada de Desalójame el alma de Rastry y Kode Gonzalez"
+                        src="imagenes/cancionfernet.png"
+                        alt="Portada de Un par de fernet de Rastry x Kode Gonzalez"
                     >
                     <div class="player__controls" aria-label="Controles de reproducción">
                         <button class="player__skip" type="button" aria-label="Pista anterior">
@@ -213,10 +213,10 @@
                             <img src="imagenes/flecha%20paso%205.png" alt="">
                         </button>
                     </div>
-                    <audio id="song-audio" src="musica/Desalójameelalma.mp3" preload="metadata"></audio>
+                    <audio id="song-audio" src="musica/UnParDeFernet.mp3" preload="metadata"></audio>
                 </div>
                 <div class="player__track">
-                    <h3 class="player__song-title">Desalójame el alma</h3>
+                    <h3 class="player__song-title">Un par de fernet</h3>
                     <p class="player__artist">Rastry x Kode Gonzalez</p>
                     <div class="player__waveform" aria-hidden="true">
                         <span style="--bar-height: 13px"></span>
@@ -342,42 +342,21 @@
 
         selectPlayerControl(selectedPlayerControl);
 
-        const selection = new URLSearchParams(window.location.search);
-        const instrument = selection.get("instrument")?.toLocaleUpperCase("es");
-        const theme = selection.get("theme")?.toLocaleUpperCase("es");
-        const voice = selection.get("voice")?.toLocaleUpperCase("es");
-        const selectedSong = window.cumbiaSongs?.[instrument]?.[theme]?.[voice];
-        if (selectedSong) {
-            songAudio.src = encodeURI(`musica/${selectedSong}`);
-            songAudio.load();
-            songTitle.textContent = "Un par de fernet";
-            songCover.src = "imagenes/cancionfernet.png";
-            songCover.alt = "Portada de Un par de fernet de Rastry x Kode Gonzalez";
-        }
-
         // Canciones del estado 5: las flechas del reproductor pasan de una a otra
         const tracks = [
-            {
-                title: songTitle.textContent,
-                artist: songArtist.textContent,
-                cover: songCover.getAttribute("src"),
-                audio: songAudio.getAttribute("src")
-            },
             {
                 title: "Un par de fernet",
                 artist: "Rastry x Kode Gonzalez",
                 cover: "imagenes/cancionfernet.png",
                 audio: "musica/UnParDeFernet.mp3"
-            }
-        ];
-        if (selectedSong) {
-            tracks.splice(1, 0, {
+            },
+            {
                 title: "Desalójame el alma",
                 artist: "Rastry x Kode Gonzalez",
                 cover: "imagenes/cancionkode.png",
                 audio: "musica/Desalójameelalma.mp3"
-            });
-        }
+            }
+        ];
         let trackIndex = 0;
 
         function selectTrack(index) {
