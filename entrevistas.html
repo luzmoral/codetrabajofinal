@@ -31,6 +31,7 @@
             <article class="paper paper--yellow" role="button" tabindex="0" aria-haspopup="dialog" aria-label="¿Emoción genuina?: ver más" data-perfil="perfil-emocion">
                 <h2>¿Emoción genuina?</h2>
                 <svg class="paper__squiggle" viewBox="0 0 220 24" preserveAspectRatio="none" aria-hidden="true"><path d="M3 15 C25 4 40 22 62 12 S100 6 120 14 S170 20 190 9 S212 12 217 10" fill="none" stroke="#ff0054" stroke-width="5" stroke-linecap="round"/><path d="M30 21 C80 16 130 22 180 17" fill="none" stroke="#ff0054" stroke-width="2.2" stroke-linecap="round" opacity=".75"/></svg>
+                <span class="paper__tag">Ver más<img class="paper__tag-icon" src="imagenes/playok.png" alt=""></span>
             </article>
 
             <article class="paper paper--lucas" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Lucas Murúa: ver más" data-perfil="perfil-lucas">
@@ -46,6 +47,7 @@
                 <h2>paradoja</h2>
                 <p>Según el diario <strong>Los Andes</strong>.</p>
                 <svg class="paper__arrow" viewBox="0 0 60 22" aria-hidden="true"><path d="M2 12 C18 8 38 14 56 10 M47 3 L57 10 L48 18" fill="none" stroke="#111" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="paper__tag">Ver más<img class="paper__tag-icon" src="imagenes/playok.png" alt=""></span>
             </article>
 
             <article class="paper paper--arse" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Arse: ver más" data-perfil="perfil-arse">
@@ -201,12 +203,59 @@
         const botonEscuchar = document.querySelector(".interviews__listen");
         botonEscuchar.href += window.location.search;
 
-        document.addEventListener("boton-arduino", () => {
-            botonEscuchar.classList.add("is-active");
-            setTimeout(() => {
-                window.location.href = botonEscuchar.href;
-            }, 300);
-        });
+       // Potenciómetro: recorre las opciones. Botón play (ENTER): selecciona la resaltada
+const opciones = [
+    document.querySelector(".paper--green"),
+    document.querySelector(".paper--yellow"),
+    document.querySelector(".paper--lucas"),
+    document.querySelector(".paper--pink"),
+    document.querySelector(".paper--arse"),
+    botonEscuchar
+];
+let opcionActual = -1;
+
+function resaltar(indice) {
+    opciones.forEach((el, i) => {
+        // el botón del banner ya usa .is-active; los carteles usan .is-selected
+        el.classList.toggle(el === botonEscuchar ? "is-active" : "is-selected", i === indice);
+    });
+    opcionActual = indice;
+}
+
+const perfilAbierto = () => document.querySelector("dialog.profile[open]");
+
+document.addEventListener("potenciometro", (e) => {
+    if (perfilAbierto()) return; // con un perfil abierto el pote no hace nada
+    const valor = e.detail;
+    const ancho = 1024 / opciones.length;
+    const zona = Math.min(opciones.length - 1, Math.floor(valor / ancho));
+
+    if (opcionActual === -1) {
+        resaltar(zona);
+        return;
+    }
+    // Margen extra para que no parpadee entre dos opciones en el borde
+    const centro = (opcionActual + 0.5) * ancho;
+    if (Math.abs(valor - centro) > ancho / 2 + 20) resaltar(zona);
+});
+
+document.addEventListener("boton-arduino", () => {
+    const abierto = perfilAbierto();
+    if (abierto) {
+        abierto.close();
+        return;
+    }
+    if (opcionActual === -1) return; // todavía no giró el pote
+
+    const elegido = opciones[opcionActual];
+    if (elegido === botonEscuchar) {
+        setTimeout(() => {
+            window.location.href = botonEscuchar.href;
+        }, 300);
+    } else {
+        elegido.click(); // abre el perfil igual que un clic
+    }
+});
 
         // Al apretar los carteles blancos (Lucas y Arse) se abre su perfil completo
         document.querySelectorAll("[data-perfil]").forEach((cartel) => {
