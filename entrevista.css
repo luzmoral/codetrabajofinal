@@ -1125,3 +1125,245 @@ body {
         transition: none;
     }
 }
+
+/* ============================================================
+   Amarillo (¿Emoción genuina?) y rosa (Paradoja): solo título en el
+   cartel y, al tocarlos, se abre su modal igual que Lucas y Arse.
+   ============================================================ */
+.paper--yellow,
+.paper--pink {
+    cursor: pointer;
+}
+
+.paper--yellow { --glow-color: rgb(255 0 84 / 85%); }
+.paper--pink   { --glow-color: rgb(240 255 0 / 90%); }
+
+.paper--yellow {
+    justify-content: center;
+    align-items: center;
+    padding: calc(var(--u) * 30) calc(var(--u) * 36);
+    text-align: center;
+}
+
+.paper--yellow h2 {
+    margin-bottom: calc(var(--u) * 6);
+    font-size: calc(var(--u) * 38);
+    line-height: 1;
+}
+
+.paper__squiggle {
+    display: block;
+    width: calc(var(--u) * 200);
+    height: calc(var(--u) * 22);
+    transform: rotate(-2deg);
+}
+
+.paper--pink {
+    padding-top: calc(var(--u) * 138);
+}
+
+.paper--pink h2 {
+    font-size: calc(var(--u) * 34);
+}
+
+.paper--pink p {
+    font-size: calc(var(--u) * 15);
+    margin-bottom: 0;
+}
+
+.paper__arrow {
+    display: block;
+    align-self: flex-start;
+    margin: auto 0 0 calc(var(--u) * 62);
+    width: calc(var(--u) * 46);
+    height: auto;
+}
+
+/* Modales simples (sin foto): Emoción genuina y Paradoja */
+.profile--simple {
+    --fs: 19;
+}
+
+.profile--simple .profile__paper {
+    min-height: calc(var(--m) * 500);
+    padding-top: calc(var(--m) * 64);
+}
+
+.profile--emocion .profile__name {
+    width: calc(var(--m) * 330);
+}
+
+.profile--paradoja .profile__name {
+    width: calc(var(--m) * 360);
+}
+
+.profile--emocion .profile__tag {
+    right: 0;
+    bottom: calc(var(--m) * 40);
+}
+
+.profile--paradoja .profile__tag {
+    right: calc(var(--m) * -10);
+    bottom: calc(var(--m) * 4);
+}
+
+.profile__lead {
+    margin: calc(var(--m) * 20) auto 0;
+    max-width: calc(var(--m) * 560);
+    font-size: calc(var(--m) * var(--fs));
+    line-height: 1.45;
+    text-align: center;
+}
+
+.profile__closing--center {
+    max-width: calc(var(--m) * 560);
+    margin-inline: auto;
+    text-align: center;
+}
+
+@media (max-width: 700px) {
+    .profile--simple .profile__paper {
+        padding-top: 64px;
+    }
+
+    .profile--emocion .profile__name {
+        width: 240px;
+    }
+
+    .profile--paradoja .profile__name {
+        width: 260px;
+    }
+
+    .profile__lead,
+    .profile__closing--center {
+        max-width: 100%;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 700px) {
+    .paper--yellow {
+        padding: 52px 42px;
+    }
+
+    .paper--yellow h2,
+    .paper--pink h2 {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+    }
+
+    .paper--pink {
+        padding-top: 46px;
+    }
+
+    .paper__squiggle {
+        width: 150px;
+        height: 18px;
+    }
+
+    .paper__arrow {
+        margin-top: 18px;
+        width: 40px;
+    }
+}
+
+/* ============================================================
+   Cartel de Arse y de Lucas (compu): todo se coloca en % / u dentro
+   del cartel, así la cita y el "Ver más" no se mueven ni se salen
+   cuando cambia el tamaño de la ventana. En celular sigue el orden
+   vertical de siempre.
+   ============================================================ */
+@media (min-width: 701px) {
+    .paper--lucas,
+    .paper--arse {
+        padding: 0;
+    }
+
+    .paper--lucas .paper__name,
+    .paper--arse .paper__name {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0;
+    }
+
+    .paper--lucas .paper__name { top: calc(var(--u) * 26); }
+    .paper--arse .paper__name  { top: calc(var(--u) * 16); }
+
+    .paper--lucas .paper__name-img--lucas {
+        width: calc(var(--u) * 180);
+        margin: 0 auto;
+    }
+
+    .paper--arse .paper__name-img--arse {
+        width: calc(var(--u) * 158);
+        margin: 0 auto;
+    }
+
+    .paper--lucas p,
+    .paper--arse p {
+        position: absolute;
+        margin: 0;
+        max-width: none;
+        text-align: left;
+    }
+
+    .paper--lucas p {
+        left: 17%;
+        top: 56%;
+        width: 55%;
+        font-size: calc(var(--u) * 11.5);
+        line-height: 1.28;
+    }
+
+    .paper--arse p {
+        left: 18%;
+        top: 50%;
+        width: 50%;
+        font-size: calc(var(--u) * 17.5);
+        line-height: 1.3;
+    }
+
+    .paper--lucas .paper__tag,
+    .paper--arse .paper__tag {
+        position: absolute;
+        margin: 0;
+    }
+
+    .paper--lucas .paper__tag {
+        left: 25%;
+        top: 85%;
+        width: calc(var(--u) * 140);
+        aspect-ratio: 4.6 / 1;
+        font-size: calc(var(--u) * 12.5);
+    }
+
+    .paper--arse .paper__tag {
+        left: 52%;
+        top: 75%;
+        width: calc(var(--u) * 150);
+        aspect-ratio: 5.4 / 1;
+        color: #ff0054;
+        font-size: calc(var(--u) * 13.5);
+        background:
+            url("imagenes/nube_verde_entrevista.png") center / 100% 100% no-repeat,
+            url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M3 11 C8 3 30 5 50 4 S92 3 97 9 S93 17 80 16 S30 18 10 17 S0 15 3 11Z' fill='%235bff00'/%3E%3C/svg%3E") center / 94% 78% no-repeat;
+    }
+
+    .paper--arse::before {
+        left: calc(var(--u) * -14);
+        top: calc(var(--u) * 92);
+        width: calc(var(--u) * 46);
+        height: calc(var(--u) * 68);
+        transform: rotate(-4deg);
+    }
+
+    .paper--arse::after {
+        right: auto;
+        bottom: auto;
+        left: calc(var(--u) * 304);
+        top: calc(var(--u) * 164);
+        width: calc(var(--u) * 46);
+        height: calc(var(--u) * 68);
+        transform: rotate(60deg);
+    }
+}
