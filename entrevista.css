@@ -182,8 +182,8 @@ body {
 /* Gris: Lucas Murúa */
 .paper--lucas {
     z-index: 3;
-    left: calc(var(--u) * 851);
-    top: calc(var(--u) * 12);
+    left: calc(var(--u) * 10);
+    top: calc(var(--u) * 300);
     width: calc(var(--u) * 340);
     height: calc(var(--u) * 305);
     align-items: center;
@@ -1366,8 +1366,8 @@ body {
    ============================================================ */
 @media (min-width: 701px) {
     .paper--lucas {
-        left: calc(var(--u) * 821);
-        top: calc(var(--u) * -49);
+        left: calc(var(--u) * 800);
+        top: calc(var(--u) * -3);
         width: calc(var(--u) * 400);
         height: calc(var(--u) * 410);
         transform: rotate(-1deg);
