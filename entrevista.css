@@ -206,6 +206,8 @@ body {
     font-size: calc(var(--u) * 14);
     line-height: 1.25;
     color: #151515;
+    transform: rotate(8deg);
+    transform-origin: center;
 }
 
 /* Nombres ilustrados (imágenes con letra cursiva anaranjada) */
@@ -520,7 +522,7 @@ body {
 
 /* Estado "enfocado": a todo color + brillo + un poco más grande, por encima de los demás */
 
-.paper:is(:hover, :focus-visible) {
+.paper:not(.paper--green):is(:hover, :focus-visible) {
     z-index: 6;
     --glow-size: 16;
     --lift: 1.03;
@@ -529,7 +531,7 @@ body {
 }
 
 /* Estado "apagado": se oscurece pero conserva el color */
-.interviews:has(.paper:is(:hover, :focus-visible)) .paper:not(:is(:hover, :focus-visible)),
+.interviews:has(.paper:not(.paper--green):is(:hover, :focus-visible)) .paper:not(:is(:hover, :focus-visible)),
 .interviews:has(.interviews__listen.is-active) .paper {
     --glow-size: 0;
     --lift: 1;
@@ -544,7 +546,7 @@ body {
 }
 
 @media (hover: hover) {
-    .interviews:has(.paper:hover) .interviews__footer {
+    .interviews:has(.paper:not(.paper--green):hover) .interviews__footer {
         filter: brightness(0.42);
     }
 
