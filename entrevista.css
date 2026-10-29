@@ -1367,3 +1367,110 @@ body {
         transform: rotate(60deg);
     }
 }
+
+/* ============================================================
+   Cartel de Lucas como en la referencia: papel más alto que ancho,
+   nombre grande, cita debajo y "Ver más" rosa pegado abajo.
+   El rosa baja un poco para que el cartel de Lucas lo pise apenas.
+   ============================================================ */
+@media (min-width: 701px) {
+    .paper--lucas {
+        left: calc(var(--u) * 881);
+        top: calc(var(--u) * 8);
+        width: calc(var(--u) * 280);
+        height: calc(var(--u) * 360);
+    }
+
+    .paper--lucas::before {
+        left: 46%;
+        top: calc(var(--u) * -12);
+        width: calc(var(--u) * 70);
+        height: calc(var(--u) * 70);
+    }
+
+    .paper--lucas .paper__name {
+        top: calc(var(--u) * 34);
+    }
+
+    .paper--lucas .paper__name-img--lucas {
+        width: calc(var(--u) * 200);
+    }
+
+    .paper--lucas p {
+        left: 15%;
+        top: 55%;
+        width: 72%;
+        font-size: calc(var(--u) * 13.5);
+        line-height: 1.3;
+    }
+
+    .paper--lucas .paper__tag {
+        left: 27%;
+        top: 83.5%;
+        width: calc(var(--u) * 140);
+        height: calc(var(--u) * 29);
+        aspect-ratio: auto;
+        font-size: calc(var(--u) * 13);
+    }
+
+    .paper--pink {
+        top: calc(var(--u) * 335);
+        height: calc(var(--u) * 290);
+        padding-top: calc(var(--u) * 100);
+    }
+}
+
+/* ============================================================
+   Cartel de Lucas: el papel blanco (papel blanco.png) tiene margen
+   transparente alrededor, así que la caja se agranda para que el PAPEL
+   se vea más grande, y la cita/botón se ubican dentro del papel visible.
+   La cita se inclina junto con el papel (hacia el mismo lado).
+   ============================================================ */
+@media (min-width: 701px) {
+    .paper--lucas {
+        left: calc(var(--u) * 821);
+        top: calc(var(--u) * -49);
+        width: calc(var(--u) * 400);
+        height: calc(var(--u) * 410);
+        transform: rotate(-1deg);
+    }
+
+    .paper--lucas::before {
+        left: 50%;
+        top: calc(var(--u) * 47);
+        width: calc(var(--u) * 70);
+        height: calc(var(--u) * 70);
+    }
+
+    .paper--lucas .paper__name {
+        top: calc(var(--u) * 52);
+    }
+
+    .paper--lucas .paper__name-img--lucas {
+        width: calc(var(--u) * 215);
+    }
+
+    .paper--lucas p {
+        left: 27%;
+        top: 52%;
+        width: 54%;
+        font-size: calc(var(--u) * 12.5);
+        line-height: 1.3;
+        transform: rotate(8deg);
+        transform-origin: left top;
+    }
+
+    .paper--lucas .paper__tag {
+        left: 36%;
+        top: 79%;
+        width: calc(var(--u) * 150);
+        height: calc(var(--u) * 31);
+        font-size: calc(var(--u) * 13.5);
+    }
+
+    .paper--pink {
+        top: calc(var(--u) * 300);
+        height: calc(var(--u) * 325);
+        padding-top: calc(var(--u) * 118);
+    }
+}
