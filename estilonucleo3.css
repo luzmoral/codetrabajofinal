@@ -82,10 +82,28 @@ body {
 /* Línea de tiempo y controles para cambiar de paso */
 .timeline {
     position: relative;
-    width: min(100%, 1050px);
+    width: min(calc(100% - 88px), 1050px);
     margin: clamp(30px, 6vh, 58px) auto -7px;
     line-height: 0;
     touch-action: pan-y;
+}
+
+.timeline__speaker {
+    position: absolute;
+    top: 48%;
+    width: clamp(26px, 5vw, 60px);
+    height: auto;
+    transform: translateY(-50%);
+    pointer-events: none;
+    user-select: none;
+}
+
+.timeline__speaker--quiet {
+    left: -60px;
+}
+
+.timeline__speaker--loud {
+    right: -60px;
 }
 
 .timeline__bar {
@@ -96,8 +114,22 @@ body {
     pointer-events: none;
 }
 
+.timeline__progress {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 15px;
+    width: 40px ;
+    height: clamp(2px, 0.5vw, 5px);
+    border-radius: 999px;
+    background: #f1ff00;
+    pointer-events: none;
+    transform: translateY(-55%);
+}
+
 .timeline__stops {
     position: absolute;
+    z-index: 2;
     inset: 0;
 }
 
@@ -122,15 +154,16 @@ body {
 
 .timeline__thumb {
     position: absolute;
-    z-index: 1;
+    z-index: 3;
     top: 50%;
     left: var(--position, 5.11%);
-    display: block;
-    width: clamp(40px, 6.4vw, 64px);
-    aspect-ratio: 1.5;
+    width: clamp(10px, 1.8vw, 15px);
+    aspect-ratio: 1;
     padding: 0;
-    border: 0;
-    background: transparent;
+    border: 2px solid #ff0054;
+    border-radius: 50%;
+    background: #ff0054;
+    box-shadow: 0 0 6px rgb(255 0 84 / 65%);
     cursor: grab;
     line-height: 0;
     touch-action: none;
@@ -139,15 +172,6 @@ body {
 
 .timeline__thumb:active {
     cursor: grabbing;
-}
-
-.timeline__thumb img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-    pointer-events: none;
-    user-select: none;
 }
 
 /* Tarjeta principal e información de cada paso */
@@ -658,6 +682,10 @@ body {
 @media (prefers-reduced-motion: no-preference) {
     .timeline__thumb {
         transition: left 140ms ease-out;
+    }
+
+    .timeline__progress {
+        transition: width 140ms ease-out;
     }
 }
 
