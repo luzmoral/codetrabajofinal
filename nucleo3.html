@@ -415,32 +415,85 @@
         skipPrevious.addEventListener("click", () => changeTrack(-1));
         skipNext.addEventListener("click", () => changeTrack(1));
 
-        document.addEventListener("potenciometro", (event) => {
-            if (currentState !== 4) {
-                return;
+// Perilla = progreso de la línea de tiempo, con movimiento suavizado
+const POT_SUAVIDAD = 0.06;       // 0.02 = muy lento · 0.06 = lento · 0.15 = rápido · 1 = sin suavizado
+const POT_HISTERESIS = 1.5;      // % de margen para que no tiemble entre dos estados
+const POT_HISTERESIS_SUB = 0.6;  // lo mismo para los botones del reproductor
+const posMin = statePositions[0];
+const posMax = statePositions[statePositions.length - 1];
+const pasoEstados = statePositions[1] - statePositions[0];
+const subZona = pasoEstados / playerControls.length;
+
+let potObjetivo = null;  // dónde está la perilla (en %)
+let potActual = null;    // dónde está la bolita (en %), persigue al objetivo
+let potAnimando = false;
+
+// la suavización la hace el JS, así que se apaga la transición del CSS para que no se sume
+thumb.style.transition = "none";
+timelineProgress.style.transition = "none";
+
+function aplicarPotenciometro(pct) {
+    const estadoAntes = currentState;
+
+    // 1) Cambiar de sección cuando la bolita se aleja lo suficiente del estado actual
+    if (Math.abs(pct - statePositions[currentState]) > pasoEstados / 2 + POT_HISTERESIS) {
+        const masCercano = statePositions.reduce((mejor, pos, i) => {
+            return Math.abs(pos - pct) < Math.abs(statePositions[mejor] - pct) ? i : mejor;
+        }, 0);
+        selectState(masCercano);
+    }
+
+    // 2) La bolita y la barra siguen la posición suavizada
+    thumb.style.setProperty("--position", `${pct}%`);
+    timelineProgress.style.width = `${pct}%`;
+
+    // 3) En el reproductor, la perilla también elige anterior / play / siguiente
+    if (currentState === 4) {
+        const inicio = statePositions[4] - pasoEstados / 2;
+        const local = Math.max(0, Math.min(pasoEstados - 0.001, pct - inicio));
+        const sub = Math.floor(local / subZona);
+
+        if (estadoAntes !== 4) {
+            selectPlayerControl(sub);
+        } else if (sub !== selectedPlayerControl) {
+            const desde = inicio + selectedPlayerControl * subZona;
+            if (pct < desde - POT_HISTERESIS_SUB || pct > desde + subZona + POT_HISTERESIS_SUB) {
+                selectPlayerControl(sub);
             }
+        }
+    }
+}
 
-            const value = Number(event.detail);
-            if (!Number.isFinite(value)) {
-                return;
-            }
+function animarPotenciometro() {
+    const diferencia = potObjetivo - potActual;
+    if (Math.abs(diferencia) < 0.05) {
+        potActual = potObjetivo;
+        aplicarPotenciometro(potActual);
+        potAnimando = false;
+        return;
+    }
+    potActual += diferencia * POT_SUAVIDAD;
+    aplicarPotenciometro(potActual);
+    requestAnimationFrame(animarPotenciometro);
+}
 
-            const clampedValue = Math.max(0, Math.min(1023, value));
-            const zoneSize = 1024 / playerControls.length;
-            const margin = 25; // evita que el botón "tiemble" cuando la perilla queda entre dos zonas
-            const zoneStart = selectedPlayerControl * zoneSize;
-            const zoneEnd = zoneStart + zoneSize;
+document.addEventListener("potenciometro", (event) => {
+    const value = Number(event.detail);
+    if (!Number.isFinite(value)) {
+        return;
+    }
 
-            if (clampedValue >= zoneStart - margin && clampedValue <= zoneEnd + margin) {
-                return;
-            }
+    const clamped = Math.max(0, Math.min(1023, value));
+    potObjetivo = posMin + (clamped / 1023) * (posMax - posMin);
 
-            const selectedControl = Math.min(
-                playerControls.length - 1,
-                Math.floor(clampedValue / zoneSize)
-            );
-            selectPlayerControl(selectedControl);
-        });
+    if (potActual === null) {
+        potActual = potObjetivo; // primera lectura: sin animación
+    }
+    if (!potAnimando) {
+        potAnimando = true;
+        requestAnimationFrame(animarPotenciometro);
+    }
+});
 
         statePositions.forEach((position, index) => {
             const stop = document.createElement("button");
