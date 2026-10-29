@@ -163,6 +163,10 @@ body {
     cursor: pointer;
 }
 
+.result__hint [hidden] {
+    display: none !important;
+}
+
 .result__hint:focus-visible {
     outline: 3px solid #fff;
     outline-offset: 5px;
