@@ -658,6 +658,24 @@ body {
     pointer-events: none;
 }
 
+.profile--arse .profile__paper,
+.profile--lucas .profile__paper {
+    background-size: 140% 200%;
+    background-position: left center;
+}
+
+@media (min-width: 701px) {
+    .profile--arse .profile__paper,
+    .profile--lucas .profile__paper {
+        width: min(calc(var(--m) * 880), calc(100vw - 30px));
+    }
+}
+
+.profile--arse .profile__star,
+.profile--lucas .profile__star {
+    display: none;
+}
+
 .profile__close {
     position: absolute;
     z-index: 3;
