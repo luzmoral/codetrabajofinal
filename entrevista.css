@@ -1179,68 +1179,6 @@ body {
     height: auto;
 }
 
-/* Modales simples (sin foto): Emoción genuina y Paradoja */
-.profile--simple {
-    --fs: 19;
-}
-
-.profile--simple .profile__paper {
-    min-height: calc(var(--m) * 500);
-    padding-top: calc(var(--m) * 64);
-}
-
-.profile--emocion .profile__name {
-    width: calc(var(--m) * 330);
-}
-
-.profile--paradoja .profile__name {
-    width: calc(var(--m) * 360);
-}
-
-.profile--emocion .profile__tag {
-    right: 0;
-    bottom: calc(var(--m) * 40);
-}
-
-.profile--paradoja .profile__tag {
-    right: calc(var(--m) * -10);
-    bottom: calc(var(--m) * 4);
-}
-
-.profile__lead {
-    margin: calc(var(--m) * 20) auto 0;
-    max-width: calc(var(--m) * 560);
-    font-size: calc(var(--m) * var(--fs));
-    line-height: 1.45;
-    text-align: center;
-}
-
-.profile__closing--center {
-    max-width: calc(var(--m) * 560);
-    margin-inline: auto;
-    text-align: center;
-}
-
-@media (max-width: 700px) {
-    .profile--simple .profile__paper {
-        padding-top: 64px;
-    }
-
-    .profile--emocion .profile__name {
-        width: 240px;
-    }
-
-    .profile--paradoja .profile__name {
-        width: 260px;
-    }
-
-    .profile__lead,
-    .profile__closing--center {
-        max-width: 100%;
-        font-size: 16px;
-    }
-}
-
 @media (max-width: 700px) {
     .paper--yellow {
         padding: 52px 42px;
@@ -1365,5 +1303,365 @@ body {
         width: calc(var(--u) * 46);
         height: calc(var(--u) * 68);
         transform: rotate(60deg);
+    }
+}
+
+/* ============================================================
+   Cartel de Lucas como en la referencia: papel más alto que ancho,
+   nombre grande, cita debajo y "Ver más" rosa pegado abajo.
+   El rosa baja un poco para que el cartel de Lucas lo pise apenas.
+   ============================================================ */
+@media (min-width: 701px) {
+    .paper--lucas {
+        left: calc(var(--u) * 881);
+        top: calc(var(--u) * 8);
+        width: calc(var(--u) * 280);
+        height: calc(var(--u) * 360);
+    }
+
+    .paper--lucas::before {
+        left: 46%;
+        top: calc(var(--u) * -12);
+        width: calc(var(--u) * 70);
+        height: calc(var(--u) * 70);
+    }
+
+    .paper--lucas .paper__name {
+        top: calc(var(--u) * 34);
+    }
+
+    .paper--lucas .paper__name-img--lucas {
+        width: calc(var(--u) * 200);
+    }
+
+    .paper--lucas p {
+        left: 15%;
+        top: 55%;
+        width: 72%;
+        font-size: calc(var(--u) * 13.5);
+        line-height: 1.3;
+    }
+
+    .paper--lucas .paper__tag {
+        left: 27%;
+        top: 83.5%;
+        width: calc(var(--u) * 140);
+        height: calc(var(--u) * 29);
+        aspect-ratio: auto;
+        font-size: calc(var(--u) * 13);
+    }
+
+    .paper--pink {
+        top: calc(var(--u) * 335);
+        height: calc(var(--u) * 290);
+        padding-top: calc(var(--u) * 100);
+    }
+}
+
+/* ============================================================
+   Cartel de Lucas: el papel blanco (papel blanco.png) tiene margen
+   transparente alrededor, así que la caja se agranda para que el PAPEL
+   se vea más grande, y la cita/botón se ubican dentro del papel visible.
+   La cita se inclina junto con el papel (hacia el mismo lado).
+   ============================================================ */
+@media (min-width: 701px) {
+    .paper--lucas {
+        left: calc(var(--u) * 821);
+        top: calc(var(--u) * -49);
+        width: calc(var(--u) * 400);
+        height: calc(var(--u) * 410);
+        transform: rotate(-1deg);
+    }
+
+    .paper--lucas::before {
+        left: 50%;
+        top: calc(var(--u) * 47);
+        width: calc(var(--u) * 70);
+        height: calc(var(--u) * 70);
+    }
+
+    .paper--lucas .paper__name {
+        top: calc(var(--u) * 52);
+    }
+
+    .paper--lucas .paper__name-img--lucas {
+        width: calc(var(--u) * 215);
+    }
+
+    .paper--lucas p {
+        left: 27%;
+        top: 52%;
+        width: 54%;
+        font-size: calc(var(--u) * 12.5);
+        line-height: 1.3;
+        transform: rotate(8deg);
+        transform-origin: left top;
+    }
+
+    .paper--lucas .paper__tag {
+        left: 36%;
+        top: 79%;
+        width: calc(var(--u) * 150);
+        height: calc(var(--u) * 31);
+        font-size: calc(var(--u) * 13.5);
+    }
+
+    .paper--pink {
+        top: calc(var(--u) * 300);
+        height: calc(var(--u) * 325);
+        padding-top: calc(var(--u) * 118);
+    }
+}
+
+/* ============================================================
+   Modales amarillo (Manuel Cullen) y rosa (Los Andes).
+   Los papeles son imágenes (modal_amarillo.png / modal_rosa.png) con
+   cintas, estrella, flecha y micrófono ya dibujados, por eso no se
+   agrega ninguna estrella ni flecha por código.
+   Todo se ubica en % dentro del papel.
+   ============================================================ */
+.profile--emocion .profile__paper,
+.profile--paradoja .profile__paper {
+    min-height: 0;
+    padding: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.profile--emocion .profile__paper::before,
+.profile--emocion .profile__paper::after,
+.profile--paradoja .profile__paper::before,
+.profile--paradoja .profile__paper::after {
+    content: none;
+}
+
+.profile--emocion .profile__paper {
+    width: calc(var(--m) * 800);
+    height: calc(var(--m) * 598);
+    background-image: url("imagenes/modal_amarillo.png");
+}
+
+.profile--paradoja {
+    --m: min(calc((100vw - 24px) / 760), calc((100svh - 24px) / 620), 1.7px);
+}
+
+.profile--paradoja .profile__paper {
+    width: calc(var(--m) * 720);
+    height: calc(var(--m) * 582);
+    background-image: url("imagenes/modal_rosa.png");
+}
+
+/* Foto recortada + silueta rosa corrida */
+.profile--emocion .profile__cutout {
+    position: absolute;
+    left: 2.5%;
+    top: 11.6%;
+    width: 41.6%;
+    height: 82.3%;
+    margin: 0;
+}
+
+.profile--emocion .profile__cutout img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.profile--emocion .profile__cutout-pink {
+    transform: translate(3.2%, -0.6%) scale(1.02);
+    transform-origin: 50% 100%;
+}
+
+/* Títulos */
+.profile--emocion .profile__title,
+.profile--paradoja .profile__title {
+    position: absolute;
+    margin: 0;
+    font-family: "Bowlby One", "Bowlby One SC", Impact, sans-serif;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.profile--emocion .profile__title {
+    left: 44.2%;
+    top: 17.5%;
+    color: #ff0054;
+    font-size: calc(var(--m) * 57);
+    transform: rotate(-1.5deg);
+    transform-origin: left top;
+}
+
+.profile--paradoja .profile__title {
+    left: 17%;
+    top: 5.5%;
+    color: #f1ff00;
+    font-size: calc(var(--m) * 66);
+    white-space: nowrap;
+}
+
+/* Franja con el cargo */
+.profile--emocion .profile__role,
+.profile--paradoja .profile__role {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3em;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.profile--emocion .profile__role {
+    left: 45.1%;
+    top: 36.4%;
+    width: 40%;
+    height: 6.6%;
+    background: #16ed00;
+    color: #ff0054;
+    font-size: calc(var(--m) * 18.5);
+    font-style: italic;
+    font-weight: 600;
+    transform: rotate(-1deg);
+}
+
+.profile--paradoja .profile__role {
+    left: 17.1%;
+    top: 18.5%;
+    width: 64.7%;
+    height: 5.4%;
+    background: linear-gradient(90deg, #f1ff00, #ffb300);
+    color: #111;
+    font-size: calc(var(--m) * 18);
+}
+
+/* Textos */
+.profile--emocion .profile__copy,
+.profile--paradoja .profile__copy {
+    position: absolute;
+    margin: 0;
+    transform: rotate(-2.5deg);
+    transform-origin: left top;
+    white-space: nowrap;
+}
+
+.profile--emocion .profile__copy {
+    color: #111;
+    font-size: calc(var(--m) * 18.5);
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.profile--emocion .profile__copy--one {
+    left: 46.1%;
+    top: 46.4%;
+}
+
+.profile--emocion .profile__copy--two {
+    left: 47.1%;
+    top: 64.8%;
+}
+
+.profile--paradoja .profile__copy {
+    color: #f1ff00;
+    font-size: calc(var(--m) * 28);
+    font-weight: 400;
+    line-height: 1.22;
+    transform: rotate(-1.5deg);
+}
+
+.profile--paradoja .profile__copy--one {
+    left: 16.5%;
+    top: 28.5%;
+}
+
+.profile--paradoja .profile__copy--two {
+    left: 16%;
+    top: 54.5%;
+}
+
+.profile--paradoja .profile__copy strong {
+    font-weight: 700;
+}
+
+.profile__pink {
+    color: #ff0054;
+    font-weight: 800;
+}
+
+.profile__no {
+    color: #ff0054;
+    font-weight: 800;
+    text-decoration: underline;
+    text-decoration-color: #16ed00;
+    text-decoration-thickness: 0.12em;
+    text-underline-offset: 0.12em;
+}
+
+.profile__underline {
+    text-decoration: underline;
+    text-decoration-color: #ff0054;
+    text-decoration-thickness: 0.09em;
+    text-underline-offset: 0.18em;
+}
+
+/* Celular: se apila en orden */
+@media (max-width: 700px) {
+    .profile--emocion .profile__paper,
+    .profile--paradoja .profile__paper {
+        width: 100%;
+        height: auto;
+        padding: 56px 28px 60px;
+        background-size: 100% 100%;
+    }
+
+    .profile--emocion .profile__cutout,
+    .profile--emocion .profile__title,
+    .profile--emocion .profile__role,
+    .profile--emocion .profile__copy,
+    .profile--paradoja .profile__title,
+    .profile--paradoja .profile__role,
+    .profile--paradoja .profile__copy {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none;
+    }
+
+    .profile--emocion .profile__cutout {
+        position: relative;
+        width: 60%;
+        aspect-ratio: 415 / 620;
+        margin: 0 auto 16px;
+    }
+
+    .profile--emocion .profile__title,
+    .profile--paradoja .profile__title {
+        margin-bottom: 10px;
+        font-size: 36px;
+        white-space: normal;
+    }
+
+    .profile--emocion .profile__role,
+    .profile--paradoja .profile__role {
+        display: inline-flex;
+        padding: 4px 12px;
+        margin-bottom: 14px;
+        font-size: 14px;
+        white-space: normal;
+    }
+
+    .profile--emocion .profile__copy,
+    .profile--paradoja .profile__copy {
+        margin-bottom: 14px;
+        font-size: 16px;
+        white-space: normal;
+    }
+
+    .profile--emocion .profile__copy br,
+    .profile--paradoja .profile__copy br {
+        display: none;
     }
 }
