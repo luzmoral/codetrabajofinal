@@ -165,6 +165,7 @@ h2 {
 
 .artist-label {
     display: inline-block;
+    transform: translateY(5px);
     margin: 0 0 13px;
     padding: 6px 16px 8px;
     background-color: transparent;
