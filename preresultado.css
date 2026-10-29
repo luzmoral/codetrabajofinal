@@ -228,6 +228,7 @@ body {
 .result__footer {
     margin-top: 12px;
     text-align: center;
+    transform: translateY(-28px);
 }
 
 .result__hint {
@@ -235,11 +236,11 @@ body {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
     width: fit-content;
     margin: 0 auto;
     color: inherit;
-    font-size: clamp(0.85rem, 1.7vw, 1rem);
+    font-size: clamp(1rem, 2.4vw, 1.5rem);
     text-align: center;
     text-decoration: none;
     animation: hint-pulse 1.6s ease-in-out infinite;
@@ -252,8 +253,8 @@ body {
 
 .result__ok {
     display: block;
-    width: 42px;
-    height: 42px;
+    width: 58px;
+    height: 58px;
     object-fit: contain;
 }
 
@@ -273,6 +274,10 @@ body {
 @media (max-width: 600px) {
     .result {
         padding: 48px 20px 24px;
+    }
+
+    .result__footer {
+        transform: translateY(-20px);
     }
 
     .result__subtitle-break {
