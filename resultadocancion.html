@@ -38,10 +38,13 @@
         </section>
 
         <footer class="result__footer">
-            <a class="result__hint" href="final.html" aria-label="Continuar a la pantalla final">
-                <span>¡Presioná el botón</span>
-                <img src="imagenes/playok.png" alt="OK" class="result__ok">
-                <span>en tu teclado para continuar!</span>
+            <a class="result__hint" id="result-hint" href="final.html" aria-label="Reproducir tu canción">
+                <span id="result-hint-listen">¡Presioná el botón</span>
+                <img id="result-hint-listen-icon" src="imagenes/playok.png" alt="OK" class="result__ok">
+                <span id="result-hint-listen-end">para escuchar tu canción!</span>
+                <span id="result-hint-continue" hidden>¡Presioná el botón</span>
+                <img id="result-hint-continue-icon" src="imagenes/playok.png" alt="OK" class="result__ok" hidden>
+                <span id="result-hint-continue-end" hidden>en tu teclado para continuar!</span>
             </a>
 
         </footer>
@@ -101,13 +104,54 @@
             audio.load();
         }
 
+        const audio = document.querySelector("#result-audio");
+        const hint = document.querySelector("#result-hint");
+        const hintListen = document.querySelector("#result-hint-listen");
+        const hintListenEnd = document.querySelector("#result-hint-listen-end");
+        const hintListenIcon = document.querySelector("#result-hint-listen-icon");
+        const hintContinue = document.querySelector("#result-hint-continue");
+        const hintContinueIcon = document.querySelector("#result-hint-continue-icon");
+        const hintContinueEnd = document.querySelector("#result-hint-continue-end");
+        let canContinue = false;
+
+        function playSong() {
+            audio.play().catch((error) => {
+                console.error("No se pudo reproducir la canción:", error);
+            });
+        }
+
+        function continueToFinal() {
+            window.location.href = "final.html";
+        }
+
+        function updateHint() {
+            canContinue = true;
+            hintListen.hidden = true;
+            hintListenEnd.hidden = true;
+            hintListenIcon.hidden = true;
+            hintContinue.hidden = false;
+            hintContinueIcon.hidden = false;
+            hintContinueEnd.hidden = false;
+            hint.setAttribute("aria-label", "Continuar a la pantalla final");
+        }
+
+        window.setTimeout(updateHint, 7000);
+
+        hint.addEventListener("click", (event) => {
+            if (!canContinue) {
+                event.preventDefault();
+                playSong();
+            }
+        });
+
         document.addEventListener("keydown", (event) => {
             if (
                 event.key === "Enter" &&
                 !event.repeat &&
                 !(event.target instanceof Element && event.target.closest("a, audio, button, input, select, textarea"))
             ) {
-                window.location.href = "final.html";
+                if (canContinue) continueToFinal();
+                else playSong();
             }
         });
     </script>
