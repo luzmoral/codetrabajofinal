@@ -51,11 +51,6 @@
         </figure>
       </div>
 
-    <p class="hint" id="hintIA" hidden>
-  <span>¡Presioná el botón</span>
-  <img class="hint__ok" src="imagenes/playok.png" alt="OK">
-  <span>en tu teclado para continuar!</span>
-</p>
         </section>
 
         <!-- ===== PANTALLA 2: la cumbia está hecha de... (carrusel de Bootstrap) ===== -->
@@ -108,11 +103,11 @@
         </button>
       </div>
 
-      <p class="hint">
+      <button class="hint" id="hintCumbia" type="button" hidden>
         <span>¡Presioná el botón</span>
         <img class="hint__ok" src="imagenes/playok.png" alt="OK">
         <span>en tu teclado para continuar!</span>
-      </p>
+      </button>
     </section>
 
     <!-- ===== PANTALLA 3: cierre con el robot ===== -->
@@ -128,7 +123,10 @@
         ¿Puede una máquina generar el sonido <span class="resaltado">sin haber vivido la historia</span> que lo construyó?
       </p>
 
-      <a class="boton" href="index.html">VOLVER A INICIAR</a>
+      <a class="boton" href="index.html">
+        VOLVER A INICIAR
+        <img class="boton__icon" src="imagenes/playok.png" alt="">
+      </a>
     </section>
 
   </main>
@@ -161,12 +159,10 @@
     }
 
     const DURACION_PASO = 4000; // milisegundos que dura cada imagen (4 s)
-    const hintIA = document.querySelector("#hintIA");
     let timerPasos = null;
 
     function mostrarPaso(indice) {
       pasosIA.forEach((paso, i) => { paso.hidden = i !== indice; });
-      hintIA.hidden = indice !== pasosIA.length - 1;
     }
 
     function programarPaso() {
@@ -179,6 +175,11 @@
       }, DURACION_PASO);
     }
 
+    function mostrarCierre() {
+      clearTimeout(timerPasos);
+      mostrarPantalla(pantallas.length - 1);
+    }
+
     function avanzar() {
       if (pantallaActual === 0 && pasoIA < pasosIA.length - 1) {
         pasoIA += 1;
@@ -187,6 +188,10 @@
         return;
       }
       clearTimeout(timerPasos);
+      if (pantallaActual === 1) {
+        mostrarCierre();
+        return;
+      }
       if (pantallaActual < pantallas.length - 1) {
         mostrarPantalla(pantallaActual + 1);
         return;
@@ -198,16 +203,32 @@
       if (
         event.key !== "Enter" ||
         event.repeat ||
+        !event.isTrusted ||
         (event.target instanceof Element && event.target.closest("button, a, input, select, textarea"))
       ) {
         return;
       }
       avanzar();
     });
+    document.addEventListener("boton-arduino", () => {
+      if (pantallaActual === 1) mostrarCierre();
+      else avanzar();
+    });
 
     mostrarPantalla(0);
     mostrarPaso(0);
     programarPaso();
+
+    const hintCumbia = document.querySelector("#hintCumbia");
+    const slidesCumbia = [...carruselEl.querySelectorAll(".carousel-item")];
+    function actualizarHintCumbia(indice = slidesCumbia.findIndex((slide) => slide.classList.contains("active"))) {
+      hintCumbia.hidden = indice !== totalSlides - 1;
+    }
+    carruselEl.addEventListener("slid.bs.carousel", (event) => {
+      actualizarHintCumbia(event.to);
+    });
+    actualizarHintCumbia();
+    hintCumbia.addEventListener("click", mostrarCierre);
 
     // Perilla del Arduino: mueve el carrusel de la pantalla 2
     document.addEventListener("potenciometro", (event) => {
