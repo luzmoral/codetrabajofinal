@@ -196,6 +196,16 @@
         </div>
     </dialog>
 
+    <aside class="interviews-tutorial" id="interviews-tutorial" role="status" aria-live="polite">
+        <div class="interviews-tutorial__content">
+            <div class="interviews-tutorial__message">
+                <img class="interviews-tutorial__knob" src="imagenes/perilla-tutorial.svg" alt="">
+                <p>Girá la perilla para desplazarte entre los flyers.</p>
+            </div>
+            <img class="interviews-tutorial__character" src="imagenes/muneco%20tutorial%20nucleo1.png" alt="">
+        </div>
+    </aside>
+
       <script src="musica-fondo.js" defer></script>
       <script src="serial.js" defer></script>
     <script>
@@ -205,7 +215,6 @@
 
        // Potenciómetro: recorre las opciones. Botón play (ENTER): selecciona la resaltada
 const opciones = [
-    document.querySelector(".paper--green"),
     document.querySelector(".paper--yellow"),
     document.querySelector(".paper--lucas"),
     document.querySelector(".paper--pink"),
@@ -224,7 +233,16 @@ function resaltar(indice) {
 
 const perfilAbierto = () => document.querySelector("dialog.profile[open]");
 
+// Tutorial inicial: mientras se ve, la perilla y el botón no hacen nada
+const tutorial = document.querySelector("#interviews-tutorial");
+const tutorialTerminado = () => tutorial.classList.contains("is-dismissed");
+window.setTimeout(() => {
+    tutorial.classList.add("is-dismissed");
+    tutorial.setAttribute("aria-hidden", "true");
+}, 6000);
+
 document.addEventListener("potenciometro", (e) => {
+    if (!tutorialTerminado()) return;
     if (perfilAbierto()) return; // con un perfil abierto el pote no hace nada
     const valor = e.detail;
     const ancho = 1024 / opciones.length;
@@ -240,6 +258,7 @@ document.addEventListener("potenciometro", (e) => {
 });
 
 document.addEventListener("boton-arduino", () => {
+    if (!tutorialTerminado()) return;
     const abierto = perfilAbierto();
     if (abierto) {
         abierto.close();
