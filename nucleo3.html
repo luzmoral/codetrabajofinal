@@ -267,8 +267,12 @@
                         <path d="M3 2 C 5 18, 14 26, 28 24 C 38 22, 38 10, 30 12 C 22 14, 28 30, 62 30" fill="none" stroke="#f1ff00" stroke-width="2" stroke-linecap="round"/>
                         <path d="M56 24 L64 30 L56 36" fill="none" stroke="#f1ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>¡Seleccioná con</span>
-                    <img class="player__hint-button" src="imagenes/perilla.png" alt="perilla verde">
+                    <span>¡Presioná</span>
+                    <svg class="player__hint-button" viewBox="0 0 32 32" role="img" aria-label="botón de volver atrás">
+                        <rect width="32" height="32" rx="3" fill="#d4e600"/>
+                        <rect x="9" y="8" width="3.2" height="16" fill="#ff0054"/>
+                        <path d="M23 8v16L13.5 16z" fill="#ff0054"/>
+                    </svg>
                     <span>y escuchá otro ejemplo!</span>
                 </p>
             </article>
@@ -298,11 +302,17 @@
                 </p>
             </article>
         </section>
+
+        <p class="story__perilla-hint" id="perilla-hint">
+            <img src="imagenes/perilla-tutorial.svg" alt="">
+            <span>Girá la perilla para avanzar</span>
+        </p>
     </main>
    <script src="canciones.js"></script>
      <script src="serial.js" defer></script>
     <script>
         const statePositions = [5.11, 22.93, 40.65, 58.38, 76.10, 93.83];
+        const perillaHint = document.querySelector("#perilla-hint");
         const timeline = document.querySelector("#timeline");
         const stopsContainer = document.querySelector("#timeline-stops");
         const thumb = document.querySelector("#timeline-thumb");
@@ -500,6 +510,7 @@ document.addEventListener("potenciometro", (event) => {
             }
             thumb.style.setProperty("--position", `${statePositions[currentState]}%`);
             timelineProgress.style.width = `${statePositions[currentState]}%`;
+            perillaHint.hidden = currentState === 4 || currentState === 5;
             thumb.setAttribute("aria-valuenow", String(currentState + 1));
             thumb.setAttribute("aria-valuetext", `Estado ${currentState + 1} de 6`);
 
