@@ -452,7 +452,7 @@ body {
     justify-content: center;
     min-height: calc(var(--u) * 58);
     padding: calc(var(--u) * 8) calc(var(--u) * 24);
-    background: url("imagenes/nube%20amarrilla.png") center / 100% 100% no-repeat;
+    background: url("imagenes/nube%20verde%20entrevista.png") center / 100% 100% no-repeat;
     color: #ed004c;
     font-family: "Poppins", Arial, sans-serif;
     font-size: calc(var(--u) * 14);
@@ -473,14 +473,14 @@ body {
 
 .interviews__listen:hover,
 .interviews__listen:focus-visible {
-    background-image: url("imagenes/nube%20rosa.png");
+    background-image: url("imagenes/nube%20rosa%20entrevista.png");
     color: #fff200;
     filter: brightness(1.08);
     transform: scale(1.04);
 }
 
 .interviews__listen:active {
-    background-image: url("imagenes/nube%20rosa.png");
+    background-image: url("imagenes/nube%20rosa%20entrevista.png");
 }
 
 .interviews__listen:focus-visible,
@@ -555,7 +555,7 @@ body {
 }
 
 .interviews__listen.is-active {
-    background-image: url("imagenes/nube%20rosa.png");
+    background-image: url("imagenes/nube%20rosa%20entrevista.png");
     color: #fff200;
     filter: brightness(1.08);
     transform: scale(1.04);
