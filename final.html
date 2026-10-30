@@ -49,6 +49,11 @@
           <img src="imagenes/ia-canciones.png" alt="Crear canciones para bailar">
           <span class="slot__texto">Acá va la imagen 3<br>imagenes/ia-canciones.png</span>
         </figure>
+        <button class="hint hint--ia" id="hintIA" type="button">
+          <span>¡Presioná el botón</span>
+          <img class="hint__ok" src="imagenes/playok.png" alt="OK">
+          <span>para continuar!</span>
+        </button>
       </div>
 
         </section>
@@ -153,8 +158,12 @@
         pantalla.hidden = i !== indice;
       });
       if (carrusel) {
-        if (indice === 1) carrusel.cycle();
-        else carrusel.pause();
+        if (indice === 1) {
+          actualizarProgresoCumbia();
+          carrusel.cycle();
+        } else {
+          carrusel.pause();
+        }
       }
     }
 
@@ -224,11 +233,29 @@
     function actualizarHintCumbia(indice = slidesCumbia.findIndex((slide) => slide.classList.contains("active"))) {
       hintCumbia.hidden = indice !== totalSlides - 1;
     }
+    function actualizarProgresoCumbia(
+      indice = slidesCumbia.findIndex((slide) => slide.classList.contains("active")),
+      iniciar = true
+    ) {
+      const indicadores = [...carruselEl.querySelectorAll(".carousel-indicators [data-bs-slide-to]")];
+      indicadores.forEach((indicador, i) => {
+        indicador.classList.toggle("is-complete", i < indice);
+        indicador.classList.remove("is-progressing");
+      });
+      if (iniciar && indicadores[indice]) {
+        requestAnimationFrame(() => indicadores[indice].classList.add("is-progressing"));
+      }
+    }
+    carruselEl.addEventListener("slide.bs.carousel", (event) => {
+      actualizarProgresoCumbia(event.to, false);
+    });
     carruselEl.addEventListener("slid.bs.carousel", (event) => {
       actualizarHintCumbia(event.to);
+      actualizarProgresoCumbia(event.to);
     });
     actualizarHintCumbia();
     hintCumbia.addEventListener("click", mostrarCierre);
+    document.querySelector("#hintIA").addEventListener("click", avanzar);
 
     // Perilla del Arduino: mueve el carrusel de la pantalla 2
     document.addEventListener("potenciometro", (event) => {
