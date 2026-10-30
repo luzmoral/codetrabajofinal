@@ -290,11 +290,12 @@ h2 {
     bottom: 31px;
     left: 0;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 12px;
     padding: 0 16px;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     text-align: center;
     animation: hint-pulse 2s ease-in-out infinite;
 }
@@ -312,8 +313,8 @@ h2 {
 
 .key {
     display: inline-grid;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     place-items: center;
     border: 3px solid transparent;
     background: transparent;
@@ -436,7 +437,12 @@ h2 {
     .start-hint {
         bottom: 20px;
         gap: 8px;
-        font-size: 0.96rem;
+        font-size: 1.15rem;
+    }
+
+    .key {
+        width: 44px;
+        height: 44px;
     }
 }
 
