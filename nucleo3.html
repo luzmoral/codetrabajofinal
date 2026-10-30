@@ -510,7 +510,7 @@ document.addEventListener("potenciometro", (event) => {
             }
             thumb.style.setProperty("--position", `${statePositions[currentState]}%`);
             timelineProgress.style.width = `${statePositions[currentState]}%`;
-            perillaHint.hidden = currentState === 4 || currentState === 5;
+            perillaHint.hidden = false;
             thumb.setAttribute("aria-valuenow", String(currentState + 1));
             thumb.setAttribute("aria-valuetext", `Estado ${currentState + 1} de 6`);
 
