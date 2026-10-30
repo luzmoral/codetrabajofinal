@@ -156,7 +156,7 @@ body {
     gap: 10px;
     margin: 0;
     font-family: "Poppins", Arial, sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
     font-weight: 400;
     text-align: center;
     animation: hint-pulse 1.6s ease-in-out infinite;
@@ -164,8 +164,8 @@ body {
 
 .tutorial__hint kbd {
     display: inline-grid;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     place-items: center;
     border: 3px solid transparent;
     background: transparent;
@@ -231,11 +231,11 @@ body {
     .tutorial__hint {
         flex-wrap: wrap;
         gap: 7px;
-        font-size: 0.97rem;
+        font-size: 1.15rem;
     }
 
     .tutorial__hint kbd {
-        width: 36px;
-        height: 36px;
+        width: 44px;
+        height: 44px;
     }
 }
