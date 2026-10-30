@@ -12,6 +12,15 @@
 </head>
 <body>
     <main class="creator" inert aria-hidden="true">
+        <button class="creator__back" id="back-button" type="button">
+            ¡Presioná
+            <svg class="creator__back-icon" viewBox="0 0 32 32" role="img" aria-label="botón de volver atrás">
+                <rect width="32" height="32" rx="3" fill="#f1ff00"/>
+                <rect x="9" y="8" width="3.2" height="16" fill="#ff0054"/>
+                <path d="M23 8v16L13.5 16z" fill="#ff0054"/>
+            </svg>
+            para volver atrás!
+        </button>
         <img class="creator__star creator__star--yellow" src="imagenes/estrellararaama.png" alt="" aria-hidden="true">
         <img class="creator__star creator__star--green" src="imagenes/estrellararaver.png" alt="" aria-hidden="true">
         <h1 class="creator__title">
@@ -39,10 +48,10 @@
     </main>
     <aside class="creator-tutorial" id="creator-tutorial" role="status" aria-live="polite">
         <div class="creator-tutorial__content">
-            <p class="creator-tutorial__message">
-                <img class="creator-tutorial__knob" src="imagenes/perilla.png" alt="">
-                ¡<strong>Girá la perilla</strong> para escuchar las opciones!
-            </p>
+            <div class="creator-tutorial__message">
+                <img class="creator-tutorial__knob" src="imagenes/perilla-tutorial.svg" alt="">
+                <p>Girá la perilla para escuchar las opciones.</p>
+            </div>
             <img
                 class="creator-tutorial__character"
                 src="imagenes/muneco%20tutorial%20nucleo1.png"
@@ -170,6 +179,21 @@
                 options.append(button);
             });
         }
+        // ----- Volver atrás -----
+        function irAtras() {
+            if (!tutorial.classList.contains("is-dismissed")) return;
+            instrumentAudio.pause();
+            instrumentAudio.currentTime = 0;
+            if (currentStep > 0) {
+                currentStep -= 1;
+                showStep();
+            } else {
+                window.location.href = "nucleo1.html";
+            }
+        }
+        document.querySelector("#back-button").addEventListener("click", irAtras);
+        document.addEventListener("boton-atras-arduino", irAtras);
+
            // ----- Potenciómetro y botón del Arduino -----
         let potIndex = 0;
 
