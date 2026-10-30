@@ -80,7 +80,7 @@
             choiceDetails.voice[voice]
         ].filter(Boolean);
         const choicesContainer = document.querySelector("#result-choices");
-        choices.forEach((choice) => {
+        choices.forEach((choice, index) => {
             const item = document.createElement("div");
             item.className = "result__choice";
             item.setAttribute("role", "listitem");
@@ -96,6 +96,15 @@
 
             item.append(icon, name);
             choicesContainer.append(item);
+
+            if (index < choices.length - 1) {
+                const plus = document.createElement("img");
+                plus.className = "result__choice-plus";
+                plus.src = "imagenes/mas.png";
+                plus.alt = "";
+                plus.setAttribute("aria-hidden", "true");
+                choicesContainer.append(plus);
+            }
         });
 
         if (selectedSong) {
