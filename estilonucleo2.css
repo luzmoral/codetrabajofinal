@@ -30,14 +30,14 @@ body {
     min-height: 100vh;
     min-height: 100svh;
     margin: 0 auto;
-    padding: clamp(52px, 7vh, 64px) clamp(20px, 5vw, 60px) 72px;
+    padding: clamp(68px, 9vh, 80px) clamp(20px, 5vw, 60px) 72px;
 }
 
 /* Aviso superior para volver atrás */
 .creator__back {
     position: absolute;
-    top: 14px;
-    left: clamp(8px, 1.2vw, 14px);
+    top: 25px;
+    left: -150px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -46,7 +46,7 @@ body {
     background: transparent;
     color: #fff;
     font-family: inherit;
-    font-size: clamp(0.95rem, 2vw, 1.3rem);
+    font-size: clamp(1.05rem, 2.2vw, 1.4rem);
     font-style: italic;
     line-height: 1.2;
     cursor: pointer;
@@ -247,7 +247,7 @@ body {
     gap: 6px;
     margin: 0;
     color: #fff;
-    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-size: clamp(1.15rem, 2.4vw, 1.5rem);
     font-style: italic;
     line-height: 1.4;
     text-align: center;
@@ -255,8 +255,8 @@ body {
 }
 
 .creator__hint img {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
     vertical-align: middle;
 }
@@ -412,7 +412,7 @@ body {
 /* Adaptación para pantallas pequeñas */
 @media (max-width: 620px) {
     .creator {
-        padding: 38px 20px 72px;
+        padding: 50px 20px 72px;
     }
 
     .creator__step {
