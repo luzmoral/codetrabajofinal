@@ -56,6 +56,12 @@ body {
   animation: text-appear 0.5s ease-out;
 }
 
+.pantalla--ia .texto,
+.pantalla--ia .paso {
+  position: relative;
+  top: 16px;
+}
+
 /* ---------- Espacio para las imágenes que subís vos ---------- */
 .slot {
   position: relative;
@@ -94,16 +100,19 @@ body {
   background: transparent;
   color: inherit;
   font: inherit;
-  font-size: clamp(0.85rem, 1.7vw, 1rem);
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
   text-align: center;
   cursor: pointer;
   animation: hint-pulse 1.6s ease-in-out infinite;
 }
 .hint__ok {
   display: block;
-  width: 42px;
-  height: 42px;
+  width: 56px;
+  height: 56px;
   object-fit: contain;
+}
+.hint--ia {
+  margin-top: 0;
 }
 
 /* ---------- Carrusel de Bootstrap (pantalla 2) ---------- */
@@ -116,7 +125,42 @@ body {
 .carrusel .slot { width: 100%; }
 .carrusel .carousel-indicators {
   position: static;
+  gap: 8px;
   margin: 14px 0 0;
+}
+.carrusel .carousel-indicators [data-bs-target] {
+  position: relative;
+  flex: 1 1 0;
+  width: auto;
+  height: 8px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  background-color: rgb(255 255 255 / 30%);
+  background-image: none;
+  opacity: 1;
+  transition: none;
+}
+.carrusel .carousel-indicators [data-bs-target]::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  content: "";
+  border-radius: inherit;
+  background: #f1ff00;
+}
+.carrusel .carousel-indicators [data-bs-target].is-complete::after {
+  width: 100%;
+}
+.carrusel .carousel-indicators [data-bs-target].is-progressing::after {
+  animation: carousel-progress 4s linear forwards;
+}
+@keyframes carousel-progress {
+  to { width: 100%; }
 }
 .carrusel .carousel-control-prev,
 .carrusel .carousel-control-next { width: 12%; }
@@ -125,7 +169,7 @@ body {
 .pantalla--cierre { text-align: left; }
 .pantalla--cierre .texto--cierre {
   width: 100%;
-  font-size: clamp(1.3rem, 3.2vw, 2rem);
+  font-size: clamp(1.5rem, 3.7vw, 2.4rem);
   font-weight: 700;
   line-height: 1.2;
 }
@@ -297,6 +341,10 @@ body {
   .paso,
   .hint {
     animation: none;
+  }
+  .carrusel .carousel-indicators [data-bs-target].is-progressing::after {
+    animation: none;
+    width: 100%;
   }
   .robot,
   .pantalla--cierre .creator__title,
