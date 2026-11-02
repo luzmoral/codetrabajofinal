@@ -29,7 +29,7 @@ body {
     min-height: 100vh;
     min-height: 100svh;
     margin: 0 auto;
-    padding: clamp(24px, 4.2vh, 42px) clamp(20px, 5.5vw, 72px) 24px;
+    padding: clamp(72px, 9vh, 92px) clamp(20px, 5.5vw, 72px) 24px;
 }
 
 .process__header {
@@ -488,7 +488,7 @@ body {
     }
 
     .process {
-        padding: 30px 18px 20px;
+        padding: 72px 18px 20px;
     }
 
     .process__header {
