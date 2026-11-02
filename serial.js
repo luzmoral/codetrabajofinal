@@ -4,53 +4,89 @@
   window.__arduinoSerialCargado = true;
 
   let conectado = false;
+  let ultimoValorPot = null;
+  let valorPotSuavizado = null;
+  const ENTER_COOLDOWN_MS = 1000;
+  const ENTER_TIMESTAMP_KEY = "arduino-enter-last-at";
 
   function enviarTecla(key) {
     document.dispatchEvent(new KeyboardEvent("keydown", { key }));
   }
-function procesar(mensaje) {
 
-  // BOTON 9: AVANZAR
-  if (mensaje === "ENTER") {
-    enviarTecla("Enter");
+  function puedeProcesarEnter() {
+    const ahora = Date.now();
+    const ultimoEnter = Number(sessionStorage.getItem(ENTER_TIMESTAMP_KEY));
 
-    document.dispatchEvent(
-      new CustomEvent("boton-arduino")
-    );
+    if (Number.isFinite(ultimoEnter) && ahora - ultimoEnter < ENTER_COOLDOWN_MS) {
+      return false;
+    }
+
+    sessionStorage.setItem(ENTER_TIMESTAMP_KEY, String(ahora));
+    return true;
   }
 
-  // BOTON 8: PAUSAR O REANUDAR MUSICA
-  else if (mensaje === "PAUSA") {
-    document.dispatchEvent(
-      new CustomEvent("pausa-arduino")
-    );
-  }
+  function procesar(mensaje) {
+    // BOTON 9: AVANZAR
+    if (mensaje === "ENTER") {
+      if (!puedeProcesarEnter()) return;
 
-  // BOTON 10: VOLVER ATRAS
-  else if (mensaje === "ATRAS") {
-    document.dispatchEvent(
-      new CustomEvent("boton-atras-arduino")
-    );
-  }
+      enviarTecla("Enter");
 
-  // CAMINANTES: NUMEROS DEL 1 AL 6
-  else if (/^[1-6]$/.test(mensaje)) {
-    enviarTecla(mensaje);
-  }
-
-  // POTENCIOMETRO
-  else if (mensaje.startsWith("POT:")) {
-    const valor = Number(mensaje.slice(4));
-
-    if (!Number.isNaN(valor)) {
       document.dispatchEvent(
-        new CustomEvent("potenciometro", {
-          detail: valor
-        })
+        new CustomEvent("boton-arduino")
       );
     }
+
+    // BOTON 8: PAUSAR O REANUDAR MUSICA
+    else if (mensaje === "PAUSA") {
+      document.dispatchEvent(
+        new CustomEvent("pausa-arduino")
+      );
+    }
+
+    // BOTON 10: VOLVER ATRAS
+    else if (mensaje === "ATRAS") {
+      document.dispatchEvent(
+        new CustomEvent("boton-atras-arduino")
+      );
+    }
+
+    // CAMINANTES: NUMEROS DEL 1 AL 6
+    else if (/^[1-6]$/.test(mensaje)) {
+      enviarTecla(mensaje);
+    }
+
+    // POTENCIOMETRO
+    else if (mensaje.startsWith("POT:")) {
+      const valor = Number(mensaje.slice(4));
+
+      if (!Number.isNaN(valor) && valor >= 0 && valor <= 1023) {
+        // Suaviza los movimientos de la perilla
+        if (valorPotSuavizado === null) {
+          valorPotSuavizado = valor;
+        } else {
+          valorPotSuavizado =
+            valorPotSuavizado * 0.8 + valor * 0.2;
+        }
+
+        // Evita enviar cambios demasiado pequeños
+        const valorRedondeado = Math.round(valorPotSuavizado / 25) * 25;
+
+        if (
+          ultimoValorPot === null ||
+          Math.abs(valorRedondeado - ultimoValorPot) >= 25
+        ) {
+          ultimoValorPot = valorRedondeado;
+
+          document.dispatchEvent(
+            new CustomEvent("potenciometro", {
+              detail: valorRedondeado
+            })
+          );
+        }
+      }
+    }
   }
-}
 
   const esperar = (ms) => new Promise((r) => setTimeout(r, ms));
 
