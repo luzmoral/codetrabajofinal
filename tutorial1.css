@@ -31,7 +31,7 @@ body {
     min-height: 100vh;
     min-height: 100svh;
     margin: 0 auto;
-    padding: clamp(36px, 6.5vh, 64px) clamp(24px, 7.5vw, 80px) 30px;
+    padding: clamp(76px, 9vh, 96px) clamp(24px, 7.5vw, 80px) 30px;
     overflow: hidden;
     isolation: isolate;
 }
@@ -198,7 +198,7 @@ body {
     .tutorial {
         min-height: 100vh;
         min-height: 100svh;
-        padding: 42px 22px 22px;
+        padding: 76px 22px 22px;
     }
 
     .tutorial__title {
