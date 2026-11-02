@@ -623,9 +623,9 @@ document.addEventListener("potenciometro", (event) => {
         }
 
         // serial.js llama a esta función cuando se aprieta Enter en el estado 5:
-        // confirma el botón que está seleccionado con la perilla (anterior, play/pausa o siguiente)
+        // en el reproductor, Enter reproduce o pausa la canción.
         function toggleSongPlayback() {
-            playerControls[selectedPlayerControl].click();
+            playerButton.click();
         }
 
         playerButton.addEventListener("click", togglePlayPause);
@@ -660,9 +660,20 @@ document.addEventListener("potenciometro", (event) => {
             if (activeExample) {
                 activeExample.play();
             } else if (currentState === 4) {
-                playerControls[selectedPlayerControl].click();
+                playerButton.click();
             } else if (currentState === 5) {
                 conclusionButton.click();
+            }
+        });
+        document.addEventListener("boton-atras-arduino", () => {
+            if (currentState === 4) {
+                if (selectedPlayerControl === 0) {
+                    skipPrevious.click();
+                } else if (selectedPlayerControl === 2) {
+                    skipNext.click();
+                }
+            } else if (currentState > 0) {
+                selectState(currentState - 1);
             }
         });
         document.addEventListener("pausa-arduino", () => {
