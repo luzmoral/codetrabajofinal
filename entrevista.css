@@ -374,7 +374,7 @@ body {
 
 .collage__doodle--ribbon {
     left: calc(var(--u) * 112);
-    top: calc(var(--u) * 100);
+    top: calc(var(--u) * 134);
     width: calc(var(--u) * 44);
 }
 
