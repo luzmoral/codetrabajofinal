@@ -71,7 +71,7 @@
         <div class="tutorial-overlay__content">
             <img
                 class="tutorial-overlay__character"
-                src="imagenes/muneco%20tutorial%20nucleo1.png"
+                src="imagenes/bichito%20wachin.png"
                 alt=""
             >
             <div class="tutorial-overlay__message">
@@ -214,6 +214,7 @@
             currentStep = index;
             const step = steps[index];
             title.textContent = step.title;
+            title.classList.toggle("is-modification", index === 4);
             description.replaceChildren();
             step.description.forEach((part) => {
                 if (!part.tone) {
