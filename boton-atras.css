@@ -1,0 +1,27 @@
+.screen-back-button {
+    position: fixed;
+    z-index: 100;
+    top: 20px;
+    left: clamp(16px, 3vw, 40px);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    font: italic 600 clamp(0.95rem, 2vw, 1.25rem) "Poppins", Arial, sans-serif;
+    line-height: 1.2;
+    cursor: pointer;
+}
+
+.screen-back-button svg {
+    flex: none;
+    width: clamp(26px, 3.4vw, 36px);
+    height: clamp(26px, 3.4vw, 36px);
+}
+
+.screen-back-button:focus-visible {
+    outline: 2px solid #f1ff00;
+    outline-offset: 4px;
+}
