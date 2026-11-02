@@ -103,6 +103,9 @@
         const creator = document.querySelector(".creator");
         const instrumentAudio = new Audio();
         let currentStep = 0;
+        let potIndex = 0;
+        let valorPotInicio = null;
+        const margenPot = 35;
 
         function playOptionSound(option) {
             instrumentAudio.pause();
@@ -127,6 +130,8 @@
 
         function showStep() {
             const step = steps[currentStep];
+            potIndex = 0;
+            valorPotInicio = null;
             title.textContent = step.title;
             previewOption(selections[currentStep] || step.options[0]);
             options.replaceChildren();
@@ -178,6 +183,7 @@
                 });
                 options.append(button);
             });
+            resaltarOpcion(0);
         }
         // ----- Volver atrás -----
         function irAtras() {
@@ -194,35 +200,72 @@
         document.querySelector("#back-button").addEventListener("click", irAtras);
         document.addEventListener("boton-atras-arduino", irAtras);
 
-           // ----- Potenciómetro y botón del Arduino -----
-        let potIndex = 0;
+        // ----- Potenciómetro y botón del Arduino -----
 
-      function resaltarOpcion(index) {
-    const botones = options.querySelectorAll(".creator__option");
-    botones.forEach((boton, i) => {
-        boton.classList.toggle("is-pot", i === index);
-    });
-    const opcion = steps[currentStep].options[index];
-    if (opcion) {
-        previewOption(opcion);
-        playOptionSound(opcion);   // <- esto faltaba
-    }
-}
+        function resaltarOpcion(index, reproducirSonido = true) {
+            const botones = options.querySelectorAll(".creator__option");
+
+            botones.forEach((boton, i) => {
+                boton.classList.toggle("is-pot", i === index);
+            });
+
+            const opcion = steps[currentStep].options[index];
+
+            if (opcion) {
+                previewOption(opcion);
+                if (reproducirSonido) playOptionSound(opcion);
+            }
+        }
+
         document.addEventListener("potenciometro", (e) => {
             if (!tutorial.classList.contains("is-dismissed")) return;
+
             const cantidad = steps[currentStep].options.length;
-            const index = Math.min(cantidad - 1, Math.floor((e.detail / 1024) * cantidad));
-            if (index !== potIndex) {
-                potIndex = index;
+            const valor = Number(e.detail);
+            if (!Number.isFinite(valor)) return;
+
+            // La primera lectura calibra la perilla; la opción inicial sigue siendo la primera.
+            if (valorPotInicio === null) {
+                valorPotInicio = valor;
+                resaltarOpcion(0, false);
+                return;
+            }
+
+            if (cantidad < 2) return;
+
+            const distanciaMaxima = Math.max(valorPotInicio, 1023 - valorPotInicio);
+            const distanciaPorOpcion = distanciaMaxima / (cantidad - 1);
+            const distancia = Math.abs(valor - valorPotInicio);
+            const indiceAnterior = potIndex;
+
+            while (
+                potIndex < cantidad - 1 &&
+                distancia >= (potIndex + 0.5) * distanciaPorOpcion + margenPot
+            ) {
+                potIndex += 1;
+            }
+
+            while (
+                potIndex > 0 &&
+                distancia <= (potIndex - 0.5) * distanciaPorOpcion - margenPot
+            ) {
+                potIndex -= 1;
+            }
+
+            if (potIndex !== indiceAnterior) {
                 resaltarOpcion(potIndex);
             }
         });
 
-        // Botón físico: confirma la opción elegida con el potenciómetro
+        // Botón físico: confirma la opción seleccionada.
         document.addEventListener("boton-arduino", () => {
             if (!tutorial.classList.contains("is-dismissed")) return;
+
             const botones = options.querySelectorAll(".creator__option");
-            if (botones[potIndex]) botones[potIndex].click();
+
+            if (botones[potIndex]) {
+                botones[potIndex].click();
+            }
         });
 
         showStep();
