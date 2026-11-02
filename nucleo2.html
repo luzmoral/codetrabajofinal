@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilonucleo2.css">
+    <link rel="stylesheet" href="boton-atras.css">
 </head>
 <body>
     <main class="creator" inert aria-hidden="true">
@@ -216,7 +217,12 @@
             }
         }
         document.querySelector("#back-button").addEventListener("click", irAtras);
-        document.addEventListener("boton-atras-arduino", irAtras);
+        document.addEventListener("boton-atras-arduino", (event) => {
+            if (tutorial.classList.contains("is-dismissed")) {
+                irAtras();
+                event.preventDefault();
+            }
+        });
 
         // ----- Potenciómetro y botón del Arduino -----
 
