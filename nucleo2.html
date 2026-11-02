@@ -57,6 +57,21 @@
                 src="imagenes/bichito%20wachin.png"
                 alt=""
             >
+            <div class="tutorial-loading">
+                <p>En unos segundos vas a poder empezar</p>
+                <div
+                    class="tutorial-progress"
+                    id="tutorial-progress"
+                    role="progressbar"
+                    aria-label="Tiempo de espera del tutorial"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="0"
+                    aria-live="off"
+                >
+                    <span id="tutorial-progress-fill"></span>
+                </div>
+            </div>
         </div>
     </aside>
        <script src="serial.js" defer></script>
@@ -100,8 +115,11 @@
         const waveform = document.querySelector("#step-waveform");
         const options = document.querySelector("#options");
         const tutorial = document.querySelector("#creator-tutorial");
+        const tutorialProgress = document.querySelector("#tutorial-progress");
+        const tutorialProgressFill = document.querySelector("#tutorial-progress-fill");
         const creator = document.querySelector(".creator");
         const instrumentAudio = new Audio();
+        const tutorialDuration = 6000;
         let currentStep = 0;
         let potIndex = 0;
         let valorPotInicio = null;
@@ -269,12 +287,23 @@
         });
 
         showStep();
-        window.setTimeout(() => {
+        const tutorialStartedAt = performance.now();
+        function updateTutorialProgress(now) {
+            const progress = Math.min(((now - tutorialStartedAt) / tutorialDuration) * 100, 100);
+            tutorialProgress.setAttribute("aria-valuenow", String(Math.round(progress)));
+            tutorialProgressFill.style.width = `${progress}%`;
+
+            if (progress < 100) {
+                window.requestAnimationFrame(updateTutorialProgress);
+                return;
+            }
+
             tutorial.classList.add("is-dismissed");
             tutorial.setAttribute("aria-hidden", "true");
             creator.removeAttribute("inert");
             creator.removeAttribute("aria-hidden");
-        }, 6000);
+        }
+        window.requestAnimationFrame(updateTutorialProgress);
     </script>
 </body>
 </html>
