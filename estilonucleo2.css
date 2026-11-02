@@ -30,7 +30,7 @@ body {
     min-height: 100vh;
     min-height: 100svh;
     margin: 0 auto;
-    padding: clamp(68px, 9vh, 80px) clamp(20px, 5vw, 60px) 72px;
+    padding: clamp(92px, 12vh, 108px) clamp(20px, 5vw, 60px) 72px;
 }
 
 /* Aviso superior para volver atrás */
