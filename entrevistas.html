@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Bowlby+One&family=Bowlby+One+SC&family=Lobster&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="entrevista.css?v=4">
+    <link rel="stylesheet" href="boton-atras.css">
 </head>
 <body>
     <main class="interviews">
@@ -322,6 +323,14 @@ document.addEventListener("boton-arduino", () => {
         }, 300);
     } else {
         elegido.click(); // abre el perfil igual que un clic
+    }
+});
+
+document.addEventListener("boton-atras-arduino", (event) => {
+    const abierto = perfilAbierto();
+    if (abierto) {
+        abierto.close();
+        event.preventDefault();
     }
 });
 
