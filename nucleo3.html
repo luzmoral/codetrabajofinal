@@ -339,18 +339,7 @@
         const songCover = document.querySelector(".player__cover");
         const skipPrevious = document.querySelector(".player__skip");
         const skipNext = document.querySelector(".player__skip--next");
-        const playerControls = [skipPrevious, playerButton, skipNext];
         let currentState = 0;
-        let selectedPlayerControl = 1;
-
-        function selectPlayerControl(index) {
-            selectedPlayerControl = Math.max(0, Math.min(playerControls.length - 1, index));
-            playerControls.forEach((control, controlIndex) => {
-                control.classList.toggle("is-pot-selected", controlIndex === selectedPlayerControl);
-            });
-        }
-
-        selectPlayerControl(selectedPlayerControl);
 
         // Canciones del estado 5: las flechas del reproductor pasan de una a otra
         const tracks = [
@@ -404,83 +393,60 @@
         skipPrevious.addEventListener("click", () => changeTrack(-1));
         skipNext.addEventListener("click", () => changeTrack(1));
 
-// Perilla = progreso de la línea de tiempo, con movimiento suavizado
-const POT_SUAVIDAD = 0.06;       // 0.02 = muy lento · 0.06 = lento · 0.15 = rápido · 1 = sin suavizado
-const POT_HISTERESIS = 1.5;      // % de margen para que no tiemble entre dos estados
-const POT_HISTERESIS_SUB = 0.6;  // lo mismo para los botones del reproductor
-const posMin = statePositions[0];
-const posMax = statePositions[statePositions.length - 1];
-const pasoEstados = statePositions[1] - statePositions[0];
-const subZona = pasoEstados / playerControls.length;
+// ----- Perilla: movimiento por posiciones estables -----
 
-let potObjetivo = null;  // dónde está la perilla (en %)
-let potActual = null;    // dónde está la bolita (en %), persigue al objetivo
-let potAnimando = false;
+const PASO_POT = 100;
 
-// la suavización la hace el JS, así que se apaga la transición del CSS para que no se sume
+let ultimoValorPot = null;
+let movimientoAcumulado = 0;
+
+// La barra comienza siempre en el estado 1.
 thumb.style.transition = "none";
 timelineProgress.style.transition = "none";
 
-function aplicarPotenciometro(pct) {
-    const estadoAntes = currentState;
+function moverConPerilla(direccion) {
+    const nuevoEstado = currentState + direccion;
 
-    // 1) Cambiar de sección cuando la bolita se aleja lo suficiente del estado actual
-    if (Math.abs(pct - statePositions[currentState]) > pasoEstados / 2 + POT_HISTERESIS) {
-        const masCercano = statePositions.reduce((mejor, pos, i) => {
-            return Math.abs(pos - pct) < Math.abs(statePositions[mejor] - pct) ? i : mejor;
-        }, 0);
-        selectState(masCercano);
+    if (nuevoEstado >= 0 && nuevoEstado < statePositions.length) {
+        selectState(nuevoEstado);
     }
-
-    // 2) La bolita y la barra siguen la posición suavizada
-    thumb.style.setProperty("--position", `${pct}%`);
-    timelineProgress.style.width = `${pct}%`;
-
-    // 3) En el reproductor, la perilla también elige anterior / play / siguiente
-    if (currentState === 4) {
-        const inicio = statePositions[4] - pasoEstados / 2;
-        const local = Math.max(0, Math.min(pasoEstados - 0.001, pct - inicio));
-        const sub = Math.floor(local / subZona);
-
-        if (estadoAntes !== 4) {
-            selectPlayerControl(sub);
-        } else if (sub !== selectedPlayerControl) {
-            const desde = inicio + selectedPlayerControl * subZona;
-            if (pct < desde - POT_HISTERESIS_SUB || pct > desde + subZona + POT_HISTERESIS_SUB) {
-                selectPlayerControl(sub);
-            }
-        }
-    }
-}
-
-function animarPotenciometro() {
-    const diferencia = potObjetivo - potActual;
-    if (Math.abs(diferencia) < 0.05) {
-        potActual = potObjetivo;
-        aplicarPotenciometro(potActual);
-        potAnimando = false;
-        return;
-    }
-    potActual += diferencia * POT_SUAVIDAD;
-    aplicarPotenciometro(potActual);
-    requestAnimationFrame(animarPotenciometro);
 }
 
 document.addEventListener("potenciometro", (event) => {
-    const value = Number(event.detail);
-    if (!Number.isFinite(value)) {
+
+    const valor = Number(event.detail);
+
+    if (!Number.isFinite(valor)) {
         return;
     }
 
-    const clamped = Math.max(0, Math.min(1023, value));
-    potObjetivo = posMin + (clamped / 1023) * (posMax - posMin);
+    const valorLimitado = Math.max(0, Math.min(1023, valor));
 
-    if (potActual === null) {
-        potActual = potObjetivo; // primera lectura: sin animación
+    // La primera lectura solo establece la posición inicial.
+    // No mueve la barra ni cambia el estado.
+    if (ultimoValorPot === null) {
+        ultimoValorPot = valorLimitado;
+        return;
     }
-    if (!potAnimando) {
-        potAnimando = true;
-        requestAnimationFrame(animarPotenciometro);
+
+    // Calcula cuánto giró realmente la perilla.
+    const diferencia = valorLimitado - ultimoValorPot;
+
+    ultimoValorPot = valorLimitado;
+
+    // Acumula el movimiento para evitar cambios por pequeñas variaciones.
+    movimientoAcumulado += diferencia;
+
+    // Girar hacia un lado avanza.
+    while (movimientoAcumulado >= PASO_POT) {
+        moverConPerilla(1);
+        movimientoAcumulado -= PASO_POT;
+    }
+
+    // Girar hacia el otro lado retrocede.
+    while (movimientoAcumulado <= -PASO_POT) {
+        moverConPerilla(-1);
+        movimientoAcumulado += PASO_POT;
     }
 });
 
@@ -667,11 +633,7 @@ document.addEventListener("potenciometro", (event) => {
         });
         document.addEventListener("boton-atras-arduino", () => {
             if (currentState === 4) {
-                if (selectedPlayerControl === 0) {
-                    skipPrevious.click();
-                } else if (selectedPlayerControl === 2) {
-                    skipNext.click();
-                }
+                changeTrack(-1);
             } else if (currentState > 0) {
                 selectState(currentState - 1);
             }
