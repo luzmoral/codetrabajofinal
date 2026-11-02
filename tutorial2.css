@@ -29,7 +29,7 @@ body {
     width: min(100%, 1200px);
     min-height: 100vh;
     margin: 0 auto;
-    padding: 38px 5% 23px;
+    padding: 82px 5% 23px;
     overflow: hidden;
     isolation: isolate;
 }
