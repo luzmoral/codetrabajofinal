@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="estilonucleo3.css">
+    <link rel="stylesheet" href="boton-atras.css">
 </head>
 <body>
     <main class="story">
@@ -631,11 +632,13 @@ document.addEventListener("potenciometro", (event) => {
                 conclusionButton.click();
             }
         });
-        document.addEventListener("boton-atras-arduino", () => {
+        document.addEventListener("boton-atras-arduino", (event) => {
             if (currentState === 4) {
                 changeTrack(-1);
+                event.preventDefault();
             } else if (currentState > 0) {
                 selectState(currentState - 1);
+                event.preventDefault();
             }
         });
         document.addEventListener("pausa-arduino", () => {
