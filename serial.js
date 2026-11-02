@@ -29,7 +29,7 @@ function procesar(mensaje) {
   // BOTON 10: VOLVER ATRAS
   else if (mensaje === "ATRAS") {
     document.dispatchEvent(
-      new CustomEvent("atras-arduino")
+      new CustomEvent("boton-atras-arduino")
     );
   }
 
