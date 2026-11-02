@@ -250,6 +250,42 @@ body {
     min-height: 300px;
 }
 
+.tutorial-loading {
+    position: absolute;
+    z-index: 3;
+    right: 5%;
+    bottom: 3%;
+    left: 5%;
+    display: grid;
+    gap: 8px;
+    padding: 12px 16px;
+    border: 2px solid #f1ff00;
+    border-radius: 14px;
+    background: rgb(23 23 23 / 88%);
+    color: #fff;
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    text-align: center;
+}
+
+.tutorial-loading p {
+    margin: 0;
+}
+
+.tutorial-progress {
+    overflow: hidden;
+    height: 12px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 28%);
+}
+
+.tutorial-progress span {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: #f1ff00;
+}
+
 .tutorial-overlay__character {
     position: absolute;
     z-index: 1;
