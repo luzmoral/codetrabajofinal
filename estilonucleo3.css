@@ -28,7 +28,7 @@ body {
     min-height: 100vh;
     min-height: 100svh;
     margin: 0 auto;
-    padding: clamp(16px, 5vh, 46px) clamp(20px, 5vw, 54px) 40px;
+    padding: clamp(72px, 10vh, 92px) clamp(20px, 5vw, 54px) 40px;
 }
 
 .story__title {
