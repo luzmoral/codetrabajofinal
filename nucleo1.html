@@ -78,6 +78,21 @@
                 <img class="tutorial-overlay__keys" src="imagenes/close-up-piano-keys_4.png" alt="">
                 <p>¡Presioná las teclas resaltadas en tu teclado físico para desplazarte!</p>
             </div>
+            <div class="tutorial-loading">
+                <p>En unos segundos vas a poder empezar</p>
+                <div
+                    class="tutorial-progress"
+                    id="tutorial-progress"
+                    role="progressbar"
+                    aria-label="Tiempo de espera del tutorial"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="0"
+                    aria-live="off"
+                >
+                    <span id="tutorial-progress-fill"></span>
+                </div>
+            </div>
         </div>
     </aside>
       <script src="serial.js" defer></script>
@@ -268,10 +283,24 @@
 
         selectStep(0);
         const tutorial = document.querySelector("#process-tutorial");
-        window.setTimeout(() => {
+        const tutorialProgress = document.querySelector("#tutorial-progress");
+        const tutorialProgressFill = document.querySelector("#tutorial-progress-fill");
+        const tutorialDuration = 5000;
+        const tutorialStartedAt = performance.now();
+        function updateTutorialProgress(now) {
+            const progress = Math.min(((now - tutorialStartedAt) / tutorialDuration) * 100, 100);
+            tutorialProgress.setAttribute("aria-valuenow", String(Math.round(progress)));
+            tutorialProgressFill.style.width = `${progress}%`;
+
+            if (progress < 100) {
+                window.requestAnimationFrame(updateTutorialProgress);
+                return;
+            }
+
             tutorial.classList.add("is-dismissed");
             tutorial.setAttribute("aria-hidden", "true");
-        }, 5000);
+        }
+        window.requestAnimationFrame(updateTutorialProgress);
     </script>
 </body>
 </html>
