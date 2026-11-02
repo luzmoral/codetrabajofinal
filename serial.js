@@ -47,7 +47,7 @@
     // BOTON 10: VOLVER ATRAS
     else if (mensaje === "ATRAS") {
       document.dispatchEvent(
-        new CustomEvent("boton-atras-arduino")
+        new CustomEvent("boton-atras-arduino", { cancelable: true })
       );
     }
 
@@ -188,6 +188,52 @@
       window.location.href = `entrevistas.html${window.location.search}`;
     }
   });
+
+  document.addEventListener("boton-atras-arduino", (event) => {
+    const page = window.location.pathname.split("/").pop().toLowerCase();
+    if (event.defaultPrevented || page === "index.html" || page === "") return;
+
+    const referrerIsLocal = document.referrer &&
+      new URL(document.referrer).origin === window.location.origin;
+    if (referrerIsLocal && window.history.length > 1) {
+      window.history.back();
+      return;
+    }
+
+    const fallbackPages = {
+      "tutorial1.html": "index.html",
+      "tutorial2.html": "tutorial1.html",
+      "nucleo1.html": "tutorial2.html",
+      "preresultado.html": "nucleo2.html",
+      "nucleo3.html": "preresultado.html",
+      "entrevistas.html": "nucleo3.html",
+      "resultadocancion.html": "entrevistas.html",
+      "final.html": "resultadocancion.html"
+    };
+    const fallbackPage = fallbackPages[page];
+    if (fallbackPage) {
+      window.location.href = `${fallbackPage}${window.location.search}`;
+    }
+  });
+
+  const page = window.location.pathname.split("/").pop().toLowerCase();
+  if (page !== "index.html" && page !== "" && !document.querySelector("#back-button")) {
+    const backButton = document.createElement("button");
+    backButton.className = "screen-back-button";
+    backButton.type = "button";
+    backButton.setAttribute("aria-label", "Volver a la pantalla anterior");
+    backButton.innerHTML = `¡Presioná
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="3" fill="#f1ff00"></rect>
+        <rect x="9" y="8" width="3.2" height="16" fill="#ff0054"></rect>
+        <path d="M23 8v16L13.5 16z" fill="#ff0054"></path>
+      </svg>
+      para volver atrás!`;
+    backButton.addEventListener("click", () => {
+      document.dispatchEvent(new CustomEvent("boton-atras-arduino", { cancelable: true }));
+    });
+    document.body.append(backButton);
+  }
 
   // Disponible para usar desde un botón: onclick="conectarManual()"
   window.conectarManual = conectarManual;
