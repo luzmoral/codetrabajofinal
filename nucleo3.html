@@ -375,6 +375,7 @@
             songAudio.pause();
             songAudio.src = track.audio;
             songAudio.load();
+            playerState.classList.toggle("is-green-track", trackIndex === 1);
             songTitle.textContent = track.title;
             songArtist.textContent = track.artist;
             songCover.src = track.cover;
