@@ -326,10 +326,7 @@ document.addEventListener("potenciometro", (e) => {
 document.addEventListener("boton-arduino", () => {
     if (!tutorialTerminado()) return;
     const abierto = perfilAbierto();
-    if (abierto) {
-        abierto.close();
-        return;
-    }
+    if (abierto) return;
     if (opcionActual === -1) return; // todavía no giró el pote
 
     const elegido = opciones[opcionActual];
