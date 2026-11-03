@@ -14,6 +14,8 @@ body {
 }
 
 .final {
+  position: relative;
+  top: 48px;
   width: 100%;
   max-width: 1000px;
   padding: 40px 24px 56px;
