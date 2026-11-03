@@ -499,6 +499,10 @@ body {
     object-fit: cover;
 }
 
+.story__state--player.is-green-track .player__cover {
+    border-color: #00f522;
+}
+
 .player__controls {
     display: flex;
     align-items: center;
@@ -554,6 +558,10 @@ body {
     font-weight: 400;
     line-height: 1.15;
     white-space: nowrap;
+}
+
+.story__state--player.is-green-track .player__song-title {
+    color: #00f522;
 }
 
 .player__artist {
