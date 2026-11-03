@@ -155,15 +155,15 @@
             previewOption(selections[currentStep] || step.options[0]);
             options.replaceChildren();
 
-            step.options.forEach((option) => {
+            step.options.forEach((option, index) => {
                 const button = document.createElement("button");
                 button.className = "creator__option";
                 button.type = "button";
                 button.textContent = option.name;
                 button.setAttribute("aria-pressed", String(selections[currentStep]?.name === option.name));
                 button.addEventListener("pointerenter", () => {
-                    previewOption(option);
-                    if (option.sound) playOptionSound(option);
+                    potIndex = index;
+                    resaltarOpcion(index);
                 });
                 button.addEventListener("pointerleave", () => {
                     if (option.sound) {
@@ -172,7 +172,10 @@
                     }
                     previewOption(selections[currentStep] || step.options[0]);
                 });
-                button.addEventListener("focus", () => previewOption(option));
+                button.addEventListener("focus", () => {
+                    potIndex = index;
+                    resaltarOpcion(index);
+                });
                 button.addEventListener("blur", () => {
                     previewOption(selections[currentStep] || step.options[0]);
                 });
