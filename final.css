@@ -17,7 +17,7 @@ body {
   position: relative;
   top: 48px;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1120px;
   padding: 40px 24px 56px;
 }
 
@@ -29,13 +29,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 22px;
+  gap: 26px;
   text-align: center;
   animation: pantalla-in 0.5s ease-out;
 }
 
 .texto {
-  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  font-size: clamp(1.2rem, 2.6vw, 1.65rem);
   font-weight: 500;
   line-height: 1.3;
 }
@@ -43,7 +43,7 @@ body {
 .subtitulo-rosa {
   color: #ff0054;
   font-family: "Bowlby One SC", Impact, sans-serif;
-  font-size: clamp(1.3rem, 3.4vw, 2rem);
+  font-size: clamp(1.4rem, 3.6vw, 2.2rem);
   font-weight: 400;
   line-height: 1.1;
 }
@@ -61,7 +61,11 @@ body {
 .pantalla--ia .texto,
 .pantalla--ia .paso {
   position: relative;
-  top: 16px;
+  top: 24px;
+}
+
+.pantalla:not(.pantalla--cierre) .creator__title {
+  margin-top: 10px;
 }
 
 /* ---------- Espacio para las imágenes que subís vos ---------- */
@@ -69,7 +73,7 @@ body {
   position: relative;
   display: grid;
   place-items: center;
-  width: min(100%, 520px, 80svh);
+  width: min(100%, 620px, 84svh);
   margin-inline: auto;
   aspect-ratio: 16 / 9;
   border: 3px dashed rgb(255 0 84 / 60%);
@@ -120,7 +124,7 @@ body {
 /* ---------- Carrusel de Bootstrap (pantalla 2) ---------- */
 .carrusel {
   position: relative;
-  width: min(100%, 560px, 80svh);
+  width: min(100%, 660px, 84svh);
 }
 .carrusel .carousel-item { text-align: center; }
 .carrusel .subtitulo-rosa { margin-bottom: 16px; }
@@ -171,14 +175,14 @@ body {
 .pantalla--cierre { text-align: left; }
 .pantalla--cierre .texto--cierre {
   width: 100%;
-  font-size: clamp(1.5rem, 3.7vw, 2.4rem);
+  font-size: clamp(1.65rem, 4vw, 2.6rem);
   font-weight: 700;
   line-height: 1.2;
 }
 .resaltado { color: #f5ff1f; }
 
 .robot {
-  width: min(70%, 300px);
+  width: min(75%, 340px);
   height: auto;
   opacity: 0;
   animation: image-appear 1.2s ease-out 0.2s forwards;
@@ -241,7 +245,7 @@ body {
     align-self: center;
     justify-self: center;
     width: 100%;
-    max-width: 380px;
+    max-width: 430px;
   }
   .pantalla--cierre .creator__title,
   .pantalla--cierre .texto--cierre,
@@ -255,7 +259,7 @@ body {
   width: 100%;
   margin: 0 auto;
   font-family: "Bowlby One SC", Impact, sans-serif;
-  font-size: clamp(1rem, 5vw, 3.5rem);
+  font-size: clamp(1.1rem, 5.4vw, 3.8rem);
   font-weight: 400;
   letter-spacing: -0.035em;
   line-height: 1;
@@ -291,7 +295,11 @@ body {
 
 @media (max-width: 620px) {
   .creator__title {
-    font-size: clamp(0.9rem, 4.6vw, 1.8rem);
+    font-size: clamp(1rem, 5vw, 2rem);
+  }
+
+  .final {
+    padding-inline: 16px;
   }
 }
 
