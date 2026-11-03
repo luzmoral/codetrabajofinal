@@ -1708,11 +1708,11 @@ body {
     white-space: nowrap;
 }
 
-.profile__exit-hint img {
+.profile__exit-icon {
     display: block;
     width: calc(var(--m) * 36);
     height: calc(var(--m) * 36);
-    object-fit: contain;
+    flex: none;
 }
 
 .profile--paradoja .profile__exit-hint {
@@ -1834,7 +1834,7 @@ body {
         font-size: 15px;
     }
 
-    .profile__exit-hint img {
+    .profile__exit-icon {
         width: 32px;
         height: 32px;
     }
