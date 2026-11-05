@@ -113,53 +113,29 @@ body {
     pointer-events: none;
 }
 
-/* Verde: testimonios */
-.paper--green {
-    z-index: 1;
-    left: calc(var(--u) * 142);
-    top: calc(var(--u) * 175);
-    width: calc(var(--u) * 480);
-    height: calc(var(--u) * 385);
-    padding: calc(var(--u) * 100) calc(var(--u) * 74) calc(var(--u) * 81) calc(var(--u) * 173);
-    background-image: url("imagenes/papel%20verde.png");
-    transform: rotate(-2deg);
-}
-
-.paper--green .paper__quote {
-    font-size: calc(var(--u) * 19.5);
-    font-weight: 500;
-    line-height: 1.22;
-    color: #151515;
-}
-
-.paper--green strong {
-    font-family: "Bowlby One SC", Impact, sans-serif;
-    color: #ff0054;
-    text-transform: uppercase;
-    font-size: 0.95em;
-}
-
-.paper--green .paper__eyebrow {
+.collage__question {
     position: absolute;
-    top: calc(var(--u) * 335);
-    left: calc(var(--u) * 4);
+    z-index: 1;
+    top: calc(var(--u) * 248);
+    left: calc(var(--u) * 32);
+    width: calc(var(--u) * 350);
     margin: 0;
-    line-height: 0;
-    transform: rotate(-2deg);
-    transform-origin: left top;
+    color: #fff;
+    font-size: calc(var(--u) * 24);
+    font-weight: 500;
+    line-height: 1.3;
+    text-align: center;
 }
 
-.paper__eyebrow-img {
-    display: block;
-    width: calc(var(--u) * 185);
-    max-width: none;
-    height: auto;
+.collage__question strong {
+    color: #f1ff00;
+    font-weight: 700;
 }
 
 /* Amarillo: emoción genuina */
 .paper--yellow {
     z-index: 2;
-    left: calc(var(--u) * 565);
+    left: calc(var(--u) * 405);
     top: calc(var(--u) * 95);
     width: calc(var(--u) * 320);
     height: calc(var(--u) * 370);
@@ -289,7 +265,7 @@ body {
 /* Rosa: la paradoja */
 .paper--pink {
     z-index: 2;
-    left: calc(var(--u) * 870);
+    left: calc(var(--u) * 710);
     top: calc(var(--u) * 270);
     width: calc(var(--u) * 315);
     height: calc(var(--u) * 355);
@@ -328,7 +304,7 @@ body {
 /* Gris ancho: Arse */
 .paper--arse {
     z-index: 3;
-    left: calc(var(--u) * 540);
+    left: calc(var(--u) * 380);
     top: calc(var(--u) * 405);
     width: calc(var(--u) * 356);
     height: calc(var(--u) * 225);
@@ -379,13 +355,13 @@ body {
 }
 
 .collage__doodle--star {
-    left: calc(var(--u) * 477);
-    top: calc(var(--u) * 120);
+    left: calc(var(--u) * -5);
+    top: calc(var(--u) * 250);
     width: calc(var(--u) * 58);
 }
 
 .collage__doodle--note {
-    left: calc(var(--u) * 480);
+    left: calc(var(--u) * 300);
     top: calc(var(--u) * 520);
     width: calc(var(--u) * 48);
 }
@@ -549,7 +525,6 @@ body {
 }
 
 /* Cada cartel guarda su capa original y su color de brillo */
-.paper--green  { --z: 1; --glow-color: rgb(22 237 0 / 85%); }
 .paper--yellow { --z: 2; }
 .paper--pink   { --z: 2; }
 .paper--lucas  { --z: 3; --glow-color: rgb(240 255 0 / 90%); }
@@ -557,7 +532,7 @@ body {
 
 /* Estado "enfocado": a todo color + brillo + un poco más grande, por encima de los demás */
 
-.paper:not(.paper--green):is(:hover, :focus-visible, .is-selected) {
+.paper:is(:hover, :focus-visible, .is-selected) {
     z-index: 6;
     --glow-size: 16;
     --lift: 1.03;
@@ -566,8 +541,7 @@ body {
 }
 
 /* Estado "apagado": se oscurece pero conserva el color */
-.interviews:has(.paper:not(.paper--green):is(:hover, :focus-visible, .is-selected)) .paper:not(:is(:hover, :focus-visible, .is-selected)),
-.interviews:has(.paper:not(.paper--green):is(:hover, :focus-visible, .is-selected)) .paper--green,
+.interviews:has(.paper:is(:hover, :focus-visible, .is-selected)) .paper:not(:is(:hover, :focus-visible, .is-selected)),
 .interviews:has(.interviews__listen.is-active) .paper {
     --glow-size: 0;
     --lift: 1;
@@ -583,7 +557,7 @@ body {
 }
 
 @media (hover: hover) {
-    .interviews:has(.paper:not(.paper--green):hover) .interviews__footer {
+    .interviews:has(.paper:hover) .interviews__footer {
         filter: brightness(0.42);
     }
 
@@ -1065,7 +1039,6 @@ body {
         margin: 0 auto;
     }
 
-    .paper--green,
     .paper--yellow,
     .paper--lucas,
     .paper--pink,
@@ -1080,10 +1053,16 @@ body {
         padding: 46px 42px;
     }
 
-    .paper--green {
-        min-height: 280px;
-        margin-bottom: 36px;
-        padding: 94px 36px 35px 102px;
+    .collage__question {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: min(100%, 390px);
+        margin: 0 auto 24px;
+        color: #fff;
+        font-size: clamp(1.2rem, 5vw, 1.6rem);
+        line-height: 1.3;
+        text-align: center;
     }
 
     .paper--yellow {
@@ -1117,7 +1096,6 @@ body {
     }
 
     .paper p,
-    .paper--green .paper__quote,
     .paper--yellow p,
     .paper--lucas p,
     .paper--pink p,
@@ -1139,16 +1117,6 @@ body {
         width: 200px;
         margin-top: -6px;
         margin-bottom: -26px;
-    }
-
-    .paper--green .paper__eyebrow {
-        top: auto;
-        bottom: -34px;
-        left: 8px;
-    }
-
-    .paper__eyebrow-img {
-        width: 150px;
     }
 
     .collage__doodle--ribbon {
@@ -1495,7 +1463,7 @@ body {
    ============================================================ */
 @media (min-width: 701px) {
     .paper--lucas {
-        left: calc(var(--u) * 800);
+        left: calc(var(--u) * 640);
         top: calc(var(--u) * -3);
         width: calc(var(--u) * 400);
         height: calc(var(--u) * 410);
