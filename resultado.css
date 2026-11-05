@@ -81,6 +81,11 @@ body {
     object-fit: contain;
 }
 
+.result__choice-icon--voice {
+    width: clamp(145px, 42vw, 195px);
+    height: clamp(145px, 42vw, 195px);
+}
+
 .result__choice-plus {
     align-self: center;
     flex: none;
