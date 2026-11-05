@@ -70,9 +70,9 @@
                 FIESTA: { name: "Fiesta", image: "imagenes/fiestaim.png" }
             },
             voice: {
-                "VOZ 1": { name: "Voz 1", image: "imagenes/voz1im.png" },
-                "VOZ 2": { name: "Voz 2", image: "imagenes/voz2im.png" },
-                "VOZ 3": { name: "Voz 3", image: "imagenes/voz3im.png" }
+                "VOZ 1": { name: "MATEO", image: "imagenes/mateor.png", isVoice: true },
+                "VOZ 2": { name: "MARIA", image: "imagenes/martinar.png", isVoice: true },
+                "VOZ 3": { name: "NICOLÁS", image: "imagenes/nicolasr.png", isVoice: true }
             }
         };
         const choices = [
@@ -87,7 +87,9 @@
             item.setAttribute("role", "listitem");
 
             const icon = document.createElement("img");
-            icon.className = "result__choice-icon";
+            icon.className = choice.isVoice
+                ? "result__choice-icon result__choice-icon--voice"
+                : "result__choice-icon";
             icon.src = choice.image;
             icon.alt = "";
 
