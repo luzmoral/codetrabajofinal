@@ -268,13 +268,12 @@
                         <path d="M3 2 C 5 18, 14 26, 28 24 C 38 22, 38 10, 30 12 C 22 14, 28 30, 62 30" fill="none" stroke="#f1ff00" stroke-width="2" stroke-linecap="round"/>
                         <path d="M56 24 L64 30 L56 36" fill="none" stroke="#f1ff00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>¡Presioná</span>
-                    <svg class="player__hint-button" viewBox="0 0 32 32" role="img" aria-label="botón de volver atrás">
-                        <rect width="32" height="32" rx="3" fill="#d4e600"/>
-                        <rect x="9" y="8" width="3.2" height="16" fill="#ff0054"/>
-                        <path d="M23 8v16L13.5 16z" fill="#ff0054"/>
-                    </svg>
-                    <span>y escuchá otro ejemplo!</span>
+                    <span>¡Presiona una tecla</span>
+                    <span class="player__hint-keys" aria-label="teclas de piano 1 y 2">
+                        <kbd class="player__hint-key" aria-label="tecla 1">1</kbd>
+                        <kbd class="player__hint-key" aria-label="tecla 2">2</kbd>
+                    </span>
+                    <span>y escucha otro ejemplo!</span>
                 </p>
             </article>
             <article class="story__state story__state--conclusion" data-state="5" aria-label="Estado 6: Conclusión" hidden>
@@ -394,6 +393,18 @@
 
         skipPrevious.addEventListener("click", () => changeTrack(-1));
         skipNext.addEventListener("click", () => changeTrack(1));
+
+        document.addEventListener("keydown", (event) => {
+            if (currentState !== 4 || event.repeat) {
+                return;
+            }
+
+            if (event.key === "1") {
+                selectTrack(1);
+            } else if (event.key === "2") {
+                selectTrack(0);
+            }
+        });
 
 // ----- Perilla: movimiento por posiciones estables -----
 
