@@ -204,6 +204,7 @@
       "tutorial1.html": "index.html",
       "tutorial2.html": "tutorial1.html",
       "nucleo1.html": "tutorial2.html",
+      "nucleo2.html": "nucleo1.html",
       "preresultado.html": "nucleo2.html",
       "nucleo3.html": "preresultado.html",
       "entrevistas.html": "nucleo3.html",
