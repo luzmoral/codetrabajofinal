@@ -103,9 +103,9 @@
                 image: "imagenes/microfono.png",
                 alt: "Micrófono",
                 options: [
-                    { name: "VOZ 1", image: "imagenes/ondamusical.png", alt: "Micrófono, voz 1", sound: "musica/VOZ 1.mp3" },
-                    { name: "VOZ 2", image: "imagenes/ondamusical.png", alt: "Micrófono, voz 2", sound: "musica/VOZ 2.mp3" },
-                    { name: "VOZ 3", image: "imagenes/ondamusical.png", alt: "Micrófono, voz 3", sound: "musica/VOZ 3.mp3" }
+                    { name: "MATEO", value: "VOZ 1", image: "imagenes/mateor.png", alt: "MATEO", isPerson: true, sound: "musica/VOZ 1.mp3" },
+                    { name: "MARIA", value: "VOZ 2", image: "imagenes/martinar.png", alt: "MARIA", isPerson: true, sound: "musica/VOZ 2.mp3" },
+                    { name: "NICOLÁS", value: "VOZ 3", image: "imagenes/nicolasr.png", alt: "NICOLÁS", isPerson: true, sound: "musica/VOZ 3.mp3" }
                 ]
             }
         ];
@@ -139,6 +139,7 @@
 
         function previewOption(option) {
             const showWaveform = option.image === "imagenes/ondamusical.png";
+            image.classList.toggle("creator__image--person", option.isPerson === true);
             image.hidden = showWaveform;
             waveform.hidden = !showWaveform;
             if (!showWaveform) {
@@ -199,7 +200,7 @@
                     const selectionsQuery = new URLSearchParams({
                         instrument: selections[0].name,
                         theme: selections[1].name,
-                        voice: selections[2].name
+                        voice: selections[2].value || selections[2].name
                     });
                     window.location.href = `preresultado.html?${selectionsQuery}`;
                 });
@@ -219,12 +220,18 @@
                 window.location.href = "nucleo1.html";
             }
         }
-        document.querySelector("#back-button").addEventListener("click", irAtras);
+        document.querySelector("#back-button").addEventListener("click", () => {
+            document.dispatchEvent(new CustomEvent("boton-atras-arduino", { cancelable: true }));
+        });
         document.addEventListener("boton-atras-arduino", (event) => {
-            if (tutorial.classList.contains("is-dismissed")) {
-                irAtras();
+            if (!tutorial.classList.contains("is-dismissed")) {
+                window.location.href = `nucleo1.html${window.location.search}`;
                 event.preventDefault();
+                return;
             }
+
+            irAtras();
+            event.preventDefault();
         });
 
         // ----- Potenciómetro y botón del Arduino -----
