@@ -649,12 +649,46 @@ body {
     margin-top: -8px;
 }
 
-.player__hint-button {
-    display: inline-block;
+.player__hint-keys {
+    position: relative;
+    display: inline-flex;
     flex: none;
-    width: 32px;
-    height: auto;
-    object-fit: contain;
+    padding-top: 5px;
+}
+
+.player__hint-key {
+    display: inline-flex;
+    flex: none;
+    width: 24px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #777;
+    border-bottom: 3px solid #555;
+    background: linear-gradient(90deg, #ccc 0%, #fff 18%, #fff 80%, #ddd 100%);
+    color: #080808;
+    font-family: Arial, sans-serif;
+    font-size: 1.1em;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.player__hint-key + .player__hint-key {
+    border-left: 0;
+}
+
+.player__hint-keys::before {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: calc(50% - 5px);
+    width: 10px;
+    height: 15px;
+    border: 1px solid #050505;
+    border-radius: 0 0 2px 2px;
+    background: linear-gradient(90deg, #050505 0%, #252525 55%, #080808 100%);
+    box-shadow: 1px 2px 2px rgb(0 0 0 / 40%);
+    content: "";
 }
 
 /* Indicador inferior para avanzar con la perilla */
