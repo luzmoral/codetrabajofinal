@@ -129,6 +129,14 @@
         ¿Puede una máquina generar el sonido <span class="resaltado">sin haber vivido la historia</span> que lo construyó?
       </p>
 
+      <div class="respuesta-final" role="group" aria-label="Tu respuesta">
+        <button class="respuesta-final__tecla" type="button" data-answer="si" aria-pressed="false">
+          SÍ <kbd>1</kbd>
+        </button>
+        <button class="respuesta-final__tecla" type="button" data-answer="no" aria-pressed="false">
+          NO <kbd>2</kbd>
+        </button>
+      </div>
       <a class="boton" href="index.html">
         VOLVER A INICIAR
         <img class="boton__icon" src="imagenes/playok.png" alt="">
@@ -152,6 +160,19 @@
     let pantallaActual = 0;
     let pasoIA = 0;
     let zonaPerilla = null;
+    const respuestasFinales = [...document.querySelectorAll(".respuesta-final__tecla")];
+
+    function seleccionarRespuesta(respuesta) {
+      respuestasFinales.forEach((boton) => {
+        const seleccionado = boton.dataset.answer === respuesta;
+        boton.classList.toggle("is-selected", seleccionado);
+        boton.setAttribute("aria-pressed", String(seleccionado));
+      });
+    }
+
+    respuestasFinales.forEach((boton) => {
+      boton.addEventListener("click", () => seleccionarRespuesta(boton.dataset.answer));
+    });
 
     function mostrarPantalla(indice) {
       pantallaActual = indice;
@@ -210,6 +231,17 @@
     }
 
     document.addEventListener("keydown", (event) => {
+      if (pantallaActual === pantallas.length - 1 && !event.repeat) {
+        if (event.key === "1") {
+          event.preventDefault();
+          seleccionarRespuesta("si");
+        } else if (event.key === "2") {
+          event.preventDefault();
+          seleccionarRespuesta("no");
+        }
+        if (event.key === "1" || event.key === "2") return;
+      }
+
       if (
         event.key !== "Enter" ||
         event.repeat ||
