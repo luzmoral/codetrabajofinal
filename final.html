@@ -32,6 +32,7 @@
           <img src="imagenes/ia-patrones.png" alt="Aprender patrones">
           <span class="slot__texto">Acá va la imagen 1<br>imagenes/ia-patrones.png</span>
         </figure>
+        <div class="paso__progress" aria-hidden="true"><span></span></div>
       </div>
 
       <!-- IMAGEN 2: imagenes/ia-sonidos.png -->
@@ -41,6 +42,7 @@
           <img src="imagenes/ia-sonidos.png" alt="Combinar sonidos">
           <span class="slot__texto">Acá va la imagen 2<br>imagenes/ia-sonidos.png</span>
         </figure>
+        <div class="paso__progress" aria-hidden="true"><span></span></div>
       </div>
 
       <!-- IMAGEN 3: imagenes/ia-canciones.png -->
@@ -50,6 +52,7 @@
           <img src="imagenes/ia-canciones.png" alt="Crear canciones para bailar">
           <span class="slot__texto">Acá va la imagen 3<br>imagenes/ia-canciones.png</span>
         </figure>
+        <div class="paso__progress" aria-hidden="true"><span></span></div>
         <button class="hint hint--ia" id="hintIA" type="button">
           <span>¡Presioná el botón</span>
           <img class="hint__ok" src="imagenes/playok.png" alt="OK">
@@ -194,6 +197,14 @@
 
     function mostrarPaso(indice) {
       pasosIA.forEach((paso, i) => { paso.hidden = i !== indice; });
+      pasosIA.forEach((paso, i) => {
+        const barra = paso.querySelector(".paso__progress");
+        barra.classList.toggle("is-complete", i < indice || i === pasosIA.length - 1);
+        barra.classList.remove("is-progressing");
+      });
+      if (indice < pasosIA.length - 1) {
+        pasosIA[indice].querySelector(".paso__progress").classList.add("is-progressing");
+      }
     }
 
     function programarPaso() {
