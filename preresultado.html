@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="boton-atras.css">
 </head>
 <body>
-    <main class="result">
+    <main class="result" id="result-page" inert aria-hidden="true">
         <header class="result__header">
             <h1 class="result__title">
                 <span class="result__title-back" aria-hidden="true">¡Tu cumbia ya está lista!</span>
@@ -50,26 +50,76 @@
         </section>
 
         <footer class="result__footer">
-            <a class="result__hint" id="continue-link" href="resultadocancion.html" aria-label="Continuar para descubrir el resultado final">
-                <span>¡Presioná el botón</span>
-                <img src="imagenes/playok.png" alt="OK" class="result__ok">
-                <span>en tu teclado para continuar!</span>
-            </a>
+            <div class="result__turn">
+                <p>Girá la perilla hacia atrás para continuar.</p>
+                <img class="result__knob" src="imagenes/perilla-tutorial.svg" alt="Perilla del controlador">
+            </div>
         </footer>
     </main>
+    <aside class="result-tutorial" id="result-tutorial" role="status" aria-live="polite">
+        <div class="result-tutorial__content">
+            <div class="result-tutorial__message">
+                <img src="imagenes/perilla-tutorial.svg" alt="">
+                <p>Para desbloquear el siguiente paso, girá la perilla hacia atrás hasta el 0.</p>
+            </div>
+            <img class="result-tutorial__character" src="imagenes/bichito%20taller%20todos%202.png" alt="">
+            <div class="result-tutorial__loading">
+                <p>En unos segundos vas a poder empezar</p>
+                <div
+                    class="result-tutorial__progress"
+                    id="tutorial-progress"
+                    role="progressbar"
+                    aria-label="Tiempo de espera del tutorial"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="0"
+                    aria-live="off"
+                >
+                    <span id="tutorial-progress-fill"></span>
+                </div>
+            </div>
+        </div>
+    </aside>
     <script src="musica-fondo.js" defer></script>
     <script src="serial.js" defer></script>
     <script>
-        const continueLink = document.querySelector("#continue-link");
-        continueLink.href = `nucleo3.html${window.location.search}`;
+        const resultPage = document.querySelector("#result-page");
+        const tutorial = document.querySelector("#result-tutorial");
+        const tutorialProgress = document.querySelector("#tutorial-progress");
+        const tutorialProgressFill = document.querySelector("#tutorial-progress-fill");
+        const nextPage = `nucleo3.html${window.location.search}`;
+        const tutorialDuration = 6000;
+        const tutorialStartedAt = performance.now();
+        let tutorialFinished = false;
+        let previousKnobValue = null;
 
-        document.addEventListener("keydown", (event) => {
-            if (
-                event.key === "Enter" &&
-                !event.repeat &&
-                !(event.target instanceof Element && event.target.closest("a, audio, button, input, select, textarea"))
-            ) {
-                window.location.href = continueLink.href;
+        function updateTutorialProgress(now) {
+            const progress = Math.min(((now - tutorialStartedAt) / tutorialDuration) * 100, 100);
+            tutorialProgress.setAttribute("aria-valuenow", String(Math.round(progress)));
+            tutorialProgressFill.style.width = `${progress}%`;
+
+            if (progress < 100) {
+                window.requestAnimationFrame(updateTutorialProgress);
+                return;
+            }
+
+            tutorialFinished = true;
+            tutorial.classList.add("is-dismissed");
+            tutorial.setAttribute("aria-hidden", "true");
+            resultPage.removeAttribute("inert");
+            resultPage.removeAttribute("aria-hidden");
+        }
+        window.requestAnimationFrame(updateTutorialProgress);
+
+        document.addEventListener("potenciometro", (event) => {
+            const value = Number(event.detail);
+            if (!Number.isFinite(value)) return;
+
+            const turnedBack = previousKnobValue !== null && value < previousKnobValue;
+            previousKnobValue = value;
+
+            if (tutorialFinished && turnedBack && value <= 25) {
+                window.location.href = nextPage;
             }
         });
     </script>
