@@ -58,6 +58,28 @@ body {
   animation: text-appear 0.5s ease-out;
 }
 
+.paso__progress {
+  width: min(100%, 620px, 84svh);
+  height: 8px;
+  margin-top: -8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background-color: rgb(255 255 255 / 30%);
+}
+.paso__progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: #f1ff00;
+}
+.paso__progress.is-complete span {
+  width: 100%;
+}
+.paso__progress.is-progressing span {
+  animation: carousel-progress 4s linear forwards;
+}
+
 .pantalla--ia .texto,
 .pantalla--ia .paso {
   position: relative;
@@ -418,6 +440,10 @@ body {
     animation: none;
   }
   .carrusel .carousel-indicators [data-bs-target].is-progressing::after {
+    animation: none;
+    width: 100%;
+  }
+  .paso__progress.is-progressing span {
     animation: none;
     width: 100%;
   }
