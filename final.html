@@ -162,7 +162,6 @@
 
     let pantallaActual = 0;
     let pasoIA = 0;
-    let zonaPerilla = null;
     const respuestasFinales = [...document.querySelectorAll(".respuesta-final__tecla")];
 
     function seleccionarRespuesta(respuesta) {
@@ -300,24 +299,6 @@
     actualizarHintCumbia();
     hintCumbia.addEventListener("click", mostrarCierre);
     document.querySelector("#hintIA").addEventListener("click", avanzar);
-
-    // Perilla del Arduino: mueve el carrusel de la pantalla 2
-    document.addEventListener("potenciometro", (event) => {
-      if (pantallaActual !== 1 || !carrusel) return;
-
-      const tamano = 1024 / totalSlides;
-      const valor = Math.max(0, Math.min(1023, event.detail));
-      const margen = 25;
-
-      if (zonaPerilla === null) {
-        zonaPerilla = Math.min(totalSlides - 1, Math.floor(valor / tamano));
-        return; // primera lectura: solo toma la posición actual de la perilla
-      }
-      if (valor >= zonaPerilla * tamano - margen && valor <= (zonaPerilla + 1) * tamano + margen) return;
-
-      zonaPerilla = Math.min(totalSlides - 1, Math.floor(valor / tamano));
-      carrusel.to(zonaPerilla);
-    });
 
     // Espacios para tus imágenes: si la imagen existe se muestra, si no queda el cartel punteado
     document.querySelectorAll(".slot").forEach((slot) => {
