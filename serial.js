@@ -8,6 +8,12 @@
   let valorPotSuavizado = null;
   const ENTER_COOLDOWN_MS = 1000;
   const ENTER_TIMESTAMP_KEY = "arduino-enter-last-at";
+  const PAGINAS_CON_POTENCIOMETRO = new Set([
+    "nucleo2.html",
+    "preresultado.html",
+    "entrevistas.html",
+    "nucleo3.html"
+  ]);
 
   function enviarTecla(key) {
     document.dispatchEvent(new KeyboardEvent("keydown", { key }));
@@ -58,6 +64,9 @@
 
     // POTENCIOMETRO
     else if (mensaje.startsWith("POT:")) {
+      const pagina = window.location.pathname.split("/").pop().toLowerCase();
+      if (!PAGINAS_CON_POTENCIOMETRO.has(pagina)) return;
+
       const valor = Number(mensaje.slice(4));
 
       if (!Number.isNaN(valor) && valor >= 0 && valor <= 1023) {
