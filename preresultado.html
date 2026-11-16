@@ -90,9 +90,10 @@
         const nextPage = `nucleo3.html${window.location.search}`;
         const tutorialDuration = 6000;
         const tutorialStartedAt = performance.now();
-        let tutorialFinished = false;
-        let previousKnobValue = null;
-
+     let tutorialFinished = false;
+let previousKnobValue = null;
+let knobReachedZeroBackwards = false;
+let changingPage = false;
         function updateTutorialProgress(now) {
             const progress = Math.min(((now - tutorialStartedAt) / tutorialDuration) * 100, 100);
             tutorialProgress.setAttribute("aria-valuenow", String(Math.round(progress)));
@@ -103,25 +104,44 @@
                 return;
             }
 
-            tutorialFinished = true;
-            tutorial.classList.add("is-dismissed");
-            tutorial.setAttribute("aria-hidden", "true");
-            resultPage.removeAttribute("inert");
-            resultPage.removeAttribute("aria-hidden");
+           tutorialFinished = true;
+tutorial.classList.add("is-dismissed");
+tutorial.setAttribute("aria-hidden", "true");
+resultPage.removeAttribute("inert");
+resultPage.removeAttribute("aria-hidden");
+
+if (knobReachedZeroBackwards) {
+    cambiarPagina();
+}
         }
         window.requestAnimationFrame(updateTutorialProgress);
 
-        document.addEventListener("potenciometro", (event) => {
-            const value = Number(event.detail);
-            if (!Number.isFinite(value)) return;
+       function cambiarPagina() {
+    if (changingPage || !tutorialFinished) return;
 
-            const turnedBack = previousKnobValue !== null && value < previousKnobValue;
-            previousKnobValue = value;
+    changingPage = true;
+    window.location.href = nextPage;
+}
 
-            if (tutorialFinished && turnedBack && value <= 25) {
-                window.location.href = nextPage;
-            }
-        });
+document.addEventListener("potenciometro", (event) => {
+    const value = Number(event.detail);
+
+    if (!Number.isFinite(value)) return;
+
+    const turnedBack =
+        previousKnobValue !== null &&
+        value < previousKnobValue;
+
+    previousKnobValue = value;
+
+    if (turnedBack && value <= 25) {
+        knobReachedZeroBackwards = true;
+    }
+
+    if (tutorialFinished && knobReachedZeroBackwards) {
+        cambiarPagina();
+    }
+});
     </script>
 </body>
 </html>
