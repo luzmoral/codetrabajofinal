@@ -192,10 +192,18 @@ body {
     place-items: center;
     width: 22px;
     height: 22px;
+    padding: 0;
+    border: 0;
     border-radius: 50%;
     background: #ff0054;
     color: #111;
     font-size: 0.65rem;
+    cursor: pointer;
+}
+
+.result-teaser__play:focus-visible {
+    outline: 2px solid #fff200;
+    outline-offset: 3px;
 }
 
 .result-teaser__track {
