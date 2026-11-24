@@ -433,7 +433,7 @@ document.addEventListener("potenciometro", (event) => {
         return;
     }
 
-    const valorLimitado = Math.max(0, Math.min(1023, valor));
+    const valorLimitado = 1023 - Math.max(0, Math.min(1023, valor));
 
     // La primera lectura solo establece la posición inicial.
     // No mueve la barra ni cambia el estado.
