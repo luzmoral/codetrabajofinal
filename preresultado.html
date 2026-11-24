@@ -89,11 +89,13 @@
         const tutorialProgressFill = document.querySelector("#tutorial-progress-fill");
         const nextPage = `nucleo3.html${window.location.search}`;
         const tutorialDuration = 6000;
+        const knobZeroThreshold = 25;
         const tutorialStartedAt = performance.now();
-     let tutorialFinished = false;
-let previousKnobValue = null;
-let knobReachedZeroBackwards = false;
-let changingPage = false;
+        let tutorialFinished = false;
+        let previousKnobValue = null;
+        let knobReachedZeroBackwards = false;
+        let changingPage = false;
+
         function updateTutorialProgress(now) {
             const progress = Math.min(((now - tutorialStartedAt) / tutorialDuration) * 100, 100);
             tutorialProgress.setAttribute("aria-valuenow", String(Math.round(progress)));
@@ -104,44 +106,47 @@ let changingPage = false;
                 return;
             }
 
-           tutorialFinished = true;
-tutorial.classList.add("is-dismissed");
-tutorial.setAttribute("aria-hidden", "true");
-resultPage.removeAttribute("inert");
-resultPage.removeAttribute("aria-hidden");
+            tutorialFinished = true;
+            tutorial.classList.add("is-dismissed");
+            tutorial.setAttribute("aria-hidden", "true");
+            resultPage.removeAttribute("inert");
+            resultPage.removeAttribute("aria-hidden");
 
-if (knobReachedZeroBackwards) {
-    cambiarPagina();
-}
+            if (knobReachedZeroBackwards) {
+                cambiarPagina();
+            }
         }
+
         window.requestAnimationFrame(updateTutorialProgress);
 
-       function cambiarPagina() {
-    if (changingPage || !tutorialFinished) return;
+        function cambiarPagina() {
+            if (changingPage || !tutorialFinished) return;
 
-    changingPage = true;
-    window.location.href = nextPage;
-}
+            changingPage = true;
+            window.location.href = nextPage;
+        }
 
-document.addEventListener("potenciometro", (event) => {
-    const value = Number(event.detail);
+        document.addEventListener("potenciometro", (event) => {
+            const value = Number(event.detail);
 
-    if (!Number.isFinite(value)) return;
+            if (!Number.isFinite(value)) return;
 
-    const turnedBack =
-        previousKnobValue !== null &&
-        value < previousKnobValue;
+            const boundedValue = Math.max(0, Math.min(1023, value));
 
-    previousKnobValue = value;
+            if (
+                previousKnobValue !== null &&
+                previousKnobValue > knobZeroThreshold &&
+                boundedValue <= knobZeroThreshold
+            ) {
+                knobReachedZeroBackwards = true;
+            }
 
-    if (turnedBack && value <= 25) {
-        knobReachedZeroBackwards = true;
-    }
+            previousKnobValue = boundedValue;
 
-    if (tutorialFinished && knobReachedZeroBackwards) {
-        cambiarPagina();
-    }
-});
+            if (tutorialFinished && knobReachedZeroBackwards) {
+                cambiarPagina();
+            }
+        });
     </script>
 </body>
 </html>
