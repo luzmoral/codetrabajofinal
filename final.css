@@ -73,12 +73,6 @@ body {
   border-radius: inherit;
   background: #f1ff00;
 }
-.paso__progress.is-complete span {
-  width: 100%;
-}
-.paso__progress.is-progressing span {
-  animation: carousel-progress 4s linear forwards;
-}
 
 .pantalla--ia .texto,
 .pantalla--ia .paso {
@@ -175,20 +169,11 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 0;
+  width: var(--progress, 0%);
   height: 100%;
   content: "";
   border-radius: inherit;
   background: #f1ff00;
-}
-.carrusel .carousel-indicators [data-bs-target].is-complete::after {
-  width: 100%;
-}
-.carrusel .carousel-indicators [data-bs-target].is-progressing::after {
-  animation: carousel-progress 4s linear forwards;
-}
-@keyframes carousel-progress {
-  to { width: 100%; }
 }
 .carrusel .carousel-control-prev,
 .carrusel .carousel-control-next { width: 12%; }
@@ -438,14 +423,6 @@ body {
   .paso,
   .hint {
     animation: none;
-  }
-  .carrusel .carousel-indicators [data-bs-target].is-progressing::after {
-    animation: none;
-    width: 100%;
-  }
-  .paso__progress.is-progressing span {
-    animation: none;
-    width: 100%;
   }
   .robot,
   .pantalla--cierre .creator__title,
