@@ -26,7 +26,7 @@
 
         <section class="result-teaser" aria-label="Vista previa de la canción">
             <img class="result-teaser__question result-teaser__question--right" src="imagenes/signo%20de%20pregunta1.png" alt="" aria-hidden="true">
-            <div class="result-teaser__player" aria-hidden="true">
+            <div class="result-teaser__player">
                 <img class="result-teaser__cover" src="imagenes/cancionkode.png" alt="">
                 <div class="result-teaser__details">
                     <span class="result-teaser__song">Tu canción</span>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="result-teaser__controls">
                         <span class="result-teaser__skip" aria-hidden="true">◀</span>
-                        <span class="result-teaser__play" aria-hidden="true">▶</span>
+                        <button class="result-teaser__play" id="result-play" type="button" aria-label="Play para continuar">▶</button>
                         <span class="result-teaser__skip" aria-hidden="true">▶</span>
                         <span class="result-teaser__track" aria-hidden="true"></span>
                     </div>
@@ -51,7 +51,7 @@
 
         <footer class="result__footer">
             <div class="result__turn">
-                <p>Girá la perilla hacia atrás para continuar.</p>
+                <p id="result-instruction" aria-live="polite">Girá la perilla hacia atrás y después apretá Play para continuar.</p>
                 <img class="result__knob" src="imagenes/perilla-tutorial.svg" alt="Perilla del controlador">
             </div>
         </footer>
@@ -60,7 +60,7 @@
         <div class="result-tutorial__content">
             <div class="result-tutorial__message">
                 <img src="imagenes/perilla-tutorial.svg" alt="">
-                <p>Para desbloquear el siguiente paso, girá la perilla hacia atrás hasta el 0.</p>
+                <p>Para desbloquear el siguiente paso, girá la perilla hacia atrás y después apretá Play.</p>
             </div>
             <img class="result-tutorial__character" src="imagenes/bichito%20taller%20todos%202.png" alt="">
             <div class="result-tutorial__loading">
@@ -87,11 +87,13 @@
         const tutorial = document.querySelector("#result-tutorial");
         const tutorialProgress = document.querySelector("#tutorial-progress");
         const tutorialProgressFill = document.querySelector("#tutorial-progress-fill");
+        const resultInstruction = document.querySelector("#result-instruction");
+        const playButton = document.querySelector("#result-play");
         const nextPage = `nucleo3.html${window.location.search}`;
-        const tutorialDuration = 6000;
-        const knobZeroThreshold = 25;
+        const tutorialDuration = 2000;
         const tutorialStartedAt = performance.now();
         let tutorialFinished = false;
+        let knobReady = false;
         let previousKnobValue = null;
         let changingPage = false;
 
@@ -110,16 +112,23 @@
             tutorial.setAttribute("aria-hidden", "true");
             resultPage.removeAttribute("inert");
             resultPage.removeAttribute("aria-hidden");
+            if (knobReady) {
+                resultInstruction.textContent = "¡Bien! Ahora apretá Play para continuar.";
+            }
         }
 
         window.requestAnimationFrame(updateTutorialProgress);
 
         function cambiarPagina() {
-            if (changingPage || !tutorialFinished) return;
+            if (changingPage || !tutorialFinished || !knobReady) return;
 
             changingPage = true;
             window.location.href = nextPage;
         }
+
+        playButton.addEventListener("click", cambiarPagina);
+        document.addEventListener("boton-arduino", cambiarPagina);
+        document.addEventListener("pausa-arduino", cambiarPagina);
 
         document.addEventListener("potenciometro", (event) => {
             const value = Number(event.detail);
@@ -129,12 +138,13 @@
             const boundedValue = Math.max(0, Math.min(1023, value));
 
             if (
-                tutorialFinished &&
                 previousKnobValue !== null &&
-                previousKnobValue > knobZeroThreshold &&
-                boundedValue <= knobZeroThreshold
+                boundedValue < previousKnobValue
             ) {
-                cambiarPagina();
+                knobReady = true;
+                if (tutorialFinished) {
+                    resultInstruction.textContent = "¡Bien! Ahora apretá Play para continuar.";
+                }
             }
 
             previousKnobValue = boundedValue;
