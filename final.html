@@ -162,6 +162,7 @@
 
     let pantallaActual = 0;
     let pasoIA = 0;
+    let frameProgresoCumbia = null;
     const respuestasFinales = [...document.querySelectorAll(".respuesta-final__tecla")];
 
     function seleccionarRespuesta(respuesta) {
@@ -187,22 +188,50 @@
           carrusel.cycle();
         } else {
           carrusel.pause();
+          if (frameProgresoCumbia !== null) {
+            cancelAnimationFrame(frameProgresoCumbia);
+            frameProgresoCumbia = null;
+          }
         }
       }
     }
 
     const DURACION_PASO = 4000; // milisegundos que dura cada imagen (4 s)
     let timerPasos = null;
+    let frameProgresoPaso = null;
 
     function mostrarPaso(indice) {
       pasosIA.forEach((paso, i) => { paso.hidden = i !== indice; });
+      if (frameProgresoPaso !== null) {
+        cancelAnimationFrame(frameProgresoPaso);
+        frameProgresoPaso = null;
+      }
       pasosIA.forEach((paso, i) => {
         const barra = paso.querySelector(".paso__progress");
         barra.classList.toggle("is-complete", i < indice || i === pasosIA.length - 1);
         barra.classList.remove("is-progressing");
+        const relleno = barra.querySelector("span");
+        relleno.style.width = i < indice || i === pasosIA.length - 1 ? "100%" : "0%";
       });
       if (indice < pasosIA.length - 1) {
-        pasosIA[indice].querySelector(".paso__progress").classList.add("is-progressing");
+        const barra = pasosIA[indice].querySelector(".paso__progress");
+        const relleno = barra.querySelector("span");
+        barra.classList.add("is-progressing");
+        relleno.style.width = "0%";
+        const inicio = performance.now();
+
+        function actualizarProgreso(now) {
+          const progreso = Math.min(((now - inicio) / DURACION_PASO) * 100, 100);
+          relleno.style.width = `${progreso}%`;
+
+          if (progreso < 100) {
+            frameProgresoPaso = requestAnimationFrame(actualizarProgreso);
+          } else {
+            frameProgresoPaso = null;
+          }
+        }
+
+        frameProgresoPaso = requestAnimationFrame(actualizarProgreso);
       }
     }
 
@@ -281,12 +310,33 @@
       iniciar = true
     ) {
       const indicadores = [...carruselEl.querySelectorAll(".carousel-indicators [data-bs-slide-to]")];
+      if (frameProgresoCumbia !== null) {
+        cancelAnimationFrame(frameProgresoCumbia);
+        frameProgresoCumbia = null;
+      }
       indicadores.forEach((indicador, i) => {
         indicador.classList.toggle("is-complete", i < indice);
         indicador.classList.remove("is-progressing");
+        indicador.style.setProperty("--progress", i < indice ? "100%" : "0%");
       });
       if (iniciar && indicadores[indice]) {
-        requestAnimationFrame(() => indicadores[indice].classList.add("is-progressing"));
+        const indicador = indicadores[indice];
+        indicador.classList.add("is-progressing");
+        indicador.style.setProperty("--progress", "0%");
+        const inicio = performance.now();
+
+        function actualizarProgreso(now) {
+          const progreso = Math.min(((now - inicio) / DURACION_PASO) * 100, 100);
+          indicador.style.setProperty("--progress", `${progreso}%`);
+
+          if (progreso < 100) {
+            frameProgresoCumbia = requestAnimationFrame(actualizarProgreso);
+          } else {
+            frameProgresoCumbia = null;
+          }
+        }
+
+        frameProgresoCumbia = requestAnimationFrame(actualizarProgreso);
       }
     }
     carruselEl.addEventListener("slide.bs.carousel", (event) => {
