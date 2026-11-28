@@ -263,6 +263,19 @@ body {
     object-fit: contain;
 }
 
+.result__knob.is-turning {
+    animation: perilla-simulada 3s linear forwards;
+}
+
+.result-teaser__play.is-ready {
+    filter: drop-shadow(0 0 8px #f1ff00);
+}
+
+@keyframes perilla-simulada {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
+
 .result-tutorial {
     position: fixed;
     z-index: 50;
