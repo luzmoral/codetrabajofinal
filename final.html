@@ -258,8 +258,17 @@
         return;
       }
       clearTimeout(timerPasos);
+      if (pantallaActual === 0) {
+        mostrarPantalla(1);
+        return;
+      }
       if (pantallaActual === 1) {
-        mostrarCierre();
+        const indiceActivo = slidesCumbia.findIndex((slide) => slide.classList.contains("active"));
+        if (indiceActivo < totalSlides - 1) {
+          carrusel.next();
+        } else {
+          mostrarCierre();
+        }
         return;
       }
       if (pantallaActual < pantallas.length - 1) {
@@ -292,8 +301,7 @@
       avanzar();
     });
     document.addEventListener("boton-arduino", () => {
-      if (pantallaActual === 1) mostrarCierre();
-      else avanzar();
+      avanzar();
     });
 
     mostrarPantalla(0);
