@@ -85,42 +85,21 @@
     <script>
         const resultPage = document.querySelector("#result-page");
         const tutorial = document.querySelector("#result-tutorial");
-        const tutorialProgress = document.querySelector("#tutorial-progress");
-        const tutorialProgressFill = document.querySelector("#tutorial-progress-fill");
         const resultInstruction = document.querySelector("#result-instruction");
         const playButton = document.querySelector("#result-play");
         const nextPage = `nucleo3.html${window.location.search}`;
-        const tutorialDuration = 2000;
-        const tutorialStartedAt = performance.now();
-        let tutorialFinished = false;
         let knobReady = false;
         let previousKnobValue = null;
         let changingPage = false;
 
-        function updateTutorialProgress(now) {
-            const progress = Math.min(((now - tutorialStartedAt) / tutorialDuration) * 100, 100);
-            tutorialProgress.setAttribute("aria-valuenow", String(Math.round(progress)));
-            tutorialProgressFill.style.width = `${progress}%`;
-
-            if (progress < 100) {
-                window.requestAnimationFrame(updateTutorialProgress);
-                return;
-            }
-
-            tutorialFinished = true;
-            tutorial.classList.add("is-dismissed");
-            tutorial.setAttribute("aria-hidden", "true");
-            resultPage.removeAttribute("inert");
-            resultPage.removeAttribute("aria-hidden");
-            if (knobReady) {
-                resultInstruction.textContent = "¡Bien! Ahora apretá Play para continuar.";
-            }
-        }
-
-        window.requestAnimationFrame(updateTutorialProgress);
+        // No hay tiempo de espera: la página queda lista de inmediato.
+        tutorial.classList.add("is-dismissed");
+        tutorial.setAttribute("aria-hidden", "true");
+        resultPage.removeAttribute("inert");
+        resultPage.removeAttribute("aria-hidden");
 
         function cambiarPagina() {
-            if (changingPage || !tutorialFinished || !knobReady) return;
+            if (changingPage || !knobReady) return;
 
             changingPage = true;
             window.location.href = nextPage;
@@ -142,9 +121,7 @@
                 boundedValue < previousKnobValue
             ) {
                 knobReady = true;
-                if (tutorialFinished) {
-                    resultInstruction.textContent = "¡Bien! Ahora apretá Play para continuar.";
-                }
+                resultInstruction.textContent = "¡Bien! Ahora apretá Play para continuar.";
             }
 
             previousKnobValue = boundedValue;
