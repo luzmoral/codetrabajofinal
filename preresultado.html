@@ -89,14 +89,47 @@
         const playButton = document.querySelector("#result-play");
         const nextPage = `nucleo3.html${window.location.search}`;
         let knobReady = false;
-        let previousKnobValue = null;
         let changingPage = false;
 
-        // No hay tiempo de espera: la página queda lista de inmediato.
-        tutorial.classList.add("is-dismissed");
-        tutorial.setAttribute("aria-hidden", "true");
-        resultPage.removeAttribute("inert");
-        resultPage.removeAttribute("aria-hidden");
+        const knob = document.querySelector(".result__knob");
+        const progressFill = document.querySelector("#tutorial-progress-fill");
+        const progressBar = document.querySelector("#tutorial-progress");
+        const DURACION_TUTORIAL = 3000;
+
+        // Primero se muestra el tutorial y la página queda bloqueada.
+        tutorial.classList.remove("is-dismissed");
+        tutorial.removeAttribute("aria-hidden");
+        resultInstruction.textContent = "Girá la perilla hacia atrás y después apretá Play para continuar.";
+
+        // Simulación visual del giro: no se lee ningún valor real.
+        knob.classList.add("is-turning");
+
+        const inicioTutorial = performance.now();
+
+        function finalizarTutorial() {
+            tutorial.classList.add("is-dismissed");
+            tutorial.setAttribute("aria-hidden", "true");
+            resultPage.removeAttribute("inert");
+            resultPage.removeAttribute("aria-hidden");
+            knob.classList.remove("is-turning");
+            knobReady = true;
+            resultInstruction.textContent = "¡Bien! Ahora apretá Play para continuar.";
+            playButton.classList.add("is-ready");
+        }
+
+        function actualizarTutorial(now) {
+            const progreso = Math.min(((now - inicioTutorial) / DURACION_TUTORIAL) * 100, 100);
+            progressFill.style.width = `${progreso}%`;
+            progressBar.setAttribute("aria-valuenow", String(Math.round(progreso)));
+
+            if (progreso < 100) {
+                requestAnimationFrame(actualizarTutorial);
+            } else {
+                finalizarTutorial();
+            }
+        }
+
+        requestAnimationFrame(actualizarTutorial);
 
         function cambiarPagina() {
             if (changingPage || !knobReady) return;
@@ -108,24 +141,6 @@
         playButton.addEventListener("click", cambiarPagina);
         document.addEventListener("boton-arduino", cambiarPagina);
         document.addEventListener("pausa-arduino", cambiarPagina);
-
-        document.addEventListener("potenciometro", (event) => {
-            const value = Number(event.detail);
-
-            if (!Number.isFinite(value)) return;
-
-            const boundedValue = Math.max(0, Math.min(1023, value));
-
-            if (
-                previousKnobValue !== null &&
-                boundedValue < previousKnobValue
-            ) {
-                knobReady = true;
-                resultInstruction.textContent = "¡Bien! Ahora apretá Play para continuar.";
-            }
-
-            previousKnobValue = boundedValue;
-        });
     </script>
 </body>
 </html>
